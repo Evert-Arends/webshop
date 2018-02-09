@@ -18,13 +18,20 @@ class home extends EmmaController
 
     public function page($page = "index")
     {
+        $this->getText();
         Loader::view("templates/header.php");
         Loader::view("home/" . $page . ".php");
         Loader::view("templates/footer.php");
 
     }
 
-    public function testMethod() {
+    private function getText()
+    {
+        $this->ReturnData = "Ok dit is leuke tekst.";
+    }
+
+    public function testMethod()
+    {
         $this->ReturnData = "ok lol";
         $this->page();
     }
