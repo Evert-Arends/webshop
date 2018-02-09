@@ -6,7 +6,7 @@
  * Time: 14:02
  */
 
-class webShop extends EmmaController
+class home extends EmmaController
 {
     protected $ReturnData;
 
@@ -18,7 +18,7 @@ class webShop extends EmmaController
 
     public function page($page = "test")
     {
-
+        $this->getText();
         Loader::view("templates/header.php");
         Loader::view("index/" . $page . ".php");
         Loader::view("templates/footer.php");
