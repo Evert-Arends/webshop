@@ -35,6 +35,7 @@ class Loader implements ISystemComponent
      * Loads a controller into the framework
      *
      * @param string $paramController
+     * @throws ReflectionException
      */
     public function controller($paramController)
     {
@@ -76,7 +77,7 @@ class Loader implements ISystemComponent
                     $args = filter_var($_GET["a"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
                     // Run the desired method with applied arguments
-                    $controller->$_GET["m"] ($args);
+                    $controller->{$_GET["m"]} ($args);
 
                 } else {
 
