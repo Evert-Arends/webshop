@@ -66,10 +66,10 @@
                  ng-class="{ 'banner-short' : banner.short }">
 
                 <div class="banner-text padding-mobile">
-                    <h1 class="ls-heading">
+                    <h1 class="ls-heading banner-title">
                         HELLOWORLD
                     </h1>
-                    <p class="ls-subheading">
+                    <p class="ls-subheading banner-title">
                         A responsive banner
                     </p>
 

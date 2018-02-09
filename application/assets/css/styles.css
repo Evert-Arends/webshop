@@ -48,6 +48,12 @@ div.banner-container .banner-text {
     text-align: center;
     color: #FFF;
     z-index: 2;
+    background-color: rgba(120, 120, 120, 0.5);
+}
+
+.banner-title{
+    text-align: left;
+    margin-left: 25px;
 }
 
 .row {
@@ -64,4 +70,8 @@ div.banner-container .banner-text {
     transform: rotate(31deg);
     left: 70%;
     top: 2%;
+}
+
+small{
+    font-size: 23px;
 }
