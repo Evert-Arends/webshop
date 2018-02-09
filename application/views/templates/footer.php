@@ -1,3 +1,4 @@
+</div>
 <footer class="py-5 bg-dark">
     <div class="container">
         <div class="row">
@@ -57,10 +58,6 @@
         </div>
     </div>
 </footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="application/assets/jquery/jquery.min.js"></script>
-<script src="application/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
