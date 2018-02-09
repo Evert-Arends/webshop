@@ -29,4 +29,9 @@ class home extends EmmaController
     {
         $this->ReturnData = "Ok dit is leuke tekst.";
     }
+
+    public function testMethod() {
+        $this->ReturnData = "ok lol";
+        $this->page();
+    }
 }
