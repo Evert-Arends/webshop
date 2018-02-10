@@ -33,7 +33,7 @@ body {
 }
 
 .custom-padding {
-    padding: 0 !important;
+    padding: 0 0 20px 0 !important;
 }
 
 /*	2.	Menu
@@ -372,7 +372,7 @@ img {
 }
 
 .image-card-body {
-    padding: 0rem !important;
+    padding: 0 !important;
 }
 
 .preview {
@@ -434,4 +434,36 @@ img {
     animation-name: opacity;
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
+}
+
+/*	7.	Cookie alert
+-------------------------------------------------------------------*/
+.cookiealert {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0 !important;
+    z-index: 999;
+    opacity: 0;
+    border-radius: 0;
+    background: #212327 url("/application/assets/images/cubes.png");
+    transform: translateY(100%);
+    transition: all 500ms ease-out;
+    color: #ecf0f1;
+}
+
+.cookiealert.show {
+    opacity: 1;
+    transform: translateY(0%);
+    transition-delay: 1000ms;
+}
+
+.cookiealert a {
+    text-decoration: underline
+}
+
+.cookiealert .acceptcookies {
+    margin-left: 10px;
+    vertical-align: baseline;
 }
