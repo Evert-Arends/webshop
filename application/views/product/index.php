@@ -13,7 +13,7 @@
     <div class="col-lg-3 col-md-3" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
         <h3 class="partial-title" style="">Categorieen</h3>
         <div class="jumbotron">
-            serg
+            WIP
         </div>
     </div>
 
@@ -47,12 +47,24 @@
                 <div class="row">
                     <!-- Image -->
                     <div class="col-12 col-lg-6">
-                        <div class="card bg-light mb-3">
-                            <div class="card-body">
-                                <a href="" data-toggle="modal" data-target="#productModal">
-                                    <img class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff"/>
-                                    <p class="text-center">Zoom</p>
-                                </a>
+                        <div class="card bg-light mb-3 image-card">
+                            <div class="card-body image-card-body">
+                                <div class="preview">
+                                    <div class="preview-pic tab-content">
+                                        <div class="tab-pane active" id="pic-1"><img src="http://via.placeholder.com/400x252/34568" /></div>
+                                        <div class="tab-pane" id="pic-2"><img src="http://via.placeholder.com/400x252/62201" /></div>
+                                        <div class="tab-pane" id="pic-3"><img src="http://via.placeholder.com/400x252/10378" /></div>
+                                        <div class="tab-pane" id="pic-4"><img src="http://via.placeholder.com/400x252/99574" /></div>
+                                        <div class="tab-pane" id="pic-5"><img src="http://via.placeholder.com/400x252/12345" /></div>
+                                    </div>
+                                    <ul class="preview-thumbnail nav nav-tabs">
+                                        <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://via.placeholder.com/200x126/34568" /></a></li>
+                                        <li><a data-target="#pic-2" data-toggle="tab"><img src="http://via.placeholder.com/200x126/62201" /></a></li>
+                                        <li><a data-target="#pic-3" data-toggle="tab"><img src="http://via.placeholder.com/200x126/10378" /></a></li>
+                                        <li><a data-target="#pic-4" data-toggle="tab"><img src="http://via.placeholder.com/200x126/99574" /></a></li>
+                                        <li><a data-target="#pic-5" data-toggle="tab"><img src="http://via.placeholder.com/200x126/12345" /></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -122,7 +134,7 @@
                             <div class="card-header bg-primary text-white text-uppercase"><i
                                         class="fa fa-align-justify"></i> Omschrijving
                             </div>
-                            <div class="card-body">
+                            <div class="card-body product-information-card">
                                 <p class="card-text">
                                     Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise
                                     en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie
@@ -157,7 +169,7 @@
                             <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i>
                                 Beoordelingen
                             </div>
-                            <div class="card-body">
+                            <div class="card-body product-information-card">
                                 <div class="review">
                                     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                     <meta itemprop="datePublished" content="01-01-2016">

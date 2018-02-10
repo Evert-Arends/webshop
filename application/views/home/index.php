@@ -24,7 +24,6 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="partial-title" style="">Aanbiedingen</h3>
-
             </div>
         </div>
 
