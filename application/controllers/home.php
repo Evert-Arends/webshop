@@ -44,14 +44,14 @@ class home extends EmmaController
     public function testMethod()
     {
         $products = new ProductsTable();
-
+        // Create new models.
         $categoryModel = clone($this->CategoryModel);
         $categoryModel2 = clone ($this->CategoryModel);
 
         $categoryModel->setId(1);
         $categoryModel2->setId(2);
 
-        $categoryModel->setParent($categoryModel);
+        $categoryModel2->setParent($products);
 
 
 //        $product = $products->find("price", 0);

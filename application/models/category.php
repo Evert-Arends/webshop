@@ -21,7 +21,7 @@ class CategoryModel extends EmmaModel
     }
 
     /**
-     * @return mixed
+     * @return integer
      */
     public function getId()
     {
