@@ -1,6 +1,19 @@
-/*Stylesheet webshop WEBS*/
+/*------------------------------------------------------------------
+Stylesheet webshop WEBS2
 
-/* Page global */
+[Table of contents]
+
+1.	PageGlobal
+2.	Menu
+3.	Banner
+4.	Product card
+5.	Product view
+6.	Product images
+
+*/
+
+/*	1.	PageGlobal
+-------------------------------------------------------------------*/
 body {
     padding-top: 54px;
 }
@@ -11,7 +24,255 @@ body {
     }
 }
 
-/* Banner */
+.custom-margin {
+    margin-top: 1.5rem !important;
+}
+
+.no-margin {
+    margin-top: 0 !important;
+}
+
+.custom-padding {
+    padding: 0 !important;
+}
+
+/*	2.	Menu
+-------------------------------------------------------------------*/
+#menu {
+    padding-top: 0;
+    padding-bottom: 0;
+    z-index: 1052;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+    background: #563d7c none;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menu .navbar-brand {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#menu .navbar-toggle {
+    border-color: #fff;
+    margin-top: 23px;
+    margin-bottom: 23px;
+}
+
+#menu .navbar-toggle:active, #menu .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+#menu .navbar-form {
+    margin-top: 38px;
+}
+
+#menu .nav-item .nav-link {
+    font-weight: bold;
+    color: #FFF;
+    font-size: 16px;
+    padding: 0 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    line-height: 50px;
+}
+
+@media (max-width: 991px) {
+    #menu .nav-item .nav-link {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+}
+
+#menu .nav-item.show > .nav-link, #menu .nav-item.show > .nav-link:focus, #menu .nav-item.show > .nav-link:hover, #menu .nav-item:focus > .nav-link, #menu .nav-item:hover > .nav-link {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+#menu .nav-btn {
+    background: none !important;
+    padding-right: 0;
+}
+
+#menu .nav-btn > span {
+    color: #ffce40;
+    font-weight: bold;
+    border: 1px solid #ffce40;
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+@media (max-width: 991px) {
+    #menu .nav-btn > span {
+        line-height: 1;
+    }
+}
+
+#menu .nav-btn:hover > span {
+    background: #ffce40;
+    color: #563d7c;
+}
+
+#menu .nav-btn.nav-btn-link > span {
+    border-color: transparent;
+}
+
+#menu .nav-item.user-account .user-image {
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background-size: cover;
+    background: no-repeat center;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#menu.navbar-inverse .navbar-toggle:focus, #menu.navbar-inverse .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+#menu .dropdown .dropdown-menu {
+    font-size: 14px;
+}
+
+#menu .dropdown .dropdown-menu > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#menu .dropdown .dropdown-item, #menu .dropdown .dropdown-menu a {
+    color: #555;
+}
+
+@media (min-width: 992px) {
+    #menu .dropdown .dropdown-menu {
+        border: none;
+        display: block;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.15s;
+        transform: translate3d(0, 15px, 0);
+        margin-top: 0;
+        border-radius: 0 0 4px 4px;
+        -webkit-box-shadow: 3px 3px 3px -3px rgba(0, 0, 0, 0.1), 3px 3px 3px -3px rgba(0, 0, 0, 0.1), -3px 3px 3px -3px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 3px 3px 3px -3px rgba(0, 0, 0, 0.1), 3px 3px 3px -3px rgba(0, 0, 0, 0.1), -3px 3px 3px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 3px 3px 3px -3px rgba(0, 0, 0, 0.1), 3px 3px 3px -3px rgba(0, 0, 0, 0.1), -3px 3px 3px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    #menu .dropdown:hover .dropdown-menu, #menu .dropdown.show .dropdown-menu {
+        visibility: visible;
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+
+    #menu .dropdown > a {
+        position: relative;
+    }
+
+    #menu .dropdown > a:hover {
+        opacity: 1 !important;
+    }
+
+    #menu .dropdown:hover > .nav-link:before, #menu .dropdown.show > .nav-link:before {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        margin-top: 5px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #FFF;
+    }
+}
+
+#menu .megamenu {
+    position: static;
+}
+
+#menu .megamenu .dropdown-menu {
+    width: 100%;
+    border-radius: 0 !important;
+    padding: 50px 20px;
+}
+
+#menu.navbar-over {
+    background-color: transparent;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0, 0, 0, 0.6)), color-stop(100% rgba(0, 0, 0, 0)));
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 100%);
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99000000', endColorstr='#00000000', GradientType=0);
+    background-repeat: repeat-x;
+}
+
+#menu.navbar-over.fixed-top {
+    background: #563d7c none;
+}
+
+#menu.navbar-over.absolute-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+@media (min-width: 992px) {
+    #menu.navbar-over {
+        box-shadow: none;
+    }
+
+    #menu.navbar-over .dropdown:hover > a:before {
+        margin-top: -10px;
+    }
+
+    #menu.navbar-over .nav-link {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    #menu.navbar-over .navbar-nav > li:hover > a {
+        background: none;
+    }
+
+    #menu.navbar-over .navbar-brand {
+        height: 110px;
+    }
+
+    #menu.navbar-over .navbar-brand img {
+        max-height: 100%;
+    }
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+/*	3.	Banner
+-------------------------------------------------------------------*/
 div.banner-container {
     min-height: 300px;
     padding: 50px 0;
@@ -53,16 +314,13 @@ div.banner-container .banner-text {
     margin-left: 25px;
 }
 
-.row {
-    margin-top: 1.5rem !important;
-}
-
 .partial-title {
     border-bottom: 1px solid #3c5f76;
     color: #305476;
 }
 
-/* Product card */
+/*	4.	Product Card
+-------------------------------------------------------------------*/
 .deal-badge {
     position: absolute;
     transform: rotate(31deg);
@@ -74,7 +332,8 @@ small {
     font-size: 23px;
 }
 
-/* Product view */
+/*	5.	Product view
+-------------------------------------------------------------------*/
 .price {
     color: #c01508;
     text-align: center;
@@ -98,11 +357,12 @@ small {
     border-radius: .3rem;
 }
 
-.product-information-card{
+.product-information-card {
     background-color: #eeeeee;
 }
 
-/* Product view images */
+/*	6.	Product images
+-------------------------------------------------------------------*/
 img {
     max-width: 100%;
 }
