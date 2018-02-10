@@ -6,6 +6,8 @@
  * Time: 14:02
  * @property ProductModel ProductModel
  * @property  CategoryModel CategoryModel
+ * @property  UserModel UserModel
+ * @property  UserRole UserRole
  */
 
 class home extends EmmaController
@@ -14,12 +16,10 @@ class home extends EmmaController
 
     public function init()
     {
-        try {
             Loader::model("ProductModel");
             Loader::model("CategoryModel");
-        } catch (Exception $e) {
-            print_r($e);
-        }
+            Loader::model("UserModel");
+            Loader::model("UserRole");
     }
 
     public function index()
@@ -43,20 +43,23 @@ class home extends EmmaController
 
     public function testMethod()
     {
-        $products = new ProductsTable();
-        // Create new models.
-        $categoryModel = clone($this->CategoryModel);
-        $categoryModel2 = clone ($this->CategoryModel);
-
-        $categoryModel->setId(1);
-        $categoryModel2->setId(2);
-
-        $categoryModel2->setParent($products);
+        $this->UserModel->setRole("ddss");
 
 
-//        $product = $products->find("price", 0);
-//        $product->Objects->price = 1200;
-//        $product->save();
-        print_r($this->ProductModel->getId());
+//        $products = new ProductsTable();
+//        // Create new models.
+//        $categoryModel = clone($this->CategoryModel);
+//        $categoryModel2 = clone ($this->CategoryModel);
+//
+//        $categoryModel->setId(1);
+//        $categoryModel2->setId(2);
+//
+//        $categoryModel2->setParent($products);
+//
+//
+////        $product = $products->find("price", 0);
+////        $product->Objects->price = 1200;
+////        $product->save();
+//        print_r($this->ProductModel->getId());
     }
 }

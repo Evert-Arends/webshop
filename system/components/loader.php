@@ -102,7 +102,6 @@ class Loader implements ISystemComponent
      * Loads a model into the framework
      *
      * @param string $paramModel
-     * @throws Exception
      */
     public static function model($paramModel)
     {
@@ -111,13 +110,15 @@ class Loader implements ISystemComponent
         $modelFileName = str_replace("Model", "", $paramModel);
         $modelName = ucfirst($paramModel);
         require_once("models/" . strtolower($modelFileName) . ".php");
-
         //Create the model object
         $modelObject = new $modelName ();
+
         if (!method_exists($modelObject, "__construct")) {
-            throw new Exception("Missing constructor, constructors can be empty, just make sure they are there.\n\n");
+            trigger_error("Missing constructor, constructors can be empty, just make sure they are there.\n\n");
+        } else {
+            $modelObject->__construct();
         }
-        $modelObject->__construct();
+
         if (method_exists($modelObject, "init"))
             $modelObject->init();
 
