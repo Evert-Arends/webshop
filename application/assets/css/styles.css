@@ -1,9 +1,6 @@
-/*!
- * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
- */
+/*Stylesheet webshop WEBS*/
 
+/* Page global */
 body {
     padding-top: 54px;
 }
@@ -14,6 +11,7 @@ body {
     }
 }
 
+/* Banner */
 div.banner-container {
     min-height: 300px;
     padding: 50px 0;
@@ -25,8 +23,7 @@ div.banner-container {
 }
 
 .background-cover {
-    background-position: center center;
-    background-repeat: no-repeat;
+    background: no-repeat center center;
     background-size: cover;
 }
 
@@ -51,7 +48,7 @@ div.banner-container .banner-text {
     background-color: rgba(120, 120, 120, 0.5);
 }
 
-.banner-title{
+.banner-title {
     text-align: left;
     margin-left: 25px;
 }
@@ -65,73 +62,112 @@ div.banner-container .banner-text {
     color: #305476;
 }
 
-.deal-badge{
+/* Product card */
+.deal-badge {
     position: absolute;
     transform: rotate(31deg);
     left: 70%;
     top: 2%;
 }
 
-small{
+small {
     font-size: 23px;
 }
 
-
-
-
-
-
-
-.bloc_left_price {
-    color: #c01508;
-    text-align: center;
-    font-weight: bold;
-    font-size: 150%;
-}
-.category_block li:hover {
-    background-color: #007bff;
-}
-.category_block li:hover a {
-    color: #ffffff;
-}
-.category_block li a {
-    color: #343a40;
-}
-.add_to_cart_block .price {
+/* Product view */
+.price {
     color: #c01508;
     text-align: center;
     font-weight: bold;
     font-size: 200%;
     margin-bottom: 0;
 }
+
 .add_to_cart_block .price_discounted {
     color: #343a40;
     text-align: center;
     text-decoration: line-through;
     font-size: 140%;
 }
-.product_rassurance {
-    padding: 10px;
-    margin-top: 15px;
-    background: #ffffff;
-    border: 1px solid #6c757d;
-    color: #6c757d;
-}
-.product_rassurance .list-inline {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    text-align: center;
-}
-.product_rassurance .list-inline li:hover {
-    color: #343a40;
-}
+
 .reviews_product .fa-star {
     color: gold;
 }
-.pagination {
-    margin-top: 20px;
+
+.datasheet {
+    border-radius: .3rem;
 }
 
-.datasheet{
-    border-radius: .3rem;
+/* Product view images */
+img {
+    max-width: 100%;
+}
+
+.image-card {
+    padding: 1em !important;
+}
+
+.image-card-body {
+    padding: 0rem !important;
+}
+
+.preview {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 996px) {
+    .preview {
+        margin-bottom: 20px;
+    }
+}
+
+.preview-pic {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.preview-thumbnail.nav-tabs {
+    border: none;
+    margin-top: 15px;
+}
+
+.preview-thumbnail.nav-tabs li {
+    width: 18%;
+    margin-right: 2.5%;
+}
+
+.preview-thumbnail.nav-tabs li img {
+    max-width: 100%;
+    display: block;
+}
+
+.preview-thumbnail.nav-tabs li a {
+    padding: 0;
+    margin: 0;
+}
+
+.preview-thumbnail.nav-tabs li:last-of-type {
+    margin-right: 0;
+}
+
+.tab-content {
+    overflow: hidden;
+}
+
+.tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+    animation-name: opacity;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
 }

@@ -47,12 +47,24 @@
                 <div class="row">
                     <!-- Image -->
                     <div class="col-12 col-lg-6">
-                        <div class="card bg-light mb-3">
-                            <div class="card-body">
-                                <a href="" data-toggle="modal" data-target="#productModal">
-                                    <img class="img-fluid" src="https://dummyimage.com/800x800/55595c/fff"/>
-                                    <p class="text-center">Zoom</p>
-                                </a>
+                        <div class="card bg-light mb-3 image-card">
+                            <div class="card-body image-card-body">
+                                <div class="preview">
+                                    <div class="preview-pic tab-content">
+                                        <div class="tab-pane active" id="pic-1"><img src="http://via.placeholder.com/400x252/34568" /></div>
+                                        <div class="tab-pane" id="pic-2"><img src="http://via.placeholder.com/400x252/62201" /></div>
+                                        <div class="tab-pane" id="pic-3"><img src="http://via.placeholder.com/400x252/10378" /></div>
+                                        <div class="tab-pane" id="pic-4"><img src="http://via.placeholder.com/400x252/99574" /></div>
+                                        <div class="tab-pane" id="pic-5"><img src="http://via.placeholder.com/400x252/12345" /></div>
+                                    </div>
+                                    <ul class="preview-thumbnail nav nav-tabs">
+                                        <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://via.placeholder.com/200x126/34568" /></a></li>
+                                        <li><a data-target="#pic-2" data-toggle="tab"><img src="http://via.placeholder.com/200x126/62201" /></a></li>
+                                        <li><a data-target="#pic-3" data-toggle="tab"><img src="http://via.placeholder.com/200x126/10378" /></a></li>
+                                        <li><a data-target="#pic-4" data-toggle="tab"><img src="http://via.placeholder.com/200x126/99574" /></a></li>
+                                        <li><a data-target="#pic-5" data-toggle="tab"><img src="http://via.placeholder.com/200x126/12345" /></a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
