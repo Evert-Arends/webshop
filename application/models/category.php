@@ -46,7 +46,6 @@ class CategoryModel extends EmmaModel
 
     /**
      * @param mixed $parent
-     * @throws Exception
      */
     public function setParent($parent)
     {
