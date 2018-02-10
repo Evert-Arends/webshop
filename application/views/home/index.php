@@ -12,6 +12,9 @@
     <!-- SIDEBAR -->
     <div class="col-lg-3 col-md-3" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
         <h3 class="partial-title" style="">Categorieen</h3>
+        <div class="jumbotron">
+            serg
+        </div>
     </div>
 
     <!-- PRODUCTS -->
@@ -27,7 +30,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <h1><span class="badge badge-danger deal-badge">50%</span></h1>
@@ -47,7 +50,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <h1><span class="badge badge-danger deal-badge">50%</span></h1>
@@ -67,7 +70,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <h1><span class="badge badge-danger deal-badge">50%</span></h1>
@@ -87,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <h1><span class="badge badge-danger deal-badge">50%</span></h1>
@@ -119,7 +122,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
@@ -138,7 +141,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
@@ -157,7 +160,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
@@ -176,7 +179,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
                     <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                     <div class="card-body">
