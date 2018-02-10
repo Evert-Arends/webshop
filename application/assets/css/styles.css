@@ -98,6 +98,10 @@ small {
     border-radius: .3rem;
 }
 
+.product-information-card{
+    background-color: #eeeeee;
+}
+
 /* Product view images */
 img {
     max-width: 100%;

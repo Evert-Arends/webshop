@@ -13,7 +13,7 @@
     <div class="col-lg-3 col-md-3" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
         <h3 class="partial-title" style="">Categorieen</h3>
         <div class="jumbotron">
-            serg
+            WIP
         </div>
     </div>
 
@@ -134,7 +134,7 @@
                             <div class="card-header bg-primary text-white text-uppercase"><i
                                         class="fa fa-align-justify"></i> Omschrijving
                             </div>
-                            <div class="card-body">
+                            <div class="card-body product-information-card">
                                 <p class="card-text">
                                     Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise
                                     en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie
@@ -169,7 +169,7 @@
                             <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i>
                                 Beoordelingen
                             </div>
-                            <div class="card-body">
+                            <div class="card-body product-information-card">
                                 <div class="review">
                                     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
                                     <meta itemprop="datePublished" content="01-01-2016">
