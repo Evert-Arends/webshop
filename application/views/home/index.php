@@ -111,7 +111,7 @@
 
         </div>
 
-        <!-- PRODUCTS ONE -->
+        <!-- PRODUCTS TWO -->
         <div class="row">
             <div class="col-12">
                 <h3 class="partial-title" style="">Uitgelicht</h3>

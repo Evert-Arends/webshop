@@ -25,10 +25,27 @@
     <!-- fontAwesome -->
     <script src="application/assets/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
 
+    <!-- Cookie alert -->
+    <link href="application/assets/cookie-alert/cookiealert.css" rel="stylesheet">
+    <script src="application/assets/cookie-alert/cookiealert-standalone.js"></script>
+    <script src="application/assets/cookie-alert/js-cookie.js"></script>
+
 </head>
 
 <body>
 
+<!-- COOKIES -->
+<div class="alert alert-dismissible text-center cookiealert" role="alert">
+    <div class="cookiealert-container">
+        <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="http://cookiesandyou.com/" target="_blank">Learn more</a>
+
+        <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
+            I agree
+        </button>
+    </div>
+</div>
+
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
