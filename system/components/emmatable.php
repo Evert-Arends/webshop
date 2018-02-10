@@ -174,7 +174,7 @@ abstract class EmmaTable implements ITable
 
         // Add all properties to the "UPDATE SET"
         $i = 0;
-        foreach ($this->properties as $prop)
+        foreach ($this->Objects as $prop => $values)
             if ($prop != "id" && !in_array($prop, $this->joinedKeys))
                 $i++ == 0
                     ? $query .= "$prop = ?"
@@ -196,13 +196,12 @@ abstract class EmmaTable implements ITable
 
             $propertiesArray = array();
             $valuesArray = array();
-
-            foreach ($this->properties as $prop) {
-
+            var_dump($this->Objects);
+            foreach ($this->Objects as $prop => $value) {
                 if ($prop != "id" && !in_array($prop, $this->joinedKeys)) {
 
                     array_push($propertiesArray, $prop);
-                    array_push($valuesArray, $this->$prop);
+                    array_push($valuesArray, $value);
 
                 }
 

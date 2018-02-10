@@ -38,9 +38,10 @@ class home extends EmmaController
     public function testMethod()
     {
         $products = new ProductsTable();
-        $product = $products->find("price", 13432);
+        $product = $products->find("price", 0);
         $this->fillProductModel();
-        echo $this->ProductModel->getId();
+        $product->Objects->price = 1200;
+        $product->save();
     }
 
     private function fillProductModel()
