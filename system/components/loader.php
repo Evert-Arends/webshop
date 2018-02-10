@@ -113,7 +113,7 @@ class Loader implements ISystemComponent
 
         //Create the model object
         $modelObject = new $modelName ();
-        $modelObject->constructor();
+        $modelObject->__construct();
         if (method_exists($modelObject, "init"))
             $modelObject->init();
 
