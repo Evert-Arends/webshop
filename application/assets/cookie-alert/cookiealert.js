@@ -1,4 +1,3 @@
-
 $(function () {
     "use strict";
 
@@ -7,7 +6,7 @@ $(function () {
     }
 
     $(".acceptcookies").click(function () {
-        Cookies.set("acceptCookies", true, { expires: 60 });
+        Cookies.set("acceptCookies", true, {expires: 60});
         $(".cookiealert").removeClass("show");
     });
 });

@@ -1,7 +1,7 @@
 </div>
 
 <!-- FOOTER -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-dark mt-3">
     <div class="container">
         <div class="row">
 

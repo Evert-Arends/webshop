@@ -13,7 +13,6 @@ class product extends EmmaController
     public function index()
     {
         $this->page();
-
     }
 
     public function page($page = "index")

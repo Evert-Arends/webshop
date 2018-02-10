@@ -12,8 +12,8 @@
     <!-- SIDEBAR -->
     <div class="col-lg-3 col-md-3" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
         <h3 class="partial-title" style="">Categorieen</h3>
-        <div class="jumbotron">
-            serg
+        <div class="jumbotron custom-margin">
+            WIP
         </div>
     </div>
 
@@ -21,13 +21,13 @@
     <div class="col-lg-9 col-md-9">
 
         <!-- PRODUCTS ONE -->
-        <div class="row">
+        <div class="row custom-margin">
             <div class="col-12">
                 <h3 class="partial-title" style="">Aanbiedingen</h3>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row custom-margin">
 
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
@@ -112,14 +112,14 @@
         </div>
 
         <!-- PRODUCTS TWO -->
-        <div class="row">
+        <div class="row custom-margin">
             <div class="col-12">
                 <h3 class="partial-title" style="">Uitgelicht</h3>
 
             </div>
         </div>
 
-        <div class="row">
+        <div class="row custom-margin">
 
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                 <div class="card h-100">
