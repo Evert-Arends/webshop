@@ -4,16 +4,21 @@
  * User: Evert Arends
  * Date: 5-2-18
  * Time: 14:02
+ * @property  ProductModel
+ * @property ProductModel ProductModel
  */
 
 class home extends EmmaController
 {
     protected $ReturnData;
+    public function init()
+    {
+        Loader::model("ProductModel");
+    }
 
     public function index()
     {
         $this->page();
-
     }
 
     public function page($page = "index")
@@ -32,7 +37,15 @@ class home extends EmmaController
 
     public function testMethod()
     {
-        $this->ReturnData = "ok lol";
-        $this->page();
+        $products = new ProductsTable();
+        $product = $products->find("price", 0);
+        $this->fillProductModel();
+        $product->Objects->price = 1200;
+        $product->save();
+    }
+
+    private function fillProductModel()
+    {
+        $this->ProductModel->setId(1);
     }
 }

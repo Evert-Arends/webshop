@@ -21,10 +21,10 @@ else
  ****************************************************/
 
 // Database Switch
-define("DB", false);
+define("DB", true);
 
 // Database Details
-define("DB_HOST", "programmeerbazen.nl");
+define("DB_HOST", "37.48.109.246");
 define("DB_NAME", "webshop");
 define("DB_USERNAME", "webshop");
 define("DB_PASSWORD", "!webshop!");

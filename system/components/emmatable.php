@@ -13,19 +13,21 @@ abstract class EmmaTable implements ITable
     private $keyValue;
     private $joinedKeys;
     private $joinsString;
+    private $properties;
+    public $Objects;
 
-    public function __construct ()
+    public function __construct()
     {
 
-        $this->db = Database::getInstance ();
-        $this->initialize ($this->getTable (get_called_class ()));
+        $this->db = Database::getInstance();
+        $this->initialize($this->getTable(get_called_class()));
 
     }
 
     /**
      * @see ITable::getProperTableName()
      */
-    public function getProperTableName ($tableNameArray, $i)
+    public function getProperTableName($tableNameArray, $i)
     {
 
         // Lowercase the first letter
@@ -34,12 +36,11 @@ abstract class EmmaTable implements ITable
             $tableNameArray,
             0,
             1,
-            strtolower ($tableNameArray[0])
+            strtolower($tableNameArray[0])
         );
 
         // If Array index is a capitol
-        if (ctype_upper ($tableNameArray[$i]))
-        {
+        if (ctype_upper($tableNameArray[$i])) {
 
             // Add an underscore before that index
             array_splice
@@ -56,51 +57,54 @@ abstract class EmmaTable implements ITable
                 $tableNameArray,
                 $i + 1,
                 1,
-                strtolower ($tableNameArray[$i + 1])
+                strtolower($tableNameArray[$i + 1])
             );
             $i++;
 
         }
 
-        return $i < (count ($tableNameArray) - 1)
-            ? $this->getProperTableName ($tableNameArray, ++$i)
-            : str_replace ("_table", "", implode ($tableNameArray));
+        return $i < (count($tableNameArray) - 1)
+            ? $this->getProperTableName($tableNameArray, ++$i)
+            : str_replace("_table", "", implode($tableNameArray));
 
     }
 
     /**
      * @see ITable::getTable()
      */
-    public function getTable ($tableName)
+    public function getTable($tableName)
     {
 
         $i = 2;
-        $tableNameArray = str_split ($tableName);
+        $tableNameArray = str_split($tableName);
 
-        return $this->getProperTableName ($tableNameArray, $i);
+        return $this->getProperTableName($tableNameArray, $i);
 
     }
 
     /**
      * @see ITable::getTableName()
      */
-    public function getTableName () { return $this->tableName; }
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
 
     /**
      * @see ITable::initialize()
      */
-    public function initialize ($name)
+    public function initialize($name)
     {
 
-        $this->tableName   = $name;
-        $this->joinedKeys  = array ();
+        $this->tableName = $name;
+        $this->joinedKeys = array();
 
     }
 
     /**
      * @see ITable::insert()
      */
-    public function insert ($dataArray)
+    public function insert($dataArray)
     {
 
         // Get all keys from the array so we may use them in the query
@@ -129,10 +133,9 @@ abstract class EmmaTable implements ITable
                 : $query .= "?" . ")";
 
         // Copy the array and clear it of its keys for use in execute ()
-        $valuesArray = array_values ($dataArray);
+        $valuesArray = array_values($dataArray);
 
-        if (DB)
-        {
+        if (DB) {
 
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute
@@ -141,21 +144,21 @@ abstract class EmmaTable implements ITable
                     PDO::ERRMODE_EXCEPTION
                 );
 
-            $stmt = $this->db->connection->prepare ($query);
+            $stmt = $this->db->connection->prepare($query);
 
-            $stmt->execute ($valuesArray);
+            $stmt->execute($valuesArray);
 
-            $error = $this->db->connection->errorInfo ();
+            $error = $this->db->connection->errorInfo();
 
             if
             (
                 DEBUG_MODE
                 && $error[0] != "00000"
             )
-                die (print_r ($this->db->connection->errorInfo ()));
+                die (print_r($this->db->connection->errorInfo()));
 
-            return $this->db->connection->lastInsertId ();
-            
+            return $this->db->connection->lastInsertId();
+
         }
 
     }
@@ -164,24 +167,23 @@ abstract class EmmaTable implements ITable
      * Saves all changes to the table
      * @see ITable::save()
      */
-    public function save ()
+    public function save()
     {
 
         $query = "UPDATE " . $this->tableName . " $this->joinsString SET ";
 
         // Add all properties to the "UPDATE SET"
         $i = 0;
-        foreach ($this->properties as $prop)
-            if ($prop != "id" && ! in_array($prop, $this->joinedKeys))
-                    $i++ == 0
-                        ? $query .= "$prop = ?"
-                        : $query .= ", $prop = ? ";
+        foreach ($this->Objects as $prop => $values)
+            if ($prop != "id" && !in_array($prop, $this->joinedKeys))
+                $i++ == 0
+                    ? $query .= "$prop = ?"
+                    : $query .= ", $prop = ? ";
 
         // Update by the supplied key via the find () method
         $query .= " WHERE $this->tableName." . $this->key . " = '" . $this->keyValue . "'";
 
-        if (DB)
-        {
+        if (DB) {
 
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute
@@ -190,34 +192,31 @@ abstract class EmmaTable implements ITable
                     PDO::ERRMODE_EXCEPTION
                 );
 
-            $stmt = $this->db->connection->prepare ($query);
+            $stmt = $this->db->connection->prepare($query);
 
-            $propertiesArray = array ();
-            $valuesArray     = array ();
+            $propertiesArray = array();
+            $valuesArray = array();
+            var_dump($this->Objects);
+            foreach ($this->Objects as $prop => $value) {
+                if ($prop != "id" && !in_array($prop, $this->joinedKeys)) {
 
-            foreach ($this->properties as $prop)
-            {
-
-                if ($prop != "id" && ! in_array($prop, $this->joinedKeys))
-                {
-
-                    array_push ($propertiesArray, $prop);
-                    array_push ($valuesArray,     $this->$prop);
+                    array_push($propertiesArray, $prop);
+                    array_push($valuesArray, $value);
 
                 }
 
             }
 
-            $stmt->execute ($valuesArray);
+            $stmt->execute($valuesArray);
 
-            $error = $this->db->connection->errorInfo ();
+            $error = $this->db->connection->errorInfo();
 
             if
             (
                 DEBUG_MODE
-             && $error[0] != "00000"
+                && $error[0] != "00000"
             )
-                die (print_r ($this->db->connection->errorInfo ()));
+                die (print_r($this->db->connection->errorInfo()));
 
         }
 
@@ -227,14 +226,14 @@ abstract class EmmaTable implements ITable
     /**
      * @see ITable::join()
      */
-    public function join ($table, $on, $thisOn)
+    public function join($table, $on, $thisOn)
     {
 
         if ($on == $this->key)
             die ("[" . $this->tableName .
-                 "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
+                "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
 
-        array_push ($this->joinedKeys, $on);
+        array_push($this->joinedKeys, $on);
 
         $this->joinsString .= <<<SQL
             JOIN $table ON ($table.$on = $this->tableName.$thisOn)
@@ -245,14 +244,14 @@ SQL;
     /**
      * @see ITable::leftJoin()
      */
-    public function leftJoin ($table, $on, $thisOn)
+    public function leftJoin($table, $on, $thisOn)
     {
 
         if ($on == $this->key)
             die ("[" . $this->tableName .
-                 "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
+                "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
 
-        array_push ($this->joinedKeys, $on);
+        array_push($this->joinedKeys, $on);
 
         $this->joinsString .= <<<SQL
             LEFT JOIN $table ON ($table.$on = $this->tableName.$thisOn)
@@ -263,14 +262,14 @@ SQL;
     /**
      * @see ITable::rightJoin()
      */
-    public function rightJoin ($table, $on, $thisOn)
+    public function rightJoin($table, $on, $thisOn)
     {
 
         if ($on == $this->key)
             die ("[" . $this->tableName .
-                 "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
+                "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
 
-        array_push ($this->joinedKeys, $on);
+        array_push($this->joinedKeys, $on);
 
         $this->joinsString .= <<<SQL
             RIGHT JOIN $table ON ($table.$on = $this->tableName.$thisOn)
@@ -281,14 +280,14 @@ SQL;
     /**
      * @see ITable::innerJoin()
      */
-    public function innerJoin ($table, $on, $thisOn)
+    public function innerJoin($table, $on, $thisOn)
     {
 
         if ($on == $this->key)
             die ("[" . $this->tableName .
-                 "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
+                "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
 
-        array_push ($this->joinedKeys, $on);
+        array_push($this->joinedKeys, $on);
 
         $this->joinsString .= <<<SQL
             INNER JOIN $table ON ($table.$on = $this->tableName.$thisOn)
@@ -299,14 +298,14 @@ SQL;
     /**
      * @see ITable::outerJoin()
      */
-    public function outerJoin ($table, $on, $thisOn)
+    public function outerJoin($table, $on, $thisOn)
     {
 
         if ($on == $this->key)
             die ("[" . $this->tableName .
-                 "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
+                "] AMBIGIUOUS KEYS CRASH. JOINED TABLE DETECTED WITH IDENTICLE KEY TO ORIGINAL TABLE.");
 
-        array_push ($this->joinedKeys, $on);
+        array_push($this->joinedKeys, $on);
 
         $this->joinsString .= <<<SQL
             OUTER JOIN $table ON ($table.$on = $this->tableName.$thisOn)
@@ -317,10 +316,10 @@ SQL;
     /**
      * @see ITable::find()
      */
-    public function find ($column, $key)
+    public function find($column, $key)
     {
 
-        $this->key      = $column;
+        $this->key = $column;
         $this->keyValue = $key;
 
         $sql = <<<SQL
@@ -333,13 +332,12 @@ SQL;
           LIMIT 1;
 SQL;
 
-        if (DB)
-        {
+        if (DB) {
 
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $this->db->connection->prepare ($sql);
+            $stmt = $this->db->connection->prepare($sql);
             $stmt->execute
             (
                 array
@@ -347,42 +345,40 @@ SQL;
                     $this->keyValue
                 )
             );
-            $dataArray = $stmt->fetch (PDO::FETCH_ASSOC);
-            $stmt->closeCursor ();
+            $dataArray = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->closeCursor();
 
-            $error = $this->db->connection->errorInfo ();
+            $error = $this->db->connection->errorInfo();
 
             if
             (
                 DEBUG_MODE
-             && $error[0] != "00000"
+                && $error[0] != "00000"
             )
-                die (print_r ($this->db->connection->errorInfo ()));
+                die (print_r($this->db->connection->errorInfo()));
 
             // If query returned result
-            if ($dataArray)
-            {
-
-                $ran = 0;
-
-                $this->properties = array ();
-
-                foreach ($dataArray as $data)
-                {
-
-                    if ( ! in_array ($data, $this->properties))
-                    {
-
-                        $ran++ == 0 ? prev ($dataArray) : false;
-
-                        $key        = key ($dataArray);
-                        array_push ($this->properties, $key);
-                        $this->$key = $data;
-                        next ($dataArray);
+            if ($dataArray) {
+                $this->properties = array();
+                $i = 0;
+//                reset($dataArray);
+                foreach ($dataArray as $data => $value) {
+                    $i++;
+                    if (!in_array($data, $this->properties)) {
+                        $key = key($dataArray);
+                        $this->properties[$key] = $value;
+                        $this->$key = $key;
+                        next($dataArray);
 
                     }
+                    // Convert Array to object.
 
+                    $object = new stdClass();
+                    foreach ($this->properties as $key => $sValue) {
+                        $object->{$key} = $sValue;
+                    }
 
+                    $this->Objects = $object;
                 }
 
                 return $ref =& $this;
@@ -398,7 +394,7 @@ SQL;
     /**
      * @see ITable::count()
      */
-    public function count ($tableRow)
+    public function count($tableRow)
     {
         $this->tableRow = $tableRow;
 
@@ -409,25 +405,24 @@ SQL;
         FROM $this->tableName
 SQL;
 
-        if (DB)
-        {
+        if (DB) {
 
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $this->db->connection->prepare ($sql);
+            $stmt = $this->db->connection->prepare($sql);
             $stmt->execute();
-            $data = $stmt->rowCount ();
-            $stmt->closeCursor ();
+            $data = $stmt->rowCount();
+            $stmt->closeCursor();
 
-            $error = $this->db->connection->errorInfo ();
+            $error = $this->db->connection->errorInfo();
 
             if
             (
                 DEBUG_MODE
-             && $error[0] != "00000"
+                && $error[0] != "00000"
             )
-                die (print_r ($this->db->connection->errorInfo ()));
+                die (print_r($this->db->connection->errorInfo()));
 
             // If query returned result
             return $data;
@@ -439,10 +434,10 @@ SQL;
     /**
      * @see ITable::delete()
      */
-    public function delete ($column, $key)
+    public function delete($column, $key)
     {
 
-        $this->key      = $column;
+        $this->key = $column;
         $this->keyValue = $key;
 
         $sql = <<<SQL
@@ -453,24 +448,23 @@ SQL;
           LIMIT 1;
 SQL;
 
-        if (DB)
-        {
+        if (DB) {
 
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $stmt = $this->db->connection->prepare ($sql);
-            $stmt->execute(array ($key));
-            $stmt->closeCursor ();
+            $stmt = $this->db->connection->prepare($sql);
+            $stmt->execute(array($key));
+            $stmt->closeCursor();
 
-            $error = $this->db->connection->errorInfo ();
+            $error = $this->db->connection->errorInfo();
 
             if
             (
                 DEBUG_MODE
-             && $error[0] != "00000"
+                && $error[0] != "00000"
             )
-                die (print_r ($this->db->connection->errorInfo ()));
+                die (print_r($this->db->connection->errorInfo()));
 
         }
 
