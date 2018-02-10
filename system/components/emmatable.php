@@ -196,7 +196,6 @@ abstract class EmmaTable implements ITable
 
             $propertiesArray = array();
             $valuesArray = array();
-            var_dump($this->Objects);
             foreach ($this->Objects as $prop => $value) {
                 if ($prop != "id" && !in_array($prop, $this->joinedKeys)) {
 

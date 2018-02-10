@@ -46,6 +46,6 @@ class home extends EmmaController
 
     private function fillProductModel()
     {
-        $this->ProductModel->setId(1);
+        $this->ProductModel->setCategoryId(0);
     }
 }
