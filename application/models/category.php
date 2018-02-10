@@ -55,10 +55,10 @@ class CategoryModel extends EmmaModel
             if (get_class($parent) == get_class($this)) {
                 $this->parent = $parent;
             } else {
-                throw new Exception("Parent must be a/an " . get_class($this) . " object.");
+                trigger_error("Parent must be a/an " . get_class($this) . " object.");
             }
         } else {
-            throw new Exception("Parent must be an object.");
+            trigger_error("Parent must be an object.");
         }
     }
 

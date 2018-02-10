@@ -41,25 +41,12 @@ class home extends EmmaController
         $this->ReturnData = "Ok dit is leuke tekst.";
     }
 
-    /**
-     * @param $object
-     * @return null
-     */
-    private function getNewObject($object)
-    {
-        if (is_object($object)) {
-            return clone($object);
-        } else {
-            return null;
-        }
-    }
-
     public function testMethod()
     {
         $products = new ProductsTable();
 
-        $categoryModel = $this->getNewObject($this->CategoryModel);
-        $categoryModel2 = $this->getNewObject(($this->CategoryModel));
+        $categoryModel = clone($this->CategoryModel);
+        $categoryModel2 = clone ($this->CategoryModel);
 
         $categoryModel->setId(1);
         $categoryModel2->setId(2);
