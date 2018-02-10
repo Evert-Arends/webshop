@@ -4,16 +4,22 @@
  * User: Evert Arends
  * Date: 5-2-18
  * Time: 14:02
- * @property  ProductModel
  * @property ProductModel ProductModel
+ * @property  CategoryModel CategoryModel
  */
 
 class home extends EmmaController
 {
     protected $ReturnData;
+
     public function init()
     {
-        Loader::model("ProductModel");
+        try {
+            Loader::model("ProductModel");
+            Loader::model("CategoryModel");
+        } catch (Exception $e) {
+            print_r($e);
+        }
     }
 
     public function index()
@@ -35,17 +41,38 @@ class home extends EmmaController
         $this->ReturnData = "Ok dit is leuke tekst.";
     }
 
+    /**
+     * @param $object
+     * @return null
+     */
+    private function getNewObject($object)
+    {
+        if (is_object($object)) {
+            return clone($object);
+        } else {
+            return null;
+        }
+    }
+
     public function testMethod()
     {
         $products = new ProductsTable();
-        $product = $products->find("price", 0);
-        $this->fillProductModel();
-        $product->Objects->price = 1200;
-        $product->save();
-    }
 
-    private function fillProductModel()
-    {
-        $this->ProductModel->setCategoryId(0);
+        $categoryModel = $this->getNewObject($this->CategoryModel);
+        $categoryModel2 = $this->getNewObject(($this->CategoryModel));
+
+        $categoryModel->setId(1);
+        $categoryModel2->setId(2);
+
+        try {
+            $categoryModel2->setParent($products);
+        } catch (Exception $e) {
+            echo $e;
+        }
+
+//        $product = $products->find("price", 0);
+//        $product->Objects->price = 1200;
+//        $product->save();
+        print_r($this->ProductModel->getId());
     }
 }

@@ -6,7 +6,7 @@
  * Time: 20:52
  */
 
-class ProductModel
+class ProductModel extends EmmaModel
 {
     private $id;
     private $name;
