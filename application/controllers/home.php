@@ -57,7 +57,7 @@ class home extends EmmaController
 //        $categoryModel2->setParent($products);
 //
 //
-////        $product = $products->find("price", 0);
+        $product = $products->find("price", 0);
 ////        $product->Objects->price = 1200;
 ////        $product->save();
 //        print_r($this->ProductModel->getId());

@@ -4,6 +4,7 @@
  * User: berm
  * Date: 10-2-18
  * Time: 16:11
+ * @property ObjectChecker objectChecker
  */
 
 class UserModel extends EmmaModel
@@ -20,6 +21,7 @@ class UserModel extends EmmaModel
      */
     public function __construct()
     {
+        $this->objectChecker = new ObjectChecker();
         return $ref =& $this;
     }
 
@@ -29,6 +31,10 @@ class UserModel extends EmmaModel
             trigger_error("At least one of the parameters required.");
 
         }
+    }
+
+    private function getUserFromDB() {
+
     }
 
     /**
@@ -60,11 +66,11 @@ class UserModel extends EmmaModel
      */
     public function setRole($role)
     {
-        $this->role = $role;
-        $objectChecker = new ObjectChecker();
-        $check = $objectChecker->typeMatcher(New UserRole(), $role);
+        $check = $this->objectChecker->typeMatcher(New UserRole(), $role);
         if (!$check) {
             trigger_error("Role must be a/an " . get_class(new UserRole()) . " object.");
+        } else {
+            $this->role = $role;
         }
     }
 
