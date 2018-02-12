@@ -4,9 +4,9 @@ class Cookie
 {
 
     /**
-     * 
+     *
      * @param string $varName
-     * @return Ambigous <boolean, string>
+     * @return bool <boolean, string>
      */
     static function get ($varName)
     {

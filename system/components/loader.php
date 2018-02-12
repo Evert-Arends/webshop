@@ -110,10 +110,15 @@ class Loader implements ISystemComponent
         $modelFileName = str_replace("Model", "", $paramModel);
         $modelName = ucfirst($paramModel);
         require_once("models/" . strtolower($modelFileName) . ".php");
-
         //Create the model object
         $modelObject = new $modelName ();
-        $modelObject->__construct();
+
+        if (!method_exists($modelObject, "__construct")) {
+            trigger_error("Missing constructor, constructors can be empty, just make sure they are there.\n\n");
+        } else {
+            $modelObject->__construct();
+        }
+
         if (method_exists($modelObject, "init"))
             $modelObject->init();
 

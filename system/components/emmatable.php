@@ -26,6 +26,9 @@ abstract class EmmaTable implements ITable
 
     /**
      * @see ITable::getProperTableName()
+     * @param $tableNameArray
+     * @param $i
+     * @return mixed
      */
     public function getProperTableName($tableNameArray, $i)
     {
@@ -71,6 +74,8 @@ abstract class EmmaTable implements ITable
 
     /**
      * @see ITable::getTable()
+     * @param $tableName
+     * @return mixed
      */
     public function getTable($tableName)
     {
@@ -92,6 +97,7 @@ abstract class EmmaTable implements ITable
 
     /**
      * @see ITable::initialize()
+     * @param $name
      */
     public function initialize($name)
     {
@@ -103,6 +109,9 @@ abstract class EmmaTable implements ITable
 
     /**
      * @see ITable::insert()
+     * @param $dataArray
+     *
+     * @return int
      */
     public function insert($dataArray)
     {
@@ -242,6 +251,9 @@ SQL;
 
     /**
      * @see ITable::leftJoin()
+     * @param $table
+     * @param $on
+     * @param $thisOn
      */
     public function leftJoin($table, $on, $thisOn)
     {
@@ -260,6 +272,9 @@ SQL;
 
     /**
      * @see ITable::rightJoin()
+     * @param $table
+     * @param $on
+     * @param $thisOn
      */
     public function rightJoin($table, $on, $thisOn)
     {
@@ -278,6 +293,9 @@ SQL;
 
     /**
      * @see ITable::innerJoin()
+     * @param $table
+     * @param $on
+     * @param $thisOn
      */
     public function innerJoin($table, $on, $thisOn)
     {
@@ -296,6 +314,9 @@ SQL;
 
     /**
      * @see ITable::outerJoin()
+     * @param $table
+     * @param $on
+     * @param $thisOn
      */
     public function outerJoin($table, $on, $thisOn)
     {
@@ -314,6 +335,9 @@ SQL;
 
     /**
      * @see ITable::find()
+     * @param $column
+     * @param $key
+     * @return bool|EmmaTable
      */
     public function find($column, $key)
     {
@@ -392,6 +416,8 @@ SQL;
 
     /**
      * @see ITable::count()
+     * @param $tableRow
+     * @return
      */
     public function count($tableRow)
     {
@@ -432,6 +458,8 @@ SQL;
 
     /**
      * @see ITable::delete()
+     * @param $column
+     * @param $key
      */
     public function delete($column, $key)
     {
