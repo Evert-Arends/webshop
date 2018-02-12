@@ -21,7 +21,7 @@
     <div class="col-lg-9 col-md-9">
 
         <!-- PAGE HEADER -->
-        <div class="row">
+        <div class="row custom-margin">
             <div class="col-12">
                 <h3 class="partial-title" style="">Producten</h3>
             </div>

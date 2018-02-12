@@ -23,6 +23,11 @@
         <div class="row custom-margin">
             <div class="col-12">
                 <h3 class="partial-title" style="">Winkelwagen</h3>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 1rem">
+            <div class="col-12">
                 <table id="cart" class="table table-hover table-condensed">
                     <thead>
                     <tr>
