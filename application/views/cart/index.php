@@ -70,8 +70,9 @@
 
                                 function editSubtotal(quantity) {
                                     var price = $('#<?php echo "product1" . "-price"; ?>').text();
-                                    var intPrice = parseFloat(price);
-                                    document.getElementById('<?php echo "product1" . "-subtotal"; ?>').innerHTML = intPrice * quantity;
+                                    var intPrice = parseFloat(price) * quantity;
+                                    var fixedPrice = intPrice.toFixed(2);
+                                    document.getElementById('<?php echo "product1" . "-subtotal"; ?>').innerHTML = fixedPrice;
                                 }
 
                             });
@@ -100,7 +101,9 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product1" . "-subtotal"; ?>>1.99</td>
+                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product1" . "-subtotal"; ?>>
+                            1.99
+                        </td>
                         <td class="actions" data-th="">
                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                         </td>
@@ -142,8 +145,9 @@
 
                                 function editSubtotal(quantity) {
                                     var price = $('#<?php echo "product2" . "-price"; ?>').text();
-                                    var intPrice = parseFloat(price);
-                                    document.getElementById('<?php echo "product2" . "-subtotal"; ?>').innerHTML = intPrice * quantity;
+                                    var intPrice = parseFloat(price) * quantity;
+                                    var fixedPrice = intPrice.toFixed(2);
+                                    document.getElementById('<?php echo "product2" . "-subtotal"; ?>').innerHTML = fixedPrice;
                                 }
                             });
                         </script>
@@ -171,33 +175,57 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product2" . "-subtotal"; ?>>1.99</td>
+                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product2" . "-subtotal"; ?>>
+                            1.99
+                        </td>
                         <td class="actions" data-th="">
                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>
-                    
+
                     </tbody>
                     <tfoot>
                     <tr>
+                        <td colspan="3" class="hidden-xs"></td>
+                        <td id="" class="hidden-xs text-center">Ex BTW</td>
+                        <td id="total-price-ex-btw" class="hidden-xs text-center">1.99</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="hidden-xs"></td>
+                        <td id="" class="hidden-xs text-center">Inc BTW</td>
+                        <td id="total-price-inc-btw" class="hidden-xs text-center">0</td>
+                    </tr>
+                    <tr>
                         <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
                         </td>
-                        <td colspan="2" class="hidden-xs"></td>
-                        <td id="total-price" class="hidden-xs text-center">1.99</td>
+                        <td colspan="3" class="hidden-xs"></td>
                         <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
                 <script>
-                    function refreshPrice(){
+                    function refreshPrice() {
+                        //Var init
                         var sum = 0;
-                        $(".subtotal").each(function() {
+                        var exBTW = 0;
+                        var sum2 = 0;
+                        var incBTW = 0;
+                        //For each subtotal(per product)
+                        $(".subtotal").each(function () {
+                            //Get subtotal
                             var value = $(this).text();
                             // add only if the value is number
-                            if(!isNaN(value) && value.length !== 0) {
+                            if (!isNaN(value) && value.length !== 0) {
+                                //Without BTW/VAT
                                 sum += parseFloat(value);
-                                document.getElementById('total-price').innerHTML = sum;
+                                exBTW = sum.toFixed(2);
+                                //BTW/VAT included
+                                sum2 = sum * 1.21;
+                                incBTW = sum2.toFixed(2);
+                                //Update table
+                                document.getElementById('total-price-ex-btw').innerHTML = exBTW;
+                                document.getElementById('total-price-inc-btw').innerHTML = incBTW;
                             }
                         });
                     }
