@@ -32,7 +32,6 @@
 </head>
 
 <body>
-<!-- Trigger the modal with a button -->
 
 <!-- CookieModal -->
 <div id="myModal" class="modal fade" role="dialog" style="z-index: 9999">

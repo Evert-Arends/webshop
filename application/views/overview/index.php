@@ -43,8 +43,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,8 +72,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,8 +101,18 @@
                             aspernatur! Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,8 +130,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,8 +159,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -139,8 +189,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -159,8 +219,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -178,8 +248,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,8 +277,18 @@
                             aspernatur! Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -216,8 +306,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -235,8 +335,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -255,8 +365,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,8 +394,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -293,8 +423,18 @@
                             aspernatur! Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -312,8 +452,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -331,8 +481,18 @@
                             aspernatur!</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                        <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                        <div class="row">
+                            <div class="reviews_product col-10">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="col-2">
+                                <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

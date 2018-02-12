@@ -40,7 +40,7 @@
                                 <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
                                                                      class="img-responsive"/></div>
                                 <div class="col-sm-10">
-                                    <h4 class="nomargin">Product 1</h4>
+                                    <h4 style="margin-top: 0.5rem !important;">Product 1</h4>
                                 </div>
                             </div>
                         </td>
@@ -115,7 +115,7 @@
                                 <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
                                                                      class="img-responsive"/></div>
                                 <div class="col-sm-10">
-                                    <h4 class="nomargin">Product 2</h4>
+                                    <h4 style="margin-top: 0.5rem !important;">Product 2</h4>
                                 </div>
                             </div>
                         </td>
@@ -186,20 +186,22 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="3" class="hidden-xs"></td>
-                        <td id="" class="hidden-xs text-center">Ex BTW</td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td id="" class="hidden-xs text-center">Exclusief BTW</td>
                         <td id="total-price-ex-btw" class="hidden-xs text-center">1.99</td>
+                        <td colspan="1" class="hidden-xs"></td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="hidden-xs"></td>
-                        <td id="" class="hidden-xs text-center">Inc BTW</td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td id="" class="hidden-xs text-center">Inclusief BTW</td>
                         <td id="total-price-inc-btw" class="hidden-xs text-center">0</td>
+                        <td colspan="1" class="hidden-xs"></td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+                        <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Doorwinkelen</a>
                         </td>
                         <td colspan="3" class="hidden-xs"></td>
-                        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a>
+                        <td><a href="#" class="btn btn-success btn-block">Betalen <i class="fa fa-angle-right"></i></a>
                         </td>
                     </tr>
                     </tfoot>
