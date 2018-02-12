@@ -43,10 +43,10 @@ class home extends EmmaController
 
     public function testMethod()
     {
-        $this->UserModel->setRole("ddss");
+//        $this->UserModel->setRole();
 
 
-//        $products = new ProductsTable();
+        $products = new ProductsTable();
 //        // Create new models.
 //        $categoryModel = clone($this->CategoryModel);
 //        $categoryModel2 = clone ($this->CategoryModel);
@@ -57,8 +57,9 @@ class home extends EmmaController
 //        $categoryModel2->setParent($products);
 //
 //
-//        $product = $products->find("price", 0);
-////        $product->Objects->price = 1200;
+        $product = $products->find("price", 0);
+        print_r($product);
+        ////        $product->Objects->price = 1200;
 ////        $product->save();
 //        print_r($this->ProductModel->getId());
     }
