@@ -55,13 +55,6 @@
         <div class="row" style="margin-top: 1rem">
             <?php
             foreach ($this->Products as $product) {
-//                if($product->getId() == 1){
-//                    print_r($product);
-//                    die();
-//
-//                }else{
-//                    continue;
-//                }
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
@@ -82,16 +75,22 @@
                             <?php
                             if ($product->getDiscount()) {
                                 ?>
-                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice(); ?></h5>
+                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice() * 1.21; ?></h5>
+
+                                <?php
+                                $sellingPrice = $product->getPrice() - ($product->getPrice() * ($product->getDiscount() / 100));
+                                ?>
+
+                                <h5 class="font-weight-bold">€<?= $sellingPrice * 1.21 ?></h5>
 
                                 <?php
                             } else {
                                 ?>
-                                <h5>€<?= $product->getPrice(); ?></h5>
+                                <h5>€<?= $product->getPrice() * 1.21; ?></h5>
                             <?php } ?>
 
                             <p class="card-text">
-                                <?= $string = strlen($product->getDescription()) > 100 ? substr($product->getDescription(), 0, 100) . "... " : $product->getDescription(); ?>
+                                <?= $string = strlen($product->getDescription()) > 100 ? substr($product->getDescription(), 0, 30) . "... " : $product->getDescription(); ?>
                             </p>
                         </div>
                         <div class="card-footer">
