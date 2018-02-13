@@ -50,6 +50,14 @@ body {
     padding-right: 0 !important;
 }
 
+.form-group{
+    margin-bottom: 0 !important;
+}
+
+.form-control{
+    margin-bottom: 10px !important;
+}
+
 /*	2.	Menu
 -------------------------------------------------------------------*/
 #menu {
