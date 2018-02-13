@@ -25,7 +25,6 @@ class getProducts extends EmmaModel
 
     public function createModels()
     {
-//        $this->ProductModel();
         $this->init();
         $allIDS = $this->getAllProducts();
         $allProducts = array();
@@ -41,7 +40,7 @@ class getProducts extends EmmaModel
             }
             array_push($allProducts, $productModel);
         }
-        print_r($allProducts[0]->getName());
+        return $allProducts;
     }
 
 }
