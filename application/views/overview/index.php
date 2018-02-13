@@ -55,6 +55,13 @@
         <div class="row" style="margin-top: 1rem">
             <?php
             foreach ($this->Products as $product) {
+                if($product->getId() == 1){
+                    print_r($product);
+                    die();
+
+                }else{
+                    continue;
+                }
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
@@ -62,7 +69,7 @@
                         <?php
                         if ($product->getDiscount()) {
                             ?>
-                            <h1><span class="badge badge-danger deal-badge"><?php $product->getDiscount() ?>%</span></h1>
+                            <h1><span class="badge badge-danger deal-badge"><?= $product->getDiscount() ?>%</span></h1>
                             <?php
                         }
                         ?>
