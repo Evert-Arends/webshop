@@ -25,22 +25,23 @@ class getProducts extends EmmaModel
 
     public function createModels()
     {
+//        $this->ProductModel();
         $this->init();
         $allIDS = $this->getAllProducts();
         $allProducts = array();
         if (!$allIDS) {
             return "No products found";
         }
-        foreach ($allIDS as $id) {
+        foreach ($allIDS as $value) {
             $productModel = clone($this->ProductModel);
-            $productModel->get($id);
+            $productModel->get($value->id);
+
             if (!$productModel) {
                 continue;
             }
             array_push($allProducts, $productModel);
         }
-        print_r($allProducts);
-        print_r((object)$allProducts[0]->getName());
+        print_r($allProducts[0]->getName());
     }
 
 }

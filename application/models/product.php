@@ -23,7 +23,7 @@ class ProductModel extends EmmaModel
     public function __construct()
     {
         EmmaModel::__construct();
-        return $ref =& $this;
+//        return $ref =& $this;
     }
 
     public function init()
@@ -143,20 +143,31 @@ class ProductModel extends EmmaModel
         $this->manufacturer = $manufacturer;
     }
 
-    public function get($id=null, $name=null)
+    public function get($id = null, $name = null)
     {
         if (!$id && !$name) {
             trigger_error("At least one parameter required with requesting a product from the database.");
             return $this;
         }
 
+//        var_dump($id);
+
         // Retrieve product from database
         $productsTable = new ProductsTable();
-        $product = $id ? $productsTable->find("name", $name) : $productsTable->find("id", $id);
+        $product = !$id ? $productsTable->find("name", $name) : $productsTable->find("id", $id);
+
 
         if (!$product) {
             return null; // Return null instead of model.
         }
+
+        $this->setId($product->Objects->id);
+        $this->setCategoryId($product->Objects->categories_id);
+        $this->setName($product->Objects->name);
+        $this->setDescription($product->Objects->description);
+        $this->setManufacturer($product->Objects->manufacturer);
+        $this->setPhoto($product->Objects->photo);
+        $this->setPrice($product->Objects->price);
 
         return $this;
     }
