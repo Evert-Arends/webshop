@@ -8,7 +8,7 @@
     <meta name="description" content="Webshop WEBS2">
     <meta name="author" content="BitHopper">
 
-    <title>Homepage</title>
+    <title>Webshop</title>
 
     <!-- Bootstrap core CSS -->
     <link href="application/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,11 +33,10 @@
 
 <body>
 
-<!-- CookieModal -->
+<!-- COOKIEMODAL -->
 <div id="myModal" class="modal fade cuztomz" role="dialog" style="z-index: 9999">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Cookies</h4>
@@ -75,11 +74,10 @@
     </div>
 </div>
 
-<!-- defaultmodal -->
+<!-- LOGINMODAL -->
 <div id="myModal2" class="modal fade cuztomz" role="dialog" style="z-index: 9999">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Inloggen</h4>
@@ -101,6 +99,102 @@
                 <a href="#" class="forgot-password">
                     Wachtwoord vergeten?
                 </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- REGISTERMODAL -->
+<div id="myModal3" class="modal fade cuztomz" role="dialog" style="z-index: 9999">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registreren</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+
+                <form id="sendMailForm" class="form-signin">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="E-mailadres" required
+                           autofocus>
+                    <p>
+                        Nadat u een e-mail adres heeft ingevuld wordt er een activatiecode naar dat adres gestuurd.
+                    </p>
+
+                    <button id="sendMail" class="btn btn-lg btn-primary btn-block btn-signin">Mail versturen</button>
+                </form>
+
+                <form id="authKeyForm" class="form-signin" style="display: none">
+                    <input type="text" id="inputKey" class="form-control" placeholder="Authenticatiecode" required>
+                    <p>
+                        Vul hier de code in die u zojuist in de mail ontvangen heeft.
+                    </p>
+
+                    <button id="makeAuth" class="btn btn-lg btn-primary btn-block btn-signin">Doorgaan</button>
+                </form>
+
+                <form id="personalInformation" class="form" role="form" autocomplete="off" style="display: none">
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Naam</label>
+                        <div class="col-md-6">
+                            <input type="text" id="inputFirstName" class="form-control" placeholder="Voornaam" required autofocus>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="inputLastName" class="form-control" placeholder="Achternaam" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Afleveradres</label>
+                        <div class="col-md-8">
+                            <input type="text" id="inputStreet" class="form-control" placeholder="Straatnaam" required autofocus>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="inputHouseNumber" class="form-control" placeholder="Huisnummer" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-5">
+                            <input type="text" id="inputPostalCode" class="form-control" placeholder="Postcode" required autofocus>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="inputCityName" class="form-control" placeholder="Plaatsnaam" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefoonnummer</label>
+                        <input type="text" id="inputPhone" class="form-control" placeholder="Telefoon" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <button id="RegisterUser" class="btn btn-lg btn-primary btn-block btn-signin">Registreren</button>
+                    </div>
+                </form>
+
+                <script type="text/javascript">
+                    $('#sendMail').on('click', function (event) {
+                        event.preventDefault();
+                        $('#sendMailForm').hide();
+                        $('#authKeyForm').show();
+                    });
+
+                    $('#makeAuth').on('click', function (event) {
+                        event.preventDefault();
+                        $('#authKeyForm').hide();
+                        $('#personalInformation').show();
+                    });
+
+                    $('#RegisterUser').on('click', function (event) {
+                        event.preventDefault();
+                    });
+                </script>
 
             </div>
         </div>
@@ -239,6 +333,10 @@
                     <li class="nav-item" style="cursor: pointer;"><a class="nav-link nav-btn" data-toggle="modal"
                                                                      data-target="#myModal2"><span><i
                                         class="fas fa-sign-in-alt" aria-hidden="true"> </i>   Inloggen</span></a></li>
+                    <li class="nav-item" style="cursor: pointer;"><a class="nav-link nav-btn" data-toggle="modal"
+                                                                     data-target="#myModal3"><span><i
+                                        class="fas fa-sign-in-alt" aria-hidden="true"> </i>   Registreren</span></a>
+                    </li>
 
                 </ul>
                 <?php

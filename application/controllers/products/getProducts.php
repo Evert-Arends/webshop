@@ -40,7 +40,7 @@ class getProducts extends EmmaModel
             array_push($allProducts, $productModel);
         }
         print_r($allProducts);
-        print_r($allProducts[0]->getName());
+        print_r((object)$allProducts[0]->getName());
     }
 
 }
