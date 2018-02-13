@@ -16,6 +16,7 @@ class ProductModel extends EmmaModel
     private $photo;
     private $manufacturer;
     private $category_id;
+    private $discount;
 
     /**
      * return reference
@@ -23,7 +24,6 @@ class ProductModel extends EmmaModel
     public function __construct()
     {
         EmmaModel::__construct();
-//        return $ref =& $this;
     }
 
     public function init()
@@ -170,6 +170,22 @@ class ProductModel extends EmmaModel
         $this->setPrice($product->Objects->price);
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param mixed $discount
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
     }
 
     private function buildCategoryTree($category_id)
