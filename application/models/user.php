@@ -19,7 +19,7 @@ class UserModel extends EmmaModel
     /**
      * return reference
      */
-    public function __construct()
+    public function construct()
     {
         $this->objectChecker = new ObjectChecker();
         return $ref =& $this;

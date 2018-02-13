@@ -142,7 +142,7 @@ class ProductModel extends EmmaModel
         $this->manufacturer = $manufacturer;
     }
 
-    public function get($id, $name)
+    public function get($id=null, $name=null)
     {
         if (!$id && !$name) {
             trigger_error("At least one parameter required with requesting a product from the database.");
@@ -157,7 +157,7 @@ class ProductModel extends EmmaModel
             return null; // Return null instead of model.
         }
 
-
+        return $this;
     }
 
     private function buildCategoryTree($category_id)
