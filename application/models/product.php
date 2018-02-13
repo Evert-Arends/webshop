@@ -16,6 +16,9 @@ class ProductModel extends EmmaModel
     private $photo;
     private $manufacturer;
     private $category_id;
+    private $category; // Only category objects
+    private $discount;
+    private $objectChecker;
 
     /**
      * return reference
@@ -23,12 +26,12 @@ class ProductModel extends EmmaModel
     public function __construct()
     {
         EmmaModel::__construct();
-//        return $ref =& $this;
+        $this->objectChecker = new ObjectChecker();
     }
 
     public function init()
     {
-        Loader::model("CategoryModel");
+        $this->CategoryModel = Loader::model("CategoryModel");
     }
 
     /**
@@ -143,6 +146,27 @@ class ProductModel extends EmmaModel
         $this->manufacturer = $manufacturer;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param mixed $discount
+     */
+    public function setDiscount($discount)
+    {
+        $this->discount = $discount;
+    }
+
+    /**
+     * @param null $id
+     * @param null $name
+     * @return $this|null
+     */
     public function get($id = null, $name = null)
     {
         if (!$id && !$name) {
@@ -150,12 +174,9 @@ class ProductModel extends EmmaModel
             return $this;
         }
 
-//        var_dump($id);
-
         // Retrieve product from database
         $productsTable = new ProductsTable();
         $product = !$id ? $productsTable->find("name", $name) : $productsTable->find("id", $id);
-
 
         if (!$product) {
             return null; // Return null instead of model.
@@ -168,10 +189,51 @@ class ProductModel extends EmmaModel
         $this->setManufacturer($product->Objects->manufacturer);
         $this->setPhoto($product->Objects->photo);
         $this->setPrice($product->Objects->price);
+        $this->setDiscount($this->getDiscountFromDB());
+        $this->buildCategoryTree($this->getCategoryId());
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    private function getDiscountFromDB()
+    {
+        $productDiscount = new product_has_discount();
+        $discount = $productDiscount->find("products_id", $this->getId());
+        if (!$discount) {
+            return null;
+        } else {
+            return $discount->Objects->discount;
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param CategoryModel $category
+     */
+    public function setCategory($category)
+    {
+        $check = $this->objectChecker->typeMatcher(New CategoryModel(), $category);
+        if (!$check) {
+            trigger_error("Category must be a/an " . get_class(New CategoryModel()) . " object.");
+        } else {
+            $this->category = $category;
+        }
+    }
+
+    /**
+     * @param integer $category_id
+     * @return bool
+     */
     private function buildCategoryTree($category_id)
     {
         $categoryModel = clone($this->CategoryModel);
@@ -179,11 +241,15 @@ class ProductModel extends EmmaModel
         $category = $categoryTable->find("id", $category_id);
 
         if (!$category) {
-            return null;
+            return false;
         }
 
         $categoryModel->setId($category_id);
         $categoryModel->setName($category->Objects->name);
         $categoryModel->setDescription($category->Objects->description);
+
+        $this->setCategory($categoryModel);
+
+        return true;
     }
 }
