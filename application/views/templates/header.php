@@ -34,7 +34,7 @@
 <body>
 
 <!-- CookieModal -->
-<div id="myModal" class="modal fade" role="dialog" style="z-index: 9999">
+<div id="myModal" class="modal fade cuztomz" role="dialog" style="z-index: 9999">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -66,11 +66,44 @@
         We gebruiken cookies om er zeker van te zijn dat je onze website zo goed mogelijk beleeft.
         Als je deze website blijft gebruiken gaan we ervan uit dat je dat goed vindt.
         <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
-            I agree
+            Natuurlijk
         </button>
         <button type="button" class="btn btn-info btn-sm more-information" data-toggle="modal" data-target="#myModal">
             Meer informatie
         </button>
+
+    </div>
+</div>
+
+<!-- defaultmodal -->
+<div id="myModal2" class="modal fade cuztomz" role="dialog" style="z-index: 9999">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Inloggen</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="E-mailadres" required
+                           autofocus>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Wachtwoord" required>
+                    <div id="remember" class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Onthouden
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Inloggen</button>
+                </form>
+                <a href="#" class="forgot-password">
+                    Wachtwoord vergeten?
+                </a>
+
+            </div>
+        </div>
 
     </div>
 </div>
@@ -174,26 +207,43 @@
 
             </ul>
 
-            <ul class="navbar-nav ml-auto">
+            <?php
+            $userIsLoggedIn = false;
 
-                <li class="nav-item dropdown user-account">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Profiel
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="my_profile.html" class="dropdown-item">My Profile</a>
-                        <a href="my_password.html" class="dropdown-item">Change Password</a>
-                        <a href="my_notifications.html" class="dropdown-item">Notifications</a>
-                        <a href="my_membership.html" class="dropdown-item">Membership</a>
-                        <a href="my_payments.html" class="dropdown-item">Payments</a>
-                        <a href="my_account.html" class="dropdown-item">Account</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link nav-btn" href="my_listing_add.html"><span><i
-                                    class="fa fa-shopping-cart" aria-hidden="true"></i> Winkelwagen</span></a></li>
-            </ul>
+            if ($userIsLoggedIn) {
+                ?>
+                <ul class="navbar-nav ml-auto">
 
+                    <li class="nav-item dropdown user-account">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Profiel
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="my_profile.html" class="dropdown-item">My Profile</a>
+                            <a href="my_password.html" class="dropdown-item">Change Password</a>
+                            <a href="my_notifications.html" class="dropdown-item">Notifications</a>
+                            <a href="my_membership.html" class="dropdown-item">Membership</a>
+                            <a href="my_payments.html" class="dropdown-item">Payments</a>
+                            <a href="my_account.html" class="dropdown-item">Account</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link nav-btn" href="my_listing_add.html"><span><i
+                                        class="fa fa-shopping-cart" aria-hidden="true"></i> Winkelwagen</span></a></li>
+                </ul>
+                <?php
+            } else {
+                ?>
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item" style="cursor: pointer;"><a class="nav-link nav-btn" data-toggle="modal"
+                                                                     data-target="#myModal2"><span><i
+                                        class="fas fa-sign-in-alt" aria-hidden="true"> </i>   Inloggen</span></a></li>
+
+                </ul>
+                <?php
+            }
+            ?>
         </div>
     </div>
 </nav>
