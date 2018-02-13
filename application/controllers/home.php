@@ -24,8 +24,8 @@ class home extends EmmaController
 
     public function index()
     {
-        $this->page();
-//        $this->testMethod();
+//        $this->page();
+        $this->testMethod();
     }
 
     public function page($page = "index")
@@ -64,8 +64,10 @@ class home extends EmmaController
 ////        $product->save();
 //        print_r($this->ProductModel->getId());
         $newCategoryObject = clone($this->CategoryModel);
-        $newCategoryObject->setRecursiveLinking(true);
-        $newCategoryObject->get(2);
-//        print_r($newCategoryObject);
+        $newCategoryObject->setRecursiveLinking(true, true);
+        $newCategoryObject->get(6);
+        print_r($newCategoryObject);
+        $array = json_decode(json_encode($newCategoryObject), true);
+        print_r($array);
     }
 }

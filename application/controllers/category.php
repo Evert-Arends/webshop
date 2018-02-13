@@ -24,7 +24,7 @@ class category extends EmmaController
         $this->page();
     }
 
-    public function page($page = "category")
+    public function page($page = "index")
     {
         $this->test_fill();
         Loader::view("templates/header.php");
