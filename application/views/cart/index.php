@@ -75,14 +75,15 @@
 
                                 function editSubtotal(quantity) {
                                     var price = $('#<?php echo "product1" . "-price"; ?>').text();
-                                    var intPrice = parseFloat(price) * quantity;
+                                    var stripped = price.replace(/\€/g, '');
+                                    var intPrice = parseFloat(stripped) * quantity;
                                     var fixedPrice = intPrice.toFixed(2);
-                                    document.getElementById('<?php echo "product1" . "-subtotal"; ?>').innerHTML = fixedPrice;
+                                    document.getElementById('<?php echo "product1" . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
                                 }
 
                             });
                         </script>
-                        <td data-th="Prijs" <?php echo "id=product1" . "-price"; ?>>1.99</td>
+                        <td data-th="Prijs" <?php echo "id=product1" . "-price"; ?>>€1.99</td>
                         <td data-th="Aantal">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -150,13 +151,14 @@
 
                                 function editSubtotal(quantity) {
                                     var price = $('#<?php echo "product2" . "-price"; ?>').text();
-                                    var intPrice = parseFloat(price) * quantity;
+                                    var stripped = price.replace(/\€/g, '');
+                                    var intPrice = parseFloat(stripped) * quantity;
                                     var fixedPrice = intPrice.toFixed(2);
-                                    document.getElementById('<?php echo "product2" . "-subtotal"; ?>').innerHTML = fixedPrice;
+                                    document.getElementById('<?php echo "product2" . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
                                 }
                             });
                         </script>
-                        <td data-th="Prijs" <?php echo "id=product2" . "-price"; ?>>1.99</td>
+                        <td data-th="Prijs" <?php echo "id=product2" . "-price"; ?>>€1.99</td>
                         <td data-th="Aantal">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -192,14 +194,14 @@
                     <tfoot>
                     <tr>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td id="" class="hidden-xs text-center">Exclusief BTW</td>
-                        <td id="total-price-ex-btw" class="hidden-xs text-center">1.99</td>
+                        <td id="" class="hidden-xs text-center font-weight-bold">Exclusief BTW</td>
+                        <td id="total-price-ex-btw" class="hidden-xs text-center font-weight-bold">1.99</td>
                         <td colspan="1" class="hidden-xs"></td>
                     </tr>
                     <tr>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td id="" class="hidden-xs text-center">Inclusief BTW</td>
-                        <td id="total-price-inc-btw" class="hidden-xs text-center">0</td>
+                        <td id="" class="hidden-xs text-center font-weight-bold">Inclusief BTW</td>
+                        <td id="total-price-inc-btw" class="hidden-xs text-center font-weight-bold">0</td>
                         <td colspan="1" class="hidden-xs"></td>
                     </tr>
                     <tr>
@@ -222,17 +224,18 @@
                         $(".subtotal").each(function () {
                             //Get subtotal
                             var value = $(this).text();
+                            var strippedValue = value.replace(/\€/g, '');
                             // add only if the value is number
-                            if (!isNaN(value) && value.length !== 0) {
+                            if (!isNaN(strippedValue) && strippedValue.length !== 0) {
                                 //Without BTW/VAT
-                                sum += parseFloat(value);
+                                sum += parseFloat(strippedValue);
                                 exBTW = sum.toFixed(2);
                                 //BTW/VAT included
                                 sum2 = sum * 1.21;
                                 incBTW = sum2.toFixed(2);
                                 //Update table
-                                document.getElementById('total-price-ex-btw').innerHTML = exBTW;
-                                document.getElementById('total-price-inc-btw').innerHTML = incBTW;
+                                document.getElementById('total-price-ex-btw').innerHTML = "€" + exBTW;
+                                document.getElementById('total-price-inc-btw').innerHTML = "€" + incBTW;
                             }
                         });
                     }
