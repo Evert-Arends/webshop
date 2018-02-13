@@ -25,13 +25,13 @@ class ProductModel extends EmmaModel
      */
     public function __construct()
     {
-        $this->objectChecker = new ObjectChecker();
         EmmaModel::__construct();
+        $this->objectChecker = new ObjectChecker();
     }
 
     public function init()
     {
-        Loader::model("CategoryModel");
+        $this->CategoryModel = Loader::model("CategoryModel");
     }
 
     /**
@@ -189,7 +189,7 @@ class ProductModel extends EmmaModel
         $this->setManufacturer($product->Objects->manufacturer);
         $this->setPhoto($product->Objects->photo);
         $this->setPrice($product->Objects->price);
-        $this->setDiscount($this->setDiscountFromDB());
+        $this->setDiscount($this->getDiscountFromDB());
         $this->buildCategoryTree($this->getCategoryId());
 
         return $this;
@@ -198,15 +198,15 @@ class ProductModel extends EmmaModel
     /**
      * @return string|null
      */
-    private function setDiscountFromDB()
+    private function getDiscountFromDB()
     {
         $productDiscount = new product_has_discount();
         $discount = $productDiscount->find("products_id", $this->getId());
         if (!$discount) {
-            $this->setDiscount(null);
+            return null;
+        } else {
+            return $discount->Objects->discount;
         }
-
-        return $discount->Objects->discount;
     }
 
     /**
