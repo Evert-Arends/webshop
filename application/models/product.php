@@ -22,14 +22,12 @@ class ProductModel extends EmmaModel
      */
     public function __construct()
     {
-        $this->init();
         return $ref =& $this;
     }
 
-    private function init()
+    public function init()
     {
         Loader::model("CategoryModel");
-
     }
 
     /**

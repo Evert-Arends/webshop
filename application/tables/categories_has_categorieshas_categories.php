@@ -6,6 +6,6 @@
  * Time: 14:31
  */
 
-class CategoryLinks extends EmmaTable {
+class categories_has_categories extends EmmaTable {
 
 }

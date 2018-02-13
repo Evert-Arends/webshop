@@ -47,7 +47,7 @@ class Database
      * Either returns a new Database instance if there isn't one in place already
      * or returns a reference to the already in place database object
      *
-     * @return Ambigous <Database, &Database>
+     * @return Database
      */
     public static function getInstance ()
     {

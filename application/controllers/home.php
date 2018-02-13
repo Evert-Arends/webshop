@@ -16,15 +16,16 @@ class home extends EmmaController
 
     public function init()
     {
-            Loader::model("ProductModel");
-            Loader::model("CategoryModel");
-            Loader::model("UserModel");
-            Loader::model("UserRole");
+        Loader::model("ProductModel");
+        Loader::model("CategoryModel");
+        Loader::model("UserModel");
+        Loader::model("UserRole");
     }
 
     public function index()
     {
         $this->page();
+//        $this->testMethod();
     }
 
     public function page($page = "index")
@@ -56,11 +57,15 @@ class home extends EmmaController
 //
 //        $categoryModel2->setParent($products);
 //
-//
-        $product = $products->find("price", 0);
-        print_r($product);
+////
+//        $product = $products->find("price", 0);
+//        print_r($product);
         ////        $product->Objects->price = 1200;
 ////        $product->save();
 //        print_r($this->ProductModel->getId());
+        $newCategoryObject = clone($this->CategoryModel);
+        $newCategoryObject->setRecursiveLinking(true);
+        $newCategoryObject->get(2);
+//        print_r($newCategoryObject);
     }
 }
