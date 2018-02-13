@@ -58,12 +58,19 @@
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
-                        <h1><span class="badge badge-danger deal-badge">50%</span></h1>
+                        <a href="#"><img class="card-img-top" src="<?= $product->getPhoto(); ?>" alt=""></a>
+                        <?php
+                        if ($product->getDiscount()) {
+                            ?>
+                            <h1><span class="badge badge-danger deal-badge"><?php $product->getDiscount() ?>%</span></h1>
+                            <?php
+                        }
+                        ?>
                         <div class="card-body">
                             <h4 class="card-title">
                                 <a href="#"><?= $product->getName(); ?></a>
                             </h4>
-                            <h5><?= $product->getPrice(); ?></h5>
+                            <h5>€<?= $product->getPrice(); ?></h5>
                             <p class="card-text">
                                 <?= $string = strlen($product->getDescription()) > 100 ? substr($product->getDescription(), 0, 100) . "... " : $product->getDescription(); ?>
                             </p>
