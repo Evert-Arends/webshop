@@ -7,11 +7,9 @@ abstract class EmmaModel implements IModel
 
     public $db;
 
-    public function constructor()
+    public function __construct()
     {
-
         $this->db = Database::getInstance();
-
     }
 
     /**
@@ -22,9 +20,7 @@ abstract class EmmaModel implements IModel
      */
     public function query($query, $params = NULL)
     {
-
         if (DB) {
-
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -53,7 +49,6 @@ abstract class EmmaModel implements IModel
     {
 
         if (DB) {
-
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -85,9 +80,7 @@ abstract class EmmaModel implements IModel
      */
     public function fetchAll($query, $params = NULL)
     {
-
         if (DB) {
-
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

@@ -6,7 +6,7 @@
  * Time: 17:12
  */
 
-class UserRole
+class UserRole extends EmmaModel
 {
     private $name;
     private $level;
@@ -16,7 +16,7 @@ class UserRole
     /**
      * return reference
      */
-    public function __construct()
+    public function construct()
     {
         return $ref =& $this;
     }

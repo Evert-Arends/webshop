@@ -28,6 +28,8 @@ define("DB_HOST", "37.48.109.246");
 define("DB_NAME", "webshop");
 define("DB_USERNAME", "webshop");
 define("DB_PASSWORD", "!webshop!");
+// If you create tables with lowercase and underscores, set this to true.
+define("DB_TABLES_LOWERCASE", true);
 
 /****************************************************
  *                    Autoloader                    *

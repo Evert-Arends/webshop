@@ -114,7 +114,7 @@ class Loader implements ISystemComponent
         $modelObject = new $modelName ();
 
         if (!method_exists($modelObject, "__construct")) {
-            trigger_error("Missing constructor, constructors can be empty, just make sure they are there.\n\n");
+            trigger_error("Missing constructor, constructors can be empty, just make sure they are there.");
         } else {
             $modelObject->__construct();
         }

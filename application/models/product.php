@@ -4,6 +4,7 @@
  * User: berm
  * Date: 5-2-18
  * Time: 20:52
+ * @property  CategoryModel CategoryModel
  */
 
 class ProductModel extends EmmaModel
@@ -13,6 +14,7 @@ class ProductModel extends EmmaModel
     private $description;
     private $price;
     private $photo;
+    private $manufacturer;
     private $category_id;
 
     /**
@@ -21,6 +23,11 @@ class ProductModel extends EmmaModel
     public function __construct()
     {
         return $ref =& $this;
+    }
+
+    public function init()
+    {
+        Loader::model("CategoryModel");
     }
 
     /**
@@ -117,5 +124,54 @@ class ProductModel extends EmmaModel
     public function setPhoto($photo)
     {
         $this->photo = $photo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManufacturer()
+    {
+        return $this->manufacturer;
+    }
+
+    /**
+     * @param mixed $manufacturer
+     */
+    public function setManufacturer($manufacturer)
+    {
+        $this->manufacturer = $manufacturer;
+    }
+
+    public function get($id=null, $name=null)
+    {
+        if (!$id && !$name) {
+            trigger_error("At least one parameter required with requesting a product from the database.");
+            return $this;
+        }
+
+        // Retrieve product from database
+        $productsTable = new ProductsTable();
+        $product = $id ? $productsTable->find("name", $name) : $productsTable->find("id", $id);
+
+        if (!$product) {
+            return null; // Return null instead of model.
+        }
+
+        return $this;
+    }
+
+    private function buildCategoryTree($category_id)
+    {
+        $categoryModel = clone($this->CategoryModel);
+        $categoryTable = new CategoriesTable();
+        $category = $categoryTable->find("id", $category_id);
+
+        if (!$category) {
+            return null;
+        }
+
+        $categoryModel->setId($category_id);
+        $categoryModel->setName($category->Objects->name);
+        $categoryModel->setDescription($category->Objects->description);
     }
 }

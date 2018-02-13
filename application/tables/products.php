@@ -6,6 +6,7 @@
  * Time: 15:01
  */
 
-class ProductsTable extends EmmaTable {
+class ProductsTable extends EmmaTable
+{
 
 }
