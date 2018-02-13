@@ -102,14 +102,19 @@ class Loader implements ISystemComponent
      * Loads a model into the framework
      *
      * @param string $paramModel
+     * @param null $path
      */
-    public static function model($paramModel)
+    public static function model($paramModel, $path = null)
     {
 
         //Find, include and make the model ready
         $modelFileName = str_replace("Model", "", $paramModel);
         $modelName = ucfirst($paramModel);
-        require_once("models/" . strtolower($modelFileName) . ".php");
+        if(!$path) {
+            require_once("models/" . strtolower($modelFileName) . ".php");
+        } else {
+            require_once($path);
+        }
         //Create the model object
         $modelObject = new $modelName ();
 
@@ -129,6 +134,7 @@ class Loader implements ISystemComponent
         //Load and initialize it into the controller as an object
         EmmaController::$instance->$modelName =& self::$model;
 
+        return $ref =& self::$model;
     }
 
     /**

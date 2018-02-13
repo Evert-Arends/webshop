@@ -22,6 +22,7 @@ class ProductModel extends EmmaModel
      */
     public function __construct()
     {
+        EmmaModel::__construct();
         return $ref =& $this;
     }
 
