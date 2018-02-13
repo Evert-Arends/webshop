@@ -21,15 +21,18 @@ class product extends EmmaController
         $this->page();
     }
 
-    public function test()
+    public function productData()
     {
         $product = new getProducts();
         $product->init();
         $product->createModels();
+        $this->ReturnData = $product;
+        return $product;
     }
 
     public function page($page = "index")
     {
+        $this->ReturnData = $this->productData();
         Loader::view("templates/header.php");
         Loader::view("product/" . $page . ".php");
         Loader::view("templates/footer.php");
