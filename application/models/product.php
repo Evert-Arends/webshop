@@ -244,10 +244,10 @@ class ProductModel extends EmmaModel
             return false;
         }
 
+        $categoryModel->setRecursiveLinking(true, true);
         $categoryModel->setId($category_id);
         $categoryModel->setName($category->Objects->name);
         $categoryModel->setDescription($category->Objects->description);
-        $categoryModel->setRecursiveLinking(true, true);
 
         $this->setCategory($categoryModel);
 
