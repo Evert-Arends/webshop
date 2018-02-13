@@ -24,8 +24,8 @@ class home extends EmmaController
 
     public function index()
     {
-//        $this->page();
-        $this->testMethod();
+        $this->page();
+//        $this->testMethod();
     }
 
     public function page($page = "index")
