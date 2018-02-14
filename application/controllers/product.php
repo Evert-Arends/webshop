@@ -25,7 +25,7 @@ class product extends EmmaController
     {
         $product = new getProducts();
         $product->init();
-        $product->createModels();
+        $product->allProducts();
         $this->ReturnData = $product;
         return $product;
     }

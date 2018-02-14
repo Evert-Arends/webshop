@@ -12,7 +12,8 @@
 
 class home extends EmmaController
 {
-    protected $ReturnData;
+    protected $DiscountProducts;
+    protected $RandomProducts;
 
     public function init()
     {
@@ -20,34 +21,50 @@ class home extends EmmaController
         Loader::model("CategoryModel");
         Loader::model("UserModel");
         Loader::model("UserRole");
+
+        require_once('./controllers/products/getProducts.php');
     }
 
     public function index()
     {
+        $this->loadTemplateData();
         $this->page();
-//        $this->testMethod();
+    }
+
+    public function discountProducts()
+    {
+        $product = new getProducts();
+        $product->init();
+
+        return $product->discountProducts();
+    }
+
+    public function randomProducts()
+    {
+        $product = new getProducts();
+        $product->init();
+
+        return $product->randomProducts();
+    }
+
+    private function loadTemplateData()
+    {
+        $this->DiscountProducts = $this->discountProducts();
+        $this->RandomProducts = $this->randomProducts();
     }
 
     public function page($page = "index")
     {
-        $this->getText();
         Loader::view("templates/header.php");
         Loader::view("home/" . $page . ".php");
         Loader::view("templates/footer.php");
-
     }
 
-    private function getText()
-    {
-        $this->ReturnData = "Ok dit is leuke tekst.";
-    }
-
-    public function testMethod()
-    {
+//    public function testMethod()
+//    {
 //        $this->UserModel->setRole();
-
-
-        $products = new ProductsTable();
+//
+//        $products = new ProductsTable();
 //        // Create new models.
 //        $categoryModel = clone($this->CategoryModel);
 //        $categoryModel2 = clone ($this->CategoryModel);
@@ -57,20 +74,19 @@ class home extends EmmaController
 //
 //        $categoryModel2->setParent($products);
 //
-////
-        $product = $products->find("price", 1234);
+//        $product = $products->find("price", 0);
 //        print_r($product);
-        ////        $product->Objects->price = 1200;
-////        $product->save();
+//        $product->Objects->price = 1200;
+//        $product->save();
 //        print_r($this->ProductModel->getId());
-
-        $product = $this->ProductModel->get($product->Objects->id);
-        print_r($product);
+//
 //        $newCategoryObject = clone($this->CategoryModel);
-//        $newCategoryObject->setRecursiveLinking(false, true);
-//        $newCategoryObject->get(8);
+//        $newCategoryObject->setRecursiveLinking(true, true);
+//        $newCategoryObject->get(6);
+//
 //        print_r($newCategoryObject);
+//
 //        $array = json_decode(json_encode($newCategoryObject), true);
 //        print_r($array);
-    }
+//    }
 }
