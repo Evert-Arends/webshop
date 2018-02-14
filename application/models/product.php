@@ -19,7 +19,7 @@ class ProductModel extends EmmaModel
     private $category; // Only category objects
     private $discount;
     private $objectChecker;
-
+    private $retrieve_categories;
     /**
      * return reference
      */
@@ -190,7 +190,9 @@ class ProductModel extends EmmaModel
         $this->setPhoto($product->Objects->photo);
         $this->setPrice($product->Objects->price);
         $this->setDiscount($this->getDiscountFromDB());
-        $this->buildCategoryTree($this->getCategoryId());
+        if($this->retrieve_categories) {
+            $this->buildCategoryTree($this->getCategoryId());
+        }
 
         return $this;
     }
@@ -244,7 +246,7 @@ class ProductModel extends EmmaModel
             return false;
         }
 
-        $categoryModel->setRecursiveLinking(true, true);
+        $categoryModel->setRecursiveLinking(false, true);
         $categoryModel->setId($category_id);
         $categoryModel->setName($category->Objects->name);
         $categoryModel->setDescription($category->Objects->description);
@@ -252,5 +254,21 @@ class ProductModel extends EmmaModel
         $this->setCategory($categoryModel);
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRetrieveCategories()
+    {
+        return $this->retrieve_categories;
+    }
+
+    /**
+     * @param mixed $retrieve_categories
+     */
+    public function setRetrieveCategories($retrieve_categories)
+    {
+        $this->retrieve_categories = $retrieve_categories;
     }
 }

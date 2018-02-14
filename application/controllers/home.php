@@ -58,16 +58,19 @@ class home extends EmmaController
 //        $categoryModel2->setParent($products);
 //
 ////
-//        $product = $products->find("price", 0);
+        $product = $products->find("price", 1234);
 //        print_r($product);
         ////        $product->Objects->price = 1200;
 ////        $product->save();
 //        print_r($this->ProductModel->getId());
-        $newCategoryObject = clone($this->CategoryModel);
-        $newCategoryObject->setRecursiveLinking(true, true);
-        $newCategoryObject->get(6);
-        print_r($newCategoryObject);
-        $array = json_decode(json_encode($newCategoryObject), true);
-        print_r($array);
+
+        $product = $this->ProductModel->get($product->Objects->id);
+        print_r($product);
+//        $newCategoryObject = clone($this->CategoryModel);
+//        $newCategoryObject->setRecursiveLinking(false, true);
+//        $newCategoryObject->get(8);
+//        print_r($newCategoryObject);
+//        $array = json_decode(json_encode($newCategoryObject), true);
+//        print_r($array);
     }
 }
