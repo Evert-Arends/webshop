@@ -14,7 +14,7 @@ class home extends EmmaController
 {
     protected $DiscountProducts;
     protected $RandomProducts;
-    protected $AllCategories;
+    protected $AllRootCategories;
 
     public function init()
     {
@@ -49,18 +49,17 @@ class home extends EmmaController
         return $product->randomProducts();
     }
 
-    private function getCategories(){
+    private function getRootCategories(){
         $categories = new getCategories();
         $categories->init();
-
-        return $categories->allCategories();
+        return $categories->allRootCategories(true, false);
     }
 
     private function loadTemplateData()
     {
         $this->DiscountProducts = $this->discountProducts();
         $this->RandomProducts = $this->randomProducts();
-        $this->AllCategories = $this->getCategories();
+        $this->AllRootCategories = $this->getRootCategories();
     }
 
     public function page($page = "index")

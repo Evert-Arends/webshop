@@ -14,29 +14,30 @@ class getCategories extends EmmaModel
         $this->CategoryModel = Loader::model("CategoryModel");
     }
 
-    private function getAllCategories()
+    private function getAllRootCategories()
     {
-        $sql = "SELECT id FROM categories";
+        $sql = "SELECT id FROM categories WHERE id NOT IN (SELECT child from categories_has_categories)";
         $result = $this->fetchAll($sql);
 
         return $result;
     }
 
-    public function allCategories()
+    public function allRootCategories($linkChild = false, $linkParent = false)
     {
-        $allIDS = $this->getAllCategories();
+        $allIDS = $this->getAllRootCategories();
 
         if (!$allIDS) {
             return "No categories found";
         }
-        return $this->createModels($allIDS);
+        return $this->createModels($allIDS, $linkChild, $linkParent);
     }
 
-    private function createModels($IDS)
+    private function createModels($IDS, $linkChild = false, $linkParent = false)
     {
         $categories = array();
         foreach ($IDS as $value) {
             $categoryModel = clone($this->CategoryModel);
+            $categoryModel->setRecursiveLinking($linkChild, $linkParent);
             $categoryModel->get($value->id);
 
             if (!$categoryModel) {

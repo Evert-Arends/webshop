@@ -16,8 +16,8 @@
             <div class="card">
                 <div class="card-body">
                     <?php
-                    foreach ($this->AllCategories as $cat) {
-                        echo $cat->getName();
+                    foreach ($this->AllRootCategories as $cat) {
+                        echo $cat->getId() . " - " . $cat->getName() . "<br>";
                     }
                     ?>
                 </div>
