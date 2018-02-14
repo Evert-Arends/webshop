@@ -55,7 +55,6 @@ class getProducts extends EmmaModel
         if (!$allIDS) {
             return "No discount products found";
         }
-        print_r($allIDS);
         return $this->createModels($allIDS);
     }
 
@@ -74,7 +73,6 @@ class getProducts extends EmmaModel
         if (!$allIDS) {
             return "No random products found";
         }
-        print_r($allIDS);
         return $this->createModels($allIDS);
     }
 

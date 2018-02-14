@@ -14,6 +14,7 @@ class home extends EmmaController
 {
     protected $DiscountProducts;
     protected $RandomProducts;
+    protected $AllCategories;
 
     public function init()
     {
@@ -23,6 +24,7 @@ class home extends EmmaController
         Loader::model("UserRole");
 
         require_once('./controllers/products/getProducts.php');
+        require_once('./controllers/categories/getCategories.php');
     }
 
     public function index()
@@ -31,7 +33,7 @@ class home extends EmmaController
         $this->page();
     }
 
-    public function discountProducts()
+    private function discountProducts()
     {
         $product = new getProducts();
         $product->init();
@@ -39,7 +41,7 @@ class home extends EmmaController
         return $product->discountProducts();
     }
 
-    public function randomProducts()
+    private function randomProducts()
     {
         $product = new getProducts();
         $product->init();
@@ -47,10 +49,18 @@ class home extends EmmaController
         return $product->randomProducts();
     }
 
+    private function getCategories(){
+        $categories = new getCategories();
+        $categories->init();
+
+        return $categories->allCategories();
+    }
+
     private function loadTemplateData()
     {
         $this->DiscountProducts = $this->discountProducts();
         $this->RandomProducts = $this->randomProducts();
+        $this->AllCategories = $this->getCategories();
     }
 
     public function page($page = "index")
