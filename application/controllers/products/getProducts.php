@@ -14,33 +14,83 @@ class getProducts extends EmmaModel
         $this->ProductModel = Loader::model("ProductModel");
     }
 
-    private function getAllProducts()
+    public function countProducts()
     {
-        $sql = "SELECT id FROM products";
+        $sql = "SELECT COUNT(*) AS Total FROM products";
+        $result = $this->fetch($sql);
+
+        return $result;
+    }
+
+    private function getAllProducts($start, $perpage)
+    {
+        $sql = "SELECT * FROM products Limit $start, $perpage";
         $result = $this->fetchAll($sql);
 
+        return $result;
+    }
+
+    public function allProducts($start, $perpage)
+    {
+        $allIDS = $this->getAllProducts($start, $perpage);
+
+        if (!$allIDS) {
+            return "No products found";
+        }
+        return $this->createModels($allIDS);
+    }
+
+    private function getDiscountProducts()
+    {
+        $sql = "SELECT products.id FROM products JOIN product_has_discount ON products.id = product_has_discount.products_id LIMIT 4";
+        $result = $this->fetchAll($sql);
         return $result;
 
     }
 
-    public function createModels()
+    public function discountProducts()
     {
-        $this->init();
-        $allIDS = $this->getAllProducts();
-        $allProducts = array();
+        $allIDS = $this->getDiscountProducts();
+
         if (!$allIDS) {
-            return "No products found";
+            return "No discount products found";
         }
-        foreach ($allIDS as $value) {
+        print_r($allIDS);
+        return $this->createModels($allIDS);
+    }
+
+    private function getRandomProducts()
+    {
+        $sql = "SELECT id FROM products ORDER BY RAND() LIMIT 4";
+        $result = $this->fetchAll($sql);
+        return $result;
+
+    }
+
+    public function randomProducts()
+    {
+        $allIDS = $this->getRandomProducts();
+
+        if (!$allIDS) {
+            return "No random products found";
+        }
+        print_r($allIDS);
+        return $this->createModels($allIDS);
+    }
+
+    private function createModels($IDS)
+    {
+        $products = array();
+        foreach ($IDS as $value) {
             $productModel = clone($this->ProductModel);
             $productModel->get($value->id);
 
             if (!$productModel) {
                 continue;
             }
-            array_push($allProducts, $productModel);
+            array_push($products, $productModel);
         }
-        return $allProducts;
+        return $products;
     }
 
 }

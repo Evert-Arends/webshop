@@ -10,6 +10,7 @@ class overview extends EmmaController
 {
     protected $ReturnData;
     protected $Products;
+    protected $productCount;
 
     public function init()
     {
@@ -28,11 +29,31 @@ class overview extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        return $product->createModels();
+        $perpage = 16;
+
+        if(isset($_GET["page"])){
+            $page = intval($_GET["page"]);
+        }
+        else {
+            $page = 1;
+        }
+        $calc = $perpage * $page;
+        $start = $calc - $perpage;
+
+        return $product->allProducts($start, $perpage);
     }
 
-    private function loadTemplateData(){
+    public function countProducts(){
+        $product = new getProducts();
+        $product->init();
+
+        return $product->countProducts();
+    }
+
+    private function loadTemplateData()
+    {
         $this->Products = $this->productData();
+        $this->productCount = $this->countProducts();
     }
 
     public function page($page = "index")
