@@ -24,6 +24,7 @@ abstract class EmmaModel implements IModel
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            $this->db->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $stmt = $this->db->connection->prepare($query);
             $stmt->execute($params);
 
@@ -52,6 +53,7 @@ abstract class EmmaModel implements IModel
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            $this->db->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $stmt = $this->db->connection->prepare($query);
             $stmt->execute($params);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -83,6 +85,7 @@ abstract class EmmaModel implements IModel
         if (DB) {
             if (DEBUG_MODE)
                 $this->db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db->connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
             $stmt = $this->db->connection->prepare($query);
             $stmt->execute($params);
