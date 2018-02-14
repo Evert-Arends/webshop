@@ -16,7 +16,7 @@ class getProducts extends EmmaModel
 
     public function countProducts()
     {
-        $sql = "SELECT COUNT(*) AS Total FROM products";
+        $sql = "SELECT COUNT(*) AS Total FROM `products`";
         $result = $this->fetch($sql);
 
         return $result;
@@ -24,8 +24,8 @@ class getProducts extends EmmaModel
 
     private function getAllProducts($start, $perpage)
     {
-        $sql = "SELECT * FROM products Limit $start, $perpage";
-        $result = $this->fetchAll($sql);
+        $sql = "SELECT * FROM `products` Limit ?, ?";
+        $result = $this->fetchAll($sql, array((int)$start, (int)$perpage));
 
         return $result;
     }
