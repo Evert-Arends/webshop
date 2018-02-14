@@ -66,7 +66,9 @@
                             <?php
                         }
                         ?>
-                        <div class="card-body">
+                        <div class="card-body"<?php if ($product->getDiscount()) {
+                            echo "style='margin-top:-10px!important'";
+                        } ?>>
 
                             <h4 class="card-title">
                                 <a href="#"><?= $product->getName(); ?></a>
@@ -113,14 +115,8 @@
             }
             ?>
         </div>
-    </div>
 
-</div>
-
-<div class="row">
-
-    <!-- PAGINATION-->
-    <div class="col-12">
+        <!-- PAGINATION-->
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <?php
@@ -137,11 +133,14 @@
                     $perpage = 16;
                     $totalPages = ceil($total / $perpage);
 
+
                     if ($page <= 1) {
-                        echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'>Previous</a></li>";
+                        echo "<li class='page-item disabled'><a class='page-link' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     } else {
                         $j = $page - 1;
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j' tabindex='-1'>Previous</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=1' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     }
 
                     for ($i = 1; $i <= $totalPages; $i++) {
@@ -153,15 +152,20 @@
                     }
 
                     if ($page == $totalPages) {
-                        echo "<li class='page-item disabled'><a class='page-link' href=''>Next</a></li>";
+                        echo "<li class='page-item disabled'><a class='page-link' href=''><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item disabled'><a class='page-link'><i class='fas fa-angle-double-right'></i></a></li>";
                     } else {
                         $j = $page + 1;
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j'>Next</a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j'><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$totalPages'><i class='fas fa-angle-double-right'></i></a></li>";
                     }
+
+
                 }
                 ?>
             </ul>
         </nav>
     </div>
+
 
 </div>
