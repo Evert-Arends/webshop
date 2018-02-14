@@ -13,11 +13,12 @@ class CategoryModel extends EmmaModel
     private $name;
     private $description;
     // Linked properties
-    private $parent; // Must be null or a parent category object
-    private $children = array(); // Must be null or a parent category object
+    private $parents = array(); // Must be null or a parent category object in an array
+    private $children = array(); // Must be null or a parent category object in an array
     // Activate linking
     private $recursiveLinkingParent;
     private $recursiveLinkingChild;
+    private $test;
 
     /**
      * return reference
@@ -25,6 +26,14 @@ class CategoryModel extends EmmaModel
     public function __construct()
     {
         EmmaModel::__construct();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getId();
     }
 
     /**
@@ -84,20 +93,20 @@ class CategoryModel extends EmmaModel
     /**
      * @return mixed
      */
-    public function getParent()
+    public function getParents()
     {
-        return $this->parent;
+        return $this->parents;
     }
 
     /**
      * @param CategoryModel
      */
-    public function setParent($parent)
+    public function setParents($parents)
     {
         // Enforce OOP
-        if (is_object($parent)) {
-            if (get_class($parent) == get_class($this)) {
-                $this->parent = $parent;
+        if (is_object($parents)) {
+            if (get_class($parents) == get_class($this)) {
+                $this->parents = $parents;
             } else {
                 trigger_error("Parent must be a/an " . get_class($this) . " object.");
             }
@@ -161,9 +170,8 @@ class CategoryModel extends EmmaModel
         $this->setName($category->Objects->name);
         $this->setDescription($category->Objects->description);
 
-        if ($this->getRecursiveLinking()) {
-            $this->getAllCategories();
-        }
+        $this->getAllCategories();
+
 
         return $this;
     }
@@ -174,7 +182,7 @@ class CategoryModel extends EmmaModel
         if ($obj->child) {
             $this->getMyChildren();
         } else if ($obj->parent) {
-            $this->getMyParent();
+            $this->getMyParents();
 
         }
     }
@@ -183,38 +191,6 @@ class CategoryModel extends EmmaModel
     {
         $category_getter = new CategoriesTable();
         return $id ? $category_getter->find("id", $id) : $category_getter->find("name", $name);
-    }
-
-    /**
-     * Check if this model has a parent category, and if so, add it to the model. This is recursive for every new
-     * category model found.
-     * @return null
-     */
-    private function getMyParent()
-    {
-        $parent = $this->getMyParentFromDB();
-
-        if (!$parent) {
-            return null;
-        }
-
-        $newCategoryTable = $this->getCategory($parent);
-        if (!$newCategoryTable) {
-            return null;
-        }
-
-        // Clone the existing object, and force the new object to retrieve his childs and roots.
-        $newCategoryModel = clone($this);
-        // Force the next object to get his links.
-        $newCategoryModel->setRecursiveLinking(false, true);
-        // Building model with database information
-        $newCategoryModel->setId($newCategoryTable->Objects->id);
-        $newCategoryModel->setName($newCategoryTable->Objects->name);
-        $newCategoryModel->setDescription($newCategoryTable->Objects->description);
-        // Set model as parent
-        $this->setParent($newCategoryModel);
-
-        return true;
     }
 
     /**
@@ -227,7 +203,7 @@ class CategoryModel extends EmmaModel
     {
         $children = $this->getMyChildrenFromDB($this->getId());
 
-        if(!$children) {
+        if (!$children) {
             return false;
         }
         foreach ($children as $child) {
@@ -248,20 +224,61 @@ class CategoryModel extends EmmaModel
             // Set model as parent
 
             array_push($this->children, $newCategoryModel);
+
+            $this->children = array_unique($this->children);
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if this model has child categories, and if so, add it to the model. This is recursive for every new
+     * category model found.
+     * @return null
+     */
+
+    private function getMyParents()
+    {
+        $parents = $this->getMyParentsFromDB($this->getId());
+        if (empty($parents) || !$parents) {
+            return false;
+        }
+        foreach ($parents as $parent) {
+            if (empty($parent)) {
+                continue;
+            }
+            $newCategoryTable = $this->getCategory($parent->parent);
+
+            if (!$newCategoryTable) {
+                continue;
+            }
+
+            // Clone the existing object, and force the new object to retrieve its children.
+            $newCategoryModel = clone($this);
+            // Force the next object to get his links.
+            $newCategoryModel->setRecursiveLinking(false, false);
+            // Building model with database information
+            $newCategoryModel->setId($newCategoryTable->Objects->id);
+            $newCategoryModel->setName($newCategoryTable->Objects->name);
+            $newCategoryModel->setDescription($newCategoryTable->Objects->description);
+            // Set model as parent
+            if (!in_array($newCategoryModel, $this->parents)) {
+                array_push($this->parents, $newCategoryModel);
+            }
+
+            // Remove the possible double inserted arrays
+            $this->parents = array_unique($this->parents);
         }
 
         return true;
     }
 
 
-    private function getMyParentFromDB()
+    private function getMyParentsFromDB($id)
     {
-        $category_link_getter = new Categories_Has_Categories();
-        $tempCategory = $category_link_getter->find("child", $this->getId());
-        if (!$tempCategory) {
-            return null;
-        }
-        return $tempCategory->Objects->parent;
+        $sql = "SELECT DISTINCT(parent) FROM categories_has_categories WHERE child = ?";
+        $result = $this->fetchAll($sql, array($id));
+        return $result;
     }
 
     /**
