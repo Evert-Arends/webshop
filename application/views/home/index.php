@@ -15,11 +15,31 @@
         <div class="custom-margin">
             <div class="card">
                 <div class="card-body">
+                    <ul>
                     <?php
+                    //WIP!!-> getChildren not working in backend.
                     foreach ($this->AllRootCategories as $cat) {
-                        echo $cat->getId() . " - " . $cat->getName() . "<br>";
+                        echo "<li>" . $cat->getId() . " - " . $cat->getName() . "</li>";
+                        echo "<ul>";
+                        foreach ($cat->getChildren() as $child) {
+                            echo "<li>" . $child->getId() . " - " . $child->getName() . "</li>";
+                            echo "<ul>";
+                            //print_r($child);
+                            foreach ($child->getChildren() as $subchild) {
+                                echo "<li>" . $subchild->getId() . " - " . $subchild->getName() . "</li>";
+                                echo "<ul>";
+                                foreach ($subchild->getChildren() as $ssc) {
+                                    echo "<li>" . $ssc->getId() . " - " . $ssc->getName() . "</li>";
+                                }
+                                echo "</ul>";
+                                //print_r($child);
+                            }
+                            echo "</ul>";
+                        }
+                        echo "</ul>";
                     }
                     ?>
+                </ul>
                 </div>
             </div>
         </div>
