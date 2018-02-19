@@ -29,6 +29,10 @@
     <script src="application/assets/cookie-alert/cookiealert.js"></script>
     <script src="application/assets/cookie-alert/js-cookie.js"></script>
 
+
+    <script src="application/assets/ajax-forms/contact.js"></script>
+
+
 </head>
 
 <body>
