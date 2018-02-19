@@ -225,7 +225,7 @@ class CategoryModel extends EmmaModel
 
             array_push($this->children, $newCategoryModel);
 
-//            $this->children = array_unique($this->children);
+            // $this->children = array_unique($this->children);
         }
 
         return true;
