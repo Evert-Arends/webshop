@@ -33,7 +33,7 @@ class CategoryModel extends EmmaModel
      */
     public function __toString()
     {
-        return $this->getId();
+        return (string)$this->getId();
     }
 
     /**
@@ -225,7 +225,7 @@ class CategoryModel extends EmmaModel
 
             array_push($this->children, $newCategoryModel);
 
-            // $this->children = array_unique($this->children);
+            $this->children = array_unique($this->children);
         }
 
         return true;
