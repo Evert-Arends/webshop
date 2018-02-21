@@ -21,13 +21,14 @@ class home extends EmmaController
     {
         // Set route request
         $this->request = $request;
-        var_dump($this->request);
 
+        // Load models
         Loader::model("ProductModel");
         Loader::model("CategoryModel");
         Loader::model("UserModel");
         Loader::model("UserRole");
 
+        // Load specific external controllers
         require_once('./controllers/products/getProducts.php');
         require_once('./controllers/categories/getCategories.php');
     }
