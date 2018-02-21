@@ -28,18 +28,21 @@ class Router
         // Create object from array values
         $routeObject = new stdClass();
 
-        $skip = false; // Skip next item in foreach, because that is the value for the previous get request.
+        // Skip next item in foreach, because that is the value for the previous get request.
+        $skip = false;
+
         foreach ($parts as $key => &$part) {
+
             if ($skip) {
                 $skip = false;
                 continue;
             }
-
             $attribute = $part;
             $value = null;
+            $key++;
 
-            if (isset($parts[$key++])) {
-                $value = $parts[$key++];
+            if (isset($parts[$key])) {
+                $value = $parts[$key];
             }
 
             $routeObject->$attribute = $value;
