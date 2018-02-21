@@ -11,23 +11,23 @@
     <title>Webshop</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="application/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="application/assets/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
-    <link href="application/assets/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
+    <link href="<?= APPPATH?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?= APPPATH?>/assets/bootstrap/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="<?= APPPATH?>/assets/bootstrap/css/bootstrap-reboot.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="application/assets/css/styles.css" rel="stylesheet">
+    <link href="<?= APPPATH?>/assets/css/styles.css" rel="stylesheet">
 
     <!-- Bootstrap core JavaScript -->
-    <script src="application/assets/jquery/jquery.min.js"></script>
-    <script src="application/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= APPPATH?>/assets/jquery/jquery.min.js"></script>
+    <script src="<?= APPPATH?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- fontAwesome -->
-    <script src="application/assets/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
+    <script src="<?= APPPATH?>/assets/fontawesome/svg-with-js/js/fontawesome-all.js"></script>
 
     <!-- Cookie alert -->
-    <script src="application/assets/cookie-alert/cookiealert.js"></script>
-    <script src="application/assets/cookie-alert/js-cookie.js"></script>
+    <script src="<?= APPPATH?>/assets/cookie-alert/cookiealert.js"></script>
+    <script src="<?= APPPATH?>/assets/cookie-alert/js-cookie.js"></script>
 
 </head>
 

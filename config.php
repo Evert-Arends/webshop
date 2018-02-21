@@ -8,7 +8,7 @@
 define("DEBUG_MODE", true);
 
 // Set the default controller
-define("DEFAULT_CONTROLLER", "index");
+define("DEFAULT_CONTROLLER", "home");
 
 // Debug mode
 if (DEBUG_MODE)
@@ -46,3 +46,18 @@ define("BASEPATH", "http://localhost/school/webshop/");
 define("APPPATH", BASEPATH . "application/");
 
 //DEFINE ANY CONSTANTS BELOW
+
+/***************************************************
+ *                      URLS                       *
+ **************************************************/
+
+// Name of route ( BETA! ), and controller used to product content.
+$urls = array(
+    "home" => array("home"),
+    "product" => array("product"),
+    "overview" => array("overview"),
+    "profile" => array("profile"),
+    "cart" => array("cart"),
+);
+
+

@@ -14,65 +14,62 @@ final class Core
      * and then continues to load all components.
      * When that's done the Loader component will be loaded in an instructed
      * to load the designated controller.
+     * @param null $route
      */
-    public function __construct ()
+    public function __construct($route = null)
     {
         // Start session if one isn't started
-        if ( ! isset ($_SESSION))
-            session_start ();
+        if (!isset ($_SESSION))
+            session_start();
 
         // Include all interfaces
-        require_once ("system/interfaces/isystemcomponent.php");
-        require_once ("system/interfaces/isystemcomponentdatacompatible.php");
-        require_once ("system/interfaces/icontroller.php");
-        require_once ("system/interfaces/imodel.php");
-        require_once ("system/interfaces/itable.php");
+        require_once("system/interfaces/isystemcomponent.php");
+        require_once("system/interfaces/isystemcomponentdatacompatible.php");
+        require_once("system/interfaces/icontroller.php");
+        require_once("system/interfaces/imodel.php");
+        require_once("system/interfaces/itable.php");
 
         // Include all components
-        $sysFiles = glob ("system/components/*.php");
+        $sysFiles = glob("system/components/*.php");
 
         foreach ($sysFiles as $file)
-            require_once ($file);
+            require_once($file);
 
         // Include the configuration
-        require_once ("config.php");
+        require_once("config.php");
 
         /*
          * If controller is not set default to
          * the default controller.
          * If the controller is set we use it. 
          */
-         if ( ! isset ($_GET["c"]))
-         	$_GET["c"] = DEFAULT_CONTROLLER;
+        if (!isset ($route->index))
+            $route->index = DEFAULT_CONTROLLER;
 
         // Check for the controller's actual file.
-        if ( ! file_exists ("application/controllers/" . $_GET["c"] . ".php"))
+        if (!file_exists("application/controllers/" . $route->index . ".php"))
             if (DEBUG_MODE)
-                die ("Couldn't find controller: " . $_GET["c"] . " :(");
+                die ("Couldn't find controller: " . $route->index . " :(");
 
         // Get it.
-        require_once ("application/controllers/" . $_GET["c"] . ".php");
+        require_once("application/controllers/" . $route->index . ".php");
 
         // Link it, detach the GET request and add the Controller affix.
-        $controllerActual = $_GET["c"];
-        $_GET["c"] = null;
-        
+        $controllerActual = $route->index;
+        $route->index = null;
+
         // Define the loader
-        $this->load = Loader::getInstance ();
-        
+        $this->load = Loader::getInstance();
+
         // Register the loader to the core
-        self::$loader = Loader::getInstance ();
-        
+        self::$loader = Loader::getInstance();
+
         // Use the loader to load the controller
-        $this->load->controller ($controllerActual);
+        try {
+            $this->load->controller($controllerActual);
+        } catch (ReflectionException $e) {
+        }
 
     }
-    
-    static function getRekt ()
-    {
 
-	    trigger_error ("You just got #REKT");
-    	
-    }
-    
 }
