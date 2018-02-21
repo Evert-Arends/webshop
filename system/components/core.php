@@ -5,18 +5,16 @@
  */
 final class Core
 {
-
     static $loader;
-
+    public $routeObject;
     /**
      * Constructor for the core
      * it loads in all configuration and interfaces
      * and then continues to load all components.
      * When that's done the Loader component will be loaded in an instructed
      * to load the designated controller.
-     * @param null $route
      */
-    public function __construct($route = null)
+    public function __construct()
     {
         // Start session if one isn't started
         if (!isset ($_SESSION))
@@ -31,6 +29,7 @@ final class Core
 
         // Include all components
         $sysFiles = glob("system/components/*.php");
+        require_once("urls.php");
 
         foreach ($sysFiles as $file)
             require_once($file);
@@ -38,25 +37,9 @@ final class Core
         // Include the configuration
         require_once("config.php");
 
-        /*
-         * If controller is not set default to
-         * the default controller.
-         * If the controller is set we use it. 
-         */
-        if (!isset ($route->index))
-            $route->index = DEFAULT_CONTROLLER;
-
-        // Check for the controller's actual file.
-        if (!file_exists("application/controllers/" . $route->index . ".php"))
-            if (DEBUG_MODE)
-                die ("Couldn't find controller: " . $route->index . " :(");
-
-        // Get it.
-        require_once("application/controllers/" . $route->index . ".php");
-
-        // Link it, detach the GET request and add the Controller affix.
-        $controllerActual = $route->index;
-        $route->index = null;
+        // Use the routing engine.
+        $router = new Router();
+        $this->routeObject = $router->getRoute();
 
         // Define the loader
         $this->load = Loader::getInstance();
@@ -66,7 +49,7 @@ final class Core
 
         // Use the loader to load the controller
         try {
-            $this->load->controller($controllerActual);
+            $this->load->controller($router->getController(), $this->routeObject);
         } catch (ReflectionException $e) {
         }
 

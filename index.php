@@ -13,12 +13,8 @@ define ("WEBSHOP_NAME", "Mijn Baby Wereld!");
 
 // Include core
 require_once ("system/components/core.php");
-require_once ("system/components/router.php");
-
-// Implement routing engine
 
 
-$router = new Router();
 
 // Run core
-new Core ($router->route());
+new Core ();

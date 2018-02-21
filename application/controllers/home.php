@@ -15,9 +15,14 @@ class home extends EmmaController
     protected $DiscountProducts;
     protected $RandomProducts;
     protected $AllRootCategories;
+    private $request;
 
-    public function init()
+    public function init($request)
     {
+        // Set route request
+        $this->request = $request;
+        var_dump($this->request);
+
         Loader::model("ProductModel");
         Loader::model("CategoryModel");
         Loader::model("UserModel");

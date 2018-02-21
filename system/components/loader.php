@@ -35,16 +35,17 @@ class Loader implements ISystemComponent
      * Loads a controller into the framework
      *
      * @param string $paramController
+     * @param $request
      * @throws ReflectionException
      */
-    public function controller($paramController)
+    public function controller($paramController, $request)
     {
 
         // Create given controller object
-        $controller = new $paramController ();
+        $controller = new $paramController ($request);
         $controller->constructor();
         if (method_exists($controller, "init"))
-            $controller->init();
+            $controller->init($request);
 
         // Link the controller instance to the loader
         self::$controller =& $controller;
