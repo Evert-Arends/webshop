@@ -12,6 +12,8 @@
  **************************************************/
 
 // Name of route ( BETA! ), and controller used to product content.
+// Single point of entry, no longer supports method calls directly.
+// Route:Controller
 $urls = array(
     array("home" => "home"),
     array("product" => "product"),
