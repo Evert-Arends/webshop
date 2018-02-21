@@ -65,7 +65,7 @@ class Router
     {
         $incorrectUrls = array();
 
-        $urls = URLS;
+        $urls = ROUTES;
         foreach ($urls as $url => $controllers) {
             foreach ($controllers as $key => $controller) {
                 if (!$this->checkIfControllerExists($controller)) {

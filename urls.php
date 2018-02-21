@@ -8,13 +8,13 @@
 
 
 /***************************************************
- *                      URLS                       *
+ *                      ROUTES                     *
  **************************************************/
 
-// Name of route ( BETA! ), and controller used to product content.
+// Name of route ( BETA! ), and controller used to produce content.
 // Single point of entry, no longer supports method calls directly.
 // Route:Controller
-$urls = array(
+$routes = array(
     array("home" => "home"),
     array("product" => "product"),
     array("overview" => "overview"),
@@ -22,4 +22,4 @@ $urls = array(
     array("cart" => "cart"),
 );
 
-define("URLS", $urls);
+define("ROUTES", $routes);
