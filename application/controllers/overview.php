@@ -31,7 +31,7 @@ class overview extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        $perpage = 16;
+        $per_page = 16;
 
         $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $uri_segments = explode('/', $uri_path);
@@ -42,10 +42,10 @@ class overview extends EmmaController
             $page = 1;
         }
 
-        $calc = $perpage * $page;
-        $start = $calc - $perpage;
+        $calc = $per_page * $page;
+        $start = $calc - $per_page;
 
-        return $product->allProducts($start, $perpage);
+        return $product->allProducts($start, $per_page);
     }
 
     public function countProducts()
