@@ -31,12 +31,15 @@ class overview extends EmmaController
 
         $perpage = 16;
 
-        if(isset($_GET["page"])){
-            $page = intval($_GET["page"]);
-        }
-        else {
+        $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri_segments = explode('/', $uri_path);
+
+        if (isset($uri_segments)) {
+            $page = $uri_segments[5];
+        } else {
             $page = 1;
         }
+
         $calc = $perpage * $page;
         $start = $calc - $perpage;
 

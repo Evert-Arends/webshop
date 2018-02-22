@@ -100,8 +100,11 @@
             <ul class="pagination justify-content-center">
                 <?php
 
-                if (isset($_GET["page"])) {
-                    $page = intval($_GET["page"]);
+                $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+                $uri_segments = explode('/', $uri_path);
+
+                if (isset($uri_segments)) {
+                    $page = $uri_segments[5];
                 } else {
                     $page = 1;
                 }
@@ -112,19 +115,19 @@
                     $perpage = 16;
                     $totalPages = ceil($total / $perpage);
 
-
                     if ($page <= 1) {
+
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     } else {
                         $j = $page - 1;
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=1' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/index/overview/page/1/' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/index/overview/page/$j/' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     }
 
                     for ($i = 1; $i <= $totalPages; $i++) {
                         if ($i <> $page) {
-                            echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$i'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='/webshop/index/overview/page/$i/'>$i</a></li>";
                         } else {
                             echo "<li class='page-item'><a class='page-link'>$i</a></li>";
                         }
@@ -135,8 +138,8 @@
                         echo "<li class='page-item disabled'><a class='page-link'><i class='fas fa-angle-double-right'></i></a></li>";
                     } else {
                         $j = $page + 1;
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$j'><i class='fas fa-angle-right'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='index.php?c=overview&page=$totalPages'><i class='fas fa-angle-double-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/index/overview/page/$j/'><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/index/overview/page/$totalPages/'><i class='fas fa-angle-double-right'></i></a></li>";
                     }
 
 
