@@ -11,9 +11,11 @@ class overview extends EmmaController
     protected $ReturnData;
     protected $Products;
     protected $productCount;
+    private $request;
 
-    public function init()
+    public function init($request)
     {
+        $this->request = $request;
         // current directory
         require_once('./controllers/products/getProducts.php');
     }
@@ -46,7 +48,8 @@ class overview extends EmmaController
         return $product->allProducts($start, $perpage);
     }
 
-    public function countProducts(){
+    public function countProducts()
+    {
         $product = new getProducts();
         $product->init();
 
