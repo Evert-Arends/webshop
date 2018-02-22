@@ -8,11 +8,11 @@
  */
 
 // Define version
-define ("VERSION", "v1.3.0");
-define ("WEBSHOP_NAME", "Mijn Baby Wereld!");
+define("VERSION", "v1.3.0");
+define("WEBSHOP_NAME", "Mijn Baby Wereld!");
 
 // Include core
-require_once ("system/components/core.php");
+require_once("system/components/core.php");
 
 // Run core
 new Core ();
