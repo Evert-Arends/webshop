@@ -100,14 +100,7 @@
             <ul class="pagination justify-content-center">
                 <?php
 
-                $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-                $uri_segments = explode('/', $uri_path);
-
-                if (isset($uri_segments)) {
-                    $page = $uri_segments[5];
-                } else {
-                    $page = 1;
-                }
+                $page = $this->pageNumber;
 
                 if (isset($page)) {
                     $rs = $this->productCount;

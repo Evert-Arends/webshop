@@ -11,6 +11,7 @@ class overview extends EmmaController
     protected $ReturnData;
     protected $Products;
     protected $productCount;
+    protected $pageNumber;
     private $request;
 
     public function init($request)
@@ -26,6 +27,15 @@ class overview extends EmmaController
         $this->page();
     }
 
+    public function getPageNumber() {
+        if (isset($this->request)) {
+            $page = $this->request->page;
+        } else {
+            $page = 1;
+        }
+        return $page;
+    }
+
     public function productData()
     {
         $product = new getProducts();
@@ -33,14 +43,7 @@ class overview extends EmmaController
 
         $per_page = 16;
 
-        $uri_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri_segments = explode('/', $uri_path);
-
-        if (isset($uri_segments)) {
-            $page = $uri_segments[5];
-        } else {
-            $page = 1;
-        }
+        $page = $this->getPageNumber();
 
         $calc = $per_page * $page;
         $start = $calc - $per_page;
@@ -58,6 +61,7 @@ class overview extends EmmaController
 
     private function loadTemplateData()
     {
+        $this->pageNumber = $this->getPageNumber();
         $this->Products = $this->productData();
         $this->productCount = $this->countProducts();
     }
