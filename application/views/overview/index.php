@@ -37,7 +37,9 @@
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="<?= $product->getPhoto(); ?>" alt=""></a>
+                        <a href="/webshop/index/product/ID/<?= $product->getID(); ?>/"><img class="card-img-top"
+                                                                                            src="<?= $product->getPhoto(); ?>"
+                                                                                            alt=""></a>
                         <?php
                         if ($product->getDiscount()) {
                             ?>
@@ -50,7 +52,7 @@
                         } ?>>
 
                             <h4 class="card-title">
-                                <a href="#"><?= $product->getName(); ?></a>
+                                <a href="/webshop/index/product/ID/<?= $product->getID(); ?>/"><?= $product->getName(); ?></a>
                             </h4>
 
                             <?php

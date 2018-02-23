@@ -36,7 +36,6 @@ class product extends EmmaController
     public function getProduct($productId)
     {
         $product = new getProducts();
-        $product->init();
         return $product->getProductOnId($productId);
     }
 

@@ -66,7 +66,7 @@
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">
 
-        <?php foreach ($this->product as $product) { var_dump($product); ?>
+        <?php foreach ($this->product as $product) { ?>
             <div class="row custom-margin">
                 <div class="col-12">
                     <h3 class="partial-title" style=""><?= $product->getName(); ?></h3>
@@ -112,8 +112,14 @@
                                     <!-- Add to cart -->
                                     <div class="col-12 col-lg-6 add_to_cart_block">
 
-                                        <p class="price">99.00 $</p>
-                                        <p class="price_discounted">149.90 $</p>
+                                        <?php if ($product->getDiscount()) {
+                                            $sellingPrice = $product->getPrice() - ($product->getPrice() * ($product->getDiscount() / 100));
+                                            ?>
+                                            <p class="price">€<?= $sellingPrice * 1.21 ?></p>
+                                            <p class="price_discounted">€<?= $product->getPrice() * 1.21 ?></p>
+                                        <?php } else { ?>
+                                            <p class="price">€<?= $product->getPrice() * 1.21 ?></p>
+                                        <?php } ?>
                                         <form method="get" action="cart.html">
                                             <div class="form-group">
                                                 <label for="colors">Kleur</label>
@@ -136,7 +142,8 @@
                                                     </div>
                                                     <input type="text" class="form-control" id="quantity"
                                                            name="quantity"
-                                                           min="1" max="100" value="1">
+                                                           min="1" max="100" value="1"
+                                                           style="margin-bottom: 0 !important;">
                                                     <div class="input-group-append">
                                                         <button type="button"
                                                                 class="quantity-right-plus btn btn-success btn-number"
@@ -177,41 +184,7 @@
                                             class="fa fa-align-justify"></i> Omschrijving
                                 </div>
                                 <div class="card-body product-information-card">
-                                    <p class="card-text">
-                                        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la
-                                        mise
-                                        en page avant impression. Le Lorem Ipsum est le faux texte standard de
-                                        l'imprimerie
-                                        depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux
-                                        de
-                                        texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que
-                                        survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique,
-                                        sans
-                                        que son contenu n'en soit modifié. Il a été popularisé dans les années 1960
-                                        grâce à
-                                        la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus
-                                        récemment, par son inclusion dans des applications de mise en page de texte,
-                                        comme
-                                        Aldus PageMaker.
-                                    </p>
-                                    <p class="card-text">
-                                        Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du
-                                        texte
-                                        aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine
-                                        classique
-                                        datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un professeur du
-                                        Hampden-Sydney College, en Virginie, s'est intéressé à un des mots latins les
-                                        plus
-                                        obscurs, consectetur, extrait d'un passage du Lorem Ipsum, et en étudiant tous
-                                        les
-                                        usages de ce mot dans la littérature classique, découvrit la source
-                                        incontestable du
-                                        Lorem Ipsum. Il provient en fait des sections 1.10.32 et 1.10.33 du "De Finibus
-                                        Bonorum et Malorum" (Des Suprêmes Biens et des Suprêmes Maux) de Cicéron. Cet
-                                        ouvrage, très populaire pendant la Renaissance, est un traité sur la théorie de
-                                        l'éthique. Les premières lignes du Lorem Ipsum, "Lorem ipsum dolor sit amet...",
-                                        proviennent de la section 1.10.32.
-                                    </p>
+                                    <?= $product->getDescription(); ?>
                                 </div>
                             </div>
                         </div>
