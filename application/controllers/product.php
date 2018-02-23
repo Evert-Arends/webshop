@@ -13,7 +13,9 @@ class product extends EmmaController
 
     public function init($request)
     {
+        //Request to get parameters
         $this->request = $request;
+
         // current directory
         require_once('./controllers/products/getProducts.php');
     }
@@ -24,8 +26,9 @@ class product extends EmmaController
         $this->page();
     }
 
-    public function getProductId() {
-        if (isset($this->request)) {
+    public function getProductId()
+    {
+        if (isset($this->request->ID)) {
             $productId = $this->request->ID;
         } else {
             $productId = null;
@@ -41,7 +44,11 @@ class product extends EmmaController
 
     private function loadTemplateData()
     {
-        $this->product = $this->getProduct($this->getProductId());
+        if ($this->getProductId()) {
+            $this->product = $this->getProduct($this->getProductId());
+        } else {
+            $this->product = null;
+        }
     }
 
     public function page($page = "index")
