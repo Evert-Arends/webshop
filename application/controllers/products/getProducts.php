@@ -9,6 +9,12 @@
 
 class getProducts extends EmmaModel
 {
+    public function __construct()
+    {
+        EmmaModel::__construct();
+        $this->init();
+    }
+
     public function init()
     {
         $this->ProductModel = Loader::model("ProductModel");
@@ -24,7 +30,7 @@ class getProducts extends EmmaModel
 
     private function getAllProducts($start, $perpage)
     {
-        $sql = "SELECT * FROM `products` Limit ?, ?";
+        $sql = "SELECT * FROM `products` LIMIT ?, ?";
         $result = $this->fetchAll($sql, array((int)$start, (int)$perpage));
 
         return $result;
