@@ -8,7 +8,6 @@
 
 class overview extends EmmaController
 {
-    protected $ReturnData;
     protected $Products;
     protected $productCount;
     protected $pageNumber;

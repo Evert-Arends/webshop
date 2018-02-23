@@ -8,31 +8,45 @@
 
 class product extends EmmaController
 {
-    protected $ReturnData;
+    protected $product;
+    private $request;
 
-    public function init()
+    public function init($request)
     {
+        $this->request = $request;
         // current directory
-       require_once('./controllers/products/getProducts.php');
+        require_once('./controllers/products/getProducts.php');
     }
 
     public function index()
     {
+        $this->loadTemplateData();
         $this->page();
     }
 
-    public function productData()
+    public function getProductId() {
+        if (isset($this->request)) {
+            $productId = $this->request->ID;
+        } else {
+            $productId = null;
+        }
+        return $productId;
+    }
+
+    public function getProduct($productId)
     {
         $product = new getProducts();
         $product->init();
-        $product->allProducts();
-        $this->ReturnData = $product;
-        return $product;
+        return $product->getProductOnId($productId);
+    }
+
+    private function loadTemplateData()
+    {
+        $this->product = $this->getProduct($this->getProductId());
     }
 
     public function page($page = "index")
     {
-        $this->ReturnData = $this->productData();
         Loader::view("templates/header.php");
         Loader::view("product/" . $page . ".php");
         Loader::view("templates/footer.php");

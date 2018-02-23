@@ -76,6 +76,14 @@ class getProducts extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    public function getProductOnId($productId)
+    {
+        $sql = "SELECT * FROM `products` WHERE id = ?";
+        $result = $this->fetchAll($sql, array((int)$productId));
+
+        return $result;
+    }
+
     private function createModels($IDS)
     {
         $products = array();
