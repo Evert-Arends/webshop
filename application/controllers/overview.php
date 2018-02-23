@@ -17,6 +17,8 @@ class overview extends EmmaController
     public function init($request)
     {
         $this->request = $request;
+        $this->request = $request;
+        $this->request = $request;
         // current directory
         require_once('./controllers/products/getProducts.php');
     }
