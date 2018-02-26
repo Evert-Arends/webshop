@@ -16,8 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <?php
-                    var_dump($this->AllRootCategories);
-                    die;
+//                    print_r($this->AllRootCategories);
                     loopCategories($this->AllRootCategories);
                     function loopCategories($categories) {
                         foreach ($categories as $cat) {
