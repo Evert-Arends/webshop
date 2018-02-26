@@ -39,7 +39,6 @@ class getCategories extends EmmaModel
             $categoryModel = clone($this->CategoryModel);
             $categoryModel->setRecursiveLinking($linkChild, $linkParent);
             $categoryModel->get($value->id);
-
             if (!$categoryModel) {
                 continue;
             }
