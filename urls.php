@@ -14,12 +14,13 @@
 // Name of route ( BETA! ), and controller used to produce content.
 // Single point of entry, no longer supports method calls directly.
 // Route:Controller
+// Keep in mind that the underscore at the start of a route is reserved for the framework, ex: _route, _index etc.
 $routes = array(
-    array("home" => "home"),
-    array("product" => "product"),
-    array("overview" => "overview"),
-    array("profile" => "profile"),
-    array("cart" => "cart"),
+    "home" => "home",
+    "product" => "product",
+    "overview" => "overview",
+    "profile" => "profile",
+    "cart1" => "cart",
 );
 
 define("ROUTES", $routes);

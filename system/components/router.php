@@ -32,21 +32,36 @@ class Router
         $skip = false;
 
         foreach ($parts as $key => &$part) {
+            if ($key == 0) {
+                if (isset($parts[$key])) {
+                    $routeObject->_route = $parts[$key];
+                    $skip = !$skip;
+
+                    // Skip the rest of the loop
+                    continue;
+                }
+            }
+
 
             if ($skip) {
-                $skip = false;
+                $skip = !$skip;
+                // Skip this item
                 continue;
             }
+
             $attribute = $part;
             $value = null;
-            $key++;
 
+            // Get next value from array
+            $key++;
+            // Check if value actually exists
             if (isset($parts[$key])) {
+                // Assign value to variable
                 $value = $parts[$key];
             }
-
+            // Set attribute and its value
             $routeObject->$attribute = $value;
-            $skip = true;
+            $skip = !$skip;
         }
         // Check for broken routes.
         $this->checkRoutes();
@@ -54,10 +69,10 @@ class Router
         // Set route object
         $this->setRoutes($routeObject);
 
-        if (!isset ($this->getRoute()->index))
-            $this->routes->index = DEFAULT_CONTROLLER;
+        if (!isset ($this->getRoute()->_route))
+            $this->routes->_route = DEFAULT_CONTROLLER;
 
-        $this->setController($this->getRoute()->index);
+        $this->setController($this->getRoute()->_route);
         $this->requireController($this->getController());
     }
 
@@ -66,20 +81,19 @@ class Router
         $incorrectUrls = array();
 
         $urls = ROUTES;
-        foreach ($urls as $url => $controllers) {
-            foreach ($controllers as $key => $controller) {
-                if (!$this->checkIfControllerExists($controller)) {
-                    array_push($incorrectUrls, "No such controller " . $controller);
-                    continue;
-                }
+        foreach ($urls as $url => $controller) {
+            if (!$this->checkIfControllerExists($controller)) {
+                array_push($incorrectUrls, "No such controller " . $controller);
+                continue;
             }
 
-            // If there are incorrect routes, to prevent errors or an incorrectly working app.
-            if (!empty($incorrectUrls)) {
-                echo "Incorrect route bindings <br />";
-                print_r($incorrectUrls);
-                die(1);
-            }
+
+        }
+        // If there are incorrect routes, to prevent errors or an incorrectly working app.
+        if (!empty($incorrectUrls)) {
+            echo "Incorrect route bindings <br />";
+            print_r($incorrectUrls);
+            die(1);
         }
     }
 
@@ -101,11 +115,16 @@ class Router
     }
 
     /**
-     * @param mixed $controller
+     * @param $route
      */
-    public function setController($controller)
+    public function setController($route)
     {
-        $this->controller = $controller;
+        $routes = ROUTES;
+        if (!isset($routes[$route])) {
+            $this->controller = "home";
+        } else {
+            $this->controller = $routes[$route];
+        }
     }
 
     private function requireController($controller)

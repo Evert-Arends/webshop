@@ -7,6 +7,7 @@
  * @property  ProductModel ProductModel
  */
 
+
 class getProducts extends EmmaModel
 {
     public function __construct()
