@@ -42,7 +42,6 @@ class Router
                 }
             }
 
-
             if ($skip) {
                 $skip = !$skip;
                 // Skip this item
@@ -65,6 +64,9 @@ class Router
         }
         // Check for broken routes.
         $this->checkRoutes();
+
+        // sanitize and get post object.
+        $routeObject->post = $this->setPost();
 
         // Set route object
         $this->setRoutes($routeObject);
@@ -143,5 +145,14 @@ class Router
     public function setRoutes($routes)
     {
         $this->routes = $routes;
+    }
+
+    private function setPost()
+    {
+        foreach ($_POST as $item => $value) {
+            filter_var($_POST[$item], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
+
+        return $_POST;
     }
 }

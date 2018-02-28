@@ -36,6 +36,7 @@ class category extends EmmaController
     private function test_fill()
     {
         $test = $this->CategoryModel->get(1);
+        $this->post();
         print_r($test);
     }
 
