@@ -65,8 +65,9 @@ class Router
         // Check for broken routes.
         $this->checkRoutes();
 
-        // sanitize and get post object.
+        // sanitize and get post/get objects.
         $routeObject->post = $this->setPost();
+        $routeObject->get = $this->setGet();
 
         // Set route object
         $this->setRoutes($routeObject);
@@ -74,7 +75,7 @@ class Router
         if (!isset ($this->getRoute()->_route))
             $this->routes->_route = DEFAULT_CONTROLLER;
 
-        $this->setController($this->getRoute()->_route);
+        $this->setController($this->getRoute());
         $this->requireController($this->getController());
     }
 
@@ -122,10 +123,10 @@ class Router
     public function setController($route)
     {
         $routes = ROUTES;
-        if (!isset($routes[$route])) {
+        if (!isset($routes[$route->_route])) {
             $this->controller = "home";
         } else {
-            $this->controller = $routes[$route];
+            $this->controller = $routes[$route->_route];
         }
     }
 
@@ -155,4 +156,14 @@ class Router
 
         return $_POST;
     }
+
+    private function setGet()
+    {
+        foreach ($_GET as $item => $value) {
+            filter_var($_GET[$item], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
+
+        return $_GET;
+    }
+
 }

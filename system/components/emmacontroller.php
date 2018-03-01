@@ -15,14 +15,16 @@ abstract class EmmaController implements IController
     protected $session;
     protected $method;
     protected $arg;
+    protected $request;
 
     /**
      * @see IController::constructor()
+     * @param $request
      */
-    public function constructor()
+    public function constructor($request)
     {
 
-
+        $this->request = $request;
         $this->load = Loader::$instance;
 
         // and the controller instance to itself

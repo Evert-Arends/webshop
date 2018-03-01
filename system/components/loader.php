@@ -42,8 +42,8 @@ class Loader implements ISystemComponent
     {
 
         // Create given controller object
-        $controller = new $paramController ($request);
-        $controller->constructor();
+        $controller = new $paramController ();
+        $controller->constructor($request);
         if (method_exists($controller, "init"))
             $controller->init($request);
 
