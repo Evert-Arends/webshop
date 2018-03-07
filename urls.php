@@ -21,6 +21,11 @@ $routes = array(
     "overview" => "overview",
     "profile" => "profile",
     "cart1" => "cart",
+    "login" => "login",
+);
+
+$allowed_requests = array(
+    null
 );
 
 define("ROUTES", $routes);

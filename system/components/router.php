@@ -6,7 +6,7 @@
  * Date: 19-2-18
  * Time: 14:16
  */
-class Router
+class Router extends Middleware
 {
     static $loader;
 
@@ -21,12 +21,14 @@ class Router
 
     public function __construct()
     {
+        parent::__construct();
+
         // Create an object from the string specified by apache.
         $route = (!isset($_GET['c']) ? '' : $_GET['c']);
         $parts = explode('/', $route);
 
         // Create object from array values
-        $routeObject = new stdClass();
+        $requestObject = new stdClass();
 
         // Skip next item in foreach, because that is the value for the previous get request.
         $skip = false;
@@ -34,7 +36,7 @@ class Router
         foreach ($parts as $key => &$part) {
             if ($key == 0) {
                 if (isset($parts[$key])) {
-                    $routeObject->_route = $parts[$key];
+                    $requestObject->_route = $parts[$key];
                     $skip = !$skip;
 
                     // Skip the rest of the loop
@@ -59,18 +61,18 @@ class Router
                 $value = $parts[$key];
             }
             // Set attribute and its value
-            $routeObject->$attribute = $value;
+            $requestObject->$attribute = $value;
             $skip = !$skip;
         }
         // Check for broken routes.
         $this->checkRoutes();
 
-        // sanitize and get post/get objects.
-        $routeObject->post = $this->setPost();
-        $routeObject->get = $this->setGet();
+        // Security
+        $this->setMiddleWare($requestObject);
 
         // Set route object
-        $this->setRoutes($routeObject);
+        $this->setRoutes($this->getCleanRequestObject());
+
 
         if (!isset ($this->getRoute()->_route))
             $this->routes->_route = DEFAULT_CONTROLLER;
@@ -146,24 +148,6 @@ class Router
     public function setRoutes($routes)
     {
         $this->routes = $routes;
-    }
-
-    private function setPost()
-    {
-        foreach ($_POST as $item => $value) {
-            filter_var($_POST[$item], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        }
-
-        return $_POST;
-    }
-
-    private function setGet()
-    {
-        foreach ($_GET as $item => $value) {
-            filter_var($_GET[$item], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        }
-
-        return $_GET;
     }
 
 }

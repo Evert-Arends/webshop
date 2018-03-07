@@ -65,6 +65,8 @@ abstract class EmmaController implements IController
 
     /**
      * @see IController::generateRandomString()
+     * @param int $length
+     * @return bool|string
      */
     public function generateRandomString($length = 8)
     {

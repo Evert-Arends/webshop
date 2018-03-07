@@ -7,6 +7,7 @@ final class Core
 {
     static $loader;
     public $routeObject;
+
     /**
      * Constructor for the core
      * it loads in all configuration and interfaces
@@ -40,12 +41,13 @@ final class Core
         // Use the routing engine.
         $router = new Router();
         $this->routeObject = $router->getRoute();
-
         // Define the loader
         $this->load = Loader::getInstance();
 
+
         // Register the loader to the core
         self::$loader = Loader::getInstance();
+
 
         // Use the loader to load the controller
         try {

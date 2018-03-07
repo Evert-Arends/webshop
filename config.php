@@ -45,5 +45,9 @@ define("TITLE", "EmmaPHP Framework");
 define("BASEPATH", "http://localhost/school/webshop/");
 define("APPPATH", BASEPATH . "application/");
 
+// If you want EmmaPHP to be in charge of authenticating a user.
+// This will be used within middleware
+define("AUTH", true);
+
 //DEFINE ANY CONSTANTS BELOW
 

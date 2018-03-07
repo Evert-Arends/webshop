@@ -11,11 +11,9 @@ class overview extends EmmaController
     protected $Products;
     protected $productCount;
     protected $pageNumber;
-    private $request;
 
-    public function init($request)
+    public function init()
     {
-        $this->request = $request;
         // current directory
         require_once('./controllers/products/getProducts.php');
     }
