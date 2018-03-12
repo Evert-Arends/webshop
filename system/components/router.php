@@ -67,8 +67,8 @@ class Router extends Middleware
         // Check for broken routes.
         $this->checkRoutes();
 
-        // Security
-        $this->setMiddleWare($requestObject);
+        // Security (Middleware)
+        $this->init($requestObject);
 
         // Set route object
         $this->setRoutes($this->getCleanRequestObject());

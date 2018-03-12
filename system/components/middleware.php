@@ -17,12 +17,13 @@ class Middleware extends EmmaModel
 
     public function __construct()
     {
-        EmmaModel::__construct();
+        parent::__construct();
     }
 
-    public function setMiddleWare($request)
+    public function init($request)
     {
         $this->request = $request;
+        $this->setUser();
         $this->setRequestParameters();
     }
 
@@ -37,9 +38,65 @@ class Middleware extends EmmaModel
      * Generates dynamic user object and their roles.
      * Requires an user table, and a roles table.
      */
-    private function retrieveUser()
+    private function setUser()
     {
+        $userSession = Session::get("id");
+        if (isset($userSession)) {
+            $sql = "SELECT * FROM users WHERE id = ?";
+            $user = $this->fetch($sql, array($userSession));
 
+            if ($user) {
+
+                $sql = "SELECT * FROM roles WHERE name = ?";
+                $role_name = "";
+
+                if (property_exists($user, "roles_name")) {
+                    if (!empty($user->roles_name)) {
+                        $role_name = $user->roles_name;
+                    }
+                }
+                $role = $this->fetch($sql, array($role_name));
+                $this->setUserObject($user);
+
+                if (!empty($role)) {
+                    $this->setUserRole($role);
+                } else {
+                    $this->setUserRole(false);
+                    $this->setUserAuth(false);
+
+                    return false;
+                }
+
+                $this->setUserAuth(true);
+
+                return true;
+            } else {
+                $this->setUserAuth(false);
+                return false;
+            }
+        } else {
+            $this->setUserAuth(false);
+            return false;
+        }
+    }
+
+    /**
+     * @param $status
+     */
+    private function setUserAuth($status)
+    {
+        $this->request->User->isAuthenticated = $status;
+    }
+
+    private function setUserRole($role)
+    {
+        $this->request->User->UserRole = $role;
+
+    }
+
+    private function setUserObject($user)
+    {
+        $this->request->User = $user;
     }
 
     private function setPost()
@@ -65,7 +122,8 @@ class Middleware extends EmmaModel
         return $this->request;
     }
 
-    public function getCleanRequestObject() {
+    public function getCleanRequestObject()
+    {
         return $this->request;
     }
 

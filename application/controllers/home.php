@@ -67,7 +67,7 @@ class home extends EmmaController
 
     public function page($page = "index")
     {
-        print_r($this->request->get);
+        var_dump($this->request);
         Loader::view("templates/header.php");
         Loader::view("home/" . $page . ".php");
         Loader::view("templates/footer.php");
