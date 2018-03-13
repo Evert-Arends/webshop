@@ -16,14 +16,13 @@
             <div class="card">
                 <div class="card-body">
                     <?php
-//                    print_r($this->AllRootCategories);
                     loopCategories($this->AllRootCategories);
-                    function loopCategories($categories) {
+                    function loopCategories($categories)
+                    {
                         foreach ($categories as $cat) {
                             echo "<ul>";
                             echo "<li>" . $cat->getId() . " - " . $cat->getName() . "</li>";
                             if ($cat->getChildren()) {
-                                //var_dump($cat);
                                 loopCategories($cat->getChildren());
                             }
                             echo "</ul>";

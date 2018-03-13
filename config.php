@@ -42,7 +42,7 @@ AutoLoader::$autoloadModels = array();
  ****************************************************/
 
 define("TITLE", "EmmaPHP Framework");
-define("BASEPATH", "http://localhost/school/webshop/");
+define("BASEPATH", "http://localhost/webshop/");
 define("APPPATH", BASEPATH . "application/");
 
 //DEFINE ANY CONSTANTS BELOW

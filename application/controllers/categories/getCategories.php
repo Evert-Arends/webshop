@@ -16,32 +16,50 @@ class getCategories extends EmmaModel
 
     private function getAllRootCategories()
     {
-        $sql = "SELECT id FROM categories WHERE id NOT IN (SELECT child from categories_has_categories)";
+        $sql = "SELECT * FROM categories WHERE id NOT IN (SELECT child FROM categories_has_categories)";
         $result = $this->fetchAll($sql);
 
         return $result;
     }
 
-    public function allRootCategories($linkChild = false, $linkParent = false)
+    public function allRootCategories()
     {
         $allIDS = $this->getAllRootCategories();
 
         if (!$allIDS) {
             return "No categories found";
         }
-        return $this->createModels($allIDS, $linkChild, $linkParent);
+        return $this->createModels($allIDS);
     }
 
-    private function createModels($IDS, $linkChild = false, $linkParent = false)
+    private function getChildren($id)
+    {
+
+        $sql = "SELECT * FROM categories INNER JOIN categories_has_categories category ON categories.id = category.child WHERE parent = ?";
+        $result = $this->fetchAll($sql, array($id));
+        if ($result) {
+            return $this->createModels($result);
+        }
+        return false;
+    }
+
+    private function createModels($IDS)
     {
         $categories = array();
         foreach ($IDS as $value) {
             $categoryModel = clone($this->CategoryModel);
-            $categoryModel->setRecursiveLinking($linkChild, $linkParent);
-            $categoryModel->get($value->id);
+
+            $children = $this->getChildren($value->id);
+
+            $categoryModel->setId($value->id);
+            $categoryModel->setName($value->name);
+            $categoryModel->setDescription($value->description);
+            $categoryModel->setChildren($children);
+
             if (!$categoryModel) {
                 continue;
             }
+
             array_push($categories, $categoryModel);
         }
         return $categories;

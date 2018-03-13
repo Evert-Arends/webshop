@@ -58,7 +58,7 @@ class home extends EmmaController
     private function getRootCategories(){
         $categories = new getCategories();
         $categories->init();
-        return $categories->allRootCategories(true, false);
+        return $categories->allRootCategories();
     }
 
     private function loadTemplateData()
