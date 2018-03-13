@@ -9,13 +9,9 @@
 class product extends EmmaController
 {
     protected $product;
-    private $request;
 
-    public function init($request)
+    public function init()
     {
-        //Request to get parameters
-        $this->request = $request;
-
         // current directory
         require_once('./controllers/products/getProducts.php');
     }

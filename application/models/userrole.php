@@ -16,8 +16,26 @@ class UserRole extends EmmaModel
     /**
      * return reference
      */
-    public function construct()
+    public function __construct()
     {
+        parent::__construct();
+        return $ref =& $this;
+    }
+
+    public function getRole($name){
+        $rolesTable = new RolesTable();
+
+        $role = $rolesTable->find("name", $name);
+
+        if(!$role) {
+            return false;
+        }
+
+        $this->name = $role->Objects->name;
+        $this->level = $role->Objects->level;
+        $this->description = $role->Objects->description;
+        $this->image= $role->Objects->image;
+
         return $ref =& $this;
     }
 

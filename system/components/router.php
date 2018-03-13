@@ -6,7 +6,7 @@
  * Date: 19-2-18
  * Time: 14:16
  */
-class Router
+class Router extends Middleware
 {
     static $loader;
 
@@ -21,12 +21,14 @@ class Router
 
     public function __construct()
     {
+        parent::__construct();
+
         // Create an object from the string specified by apache.
         $route = (!isset($_GET['c']) ? '' : $_GET['c']);
         $parts = explode('/', $route);
 
         // Create object from array values
-        $routeObject = new stdClass();
+        $requestObject = new stdClass();
 
         // Skip next item in foreach, because that is the value for the previous get request.
         $skip = false;
@@ -34,14 +36,13 @@ class Router
         foreach ($parts as $key => &$part) {
             if ($key == 0) {
                 if (isset($parts[$key])) {
-                    $routeObject->_route = $parts[$key];
+                    $requestObject->_route = $parts[$key];
                     $skip = !$skip;
 
                     // Skip the rest of the loop
                     continue;
                 }
             }
-
 
             if ($skip) {
                 $skip = !$skip;
@@ -60,19 +61,23 @@ class Router
                 $value = $parts[$key];
             }
             // Set attribute and its value
-            $routeObject->$attribute = $value;
+            $requestObject->$attribute = $value;
             $skip = !$skip;
         }
         // Check for broken routes.
         $this->checkRoutes();
 
+        // Security (Middleware)
+        $this->init($requestObject);
+
         // Set route object
-        $this->setRoutes($routeObject);
+        $this->setRoutes($this->getCleanRequestObject());
+
 
         if (!isset ($this->getRoute()->_route))
             $this->routes->_route = DEFAULT_CONTROLLER;
 
-        $this->setController($this->getRoute()->_route);
+        $this->setController($this->getRoute());
         $this->requireController($this->getController());
     }
 
@@ -120,10 +125,10 @@ class Router
     public function setController($route)
     {
         $routes = ROUTES;
-        if (!isset($routes[$route])) {
+        if (!isset($routes[$route->_route])) {
             $this->controller = "home";
         } else {
-            $this->controller = $routes[$route];
+            $this->controller = $routes[$route->_route];
         }
     }
 
@@ -144,4 +149,5 @@ class Router
     {
         $this->routes = $routes;
     }
+
 }
