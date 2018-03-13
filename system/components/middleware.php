@@ -44,7 +44,6 @@ class Middleware extends EmmaModel
         if (isset($userSession)) {
             $sql = "SELECT * FROM users WHERE id = ?";
             $user = $this->fetch($sql, array($userSession));
-
             if ($user) {
 
                 $sql = "SELECT * FROM roles WHERE name = ?";
@@ -85,6 +84,7 @@ class Middleware extends EmmaModel
      */
     private function setUserAuth($status)
     {
+        $this->request->User = $status;
         $this->request->User->isAuthenticated = $status;
     }
 
