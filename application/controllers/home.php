@@ -72,34 +72,4 @@ class home extends EmmaController
         Loader::view("home/" . $page . ".php");
         Loader::view("templates/footer.php");
     }
-
-//    public function testMethod()
-//    {
-//        $this->UserModel->setRole();
-//
-//        $products = new ProductsTable();
-//        // Create new models.
-//        $categoryModel = clone($this->CategoryModel);
-//        $categoryModel2 = clone ($this->CategoryModel);
-//
-//        $categoryModel->setId(1);
-//        $categoryModel2->setId(2);
-//
-//        $categoryModel2->setParent($products);
-//
-//        $product = $products->find("price", 0);
-//        print_r($product);
-//        $product->Objects->price = 1200;
-//        $product->save();
-//        print_r($this->ProductModel->getId());
-//
-//        $newCategoryObject = clone($this->CategoryModel);
-//        $newCategoryObject->setRecursiveLinking(true, true);
-//        $newCategoryObject->get(6);
-//
-//        print_r($newCategoryObject);
-//
-//        $array = json_decode(json_encode($newCategoryObject), true);
-//        print_r($array);
-//    }
 }
