@@ -84,7 +84,7 @@ class Middleware extends EmmaModel
      */
     private function setUserAuth($status)
     {
-        $this->request->User = $status;
+        $this->request->User = new stdClass();
         $this->request->User->isAuthenticated = $status;
     }
 
