@@ -36,7 +36,7 @@ class Middleware extends EmmaModel
 
     /**
      * Generates dynamic user object and their roles.
-     * Requires an user table, and a roles table.
+     * Requires an active database connections
      */
     private function setUser()
     {
