@@ -68,18 +68,18 @@
                             <?php
                             if ($product->getDiscount()) {
                                 ?>
-                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice() * 1.21; ?></h5>
+                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice(); ?></h5>
 
                                 <?php
                                 $sellingPrice = $product->getPrice() - ($product->getPrice() * ($product->getDiscount() / 100));
                                 ?>
 
-                                <h5 class="font-weight-bold">€<?= $sellingPrice * 1.21 ?></h5>
+                                <h5 class="font-weight-bold">€<?= $sellingPrice ?></h5>
 
                                 <?php
                             } else {
                                 ?>
-                                <h5>€<?= $product->getPrice() * 1.21; ?></h5>
+                                <h5>€<?= $product->getPrice(); ?></h5>
                             <?php } ?>
 
                             <p class="card-text">
@@ -138,18 +138,18 @@
                             <?php
                             if ($product->getDiscount()) {
                                 ?>
-                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice() * 1.21; ?></h5>
+                                <h5 style="text-decoration: line-through;">€<?= $product->getPrice(); ?></h5>
 
                                 <?php
                                 $sellingPrice = $product->getPrice() - ($product->getPrice() * ($product->getDiscount() / 100));
                                 ?>
 
-                                <h5 class="font-weight-bold">€<?= $sellingPrice * 1.21 ?></h5>
+                                <h5 class="font-weight-bold">€<?= $sellingPrice ?></h5>
 
                                 <?php
                             } else {
                                 ?>
-                                <h5>€<?= $product->getPrice() * 1.21; ?></h5>
+                                <h5>€<?= $product->getPrice(); ?></h5>
                             <?php } ?>
 
                             <p class="card-text">
