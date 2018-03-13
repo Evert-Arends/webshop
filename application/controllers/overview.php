@@ -25,8 +25,8 @@ class overview extends EmmaController
     }
 
     public function getPageNumber() {
-        if (isset($this->request->page)) {
-            $page = $this->request->page;
+        if (isset($this->request->get["page"])) {
+            $page = $this->request->get["page"];
         } else {
             $page = 1;
         }
