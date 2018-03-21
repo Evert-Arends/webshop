@@ -25,7 +25,7 @@ class home extends EmmaController
         Loader::model("UserModel");
         Loader::model("UserRole");
 
-        // Load specific external controllers
+        // Load specific external helpers
         require_once('./controllers/products/getProducts.php');
         require_once('./controllers/categories/getCategories.php');
     }
