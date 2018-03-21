@@ -33,6 +33,7 @@ class Router extends Middleware
         // Skip next item in foreach, because that is the value for the previous get request.
         $skip = false;
 
+        // TODO: Needs to be optimized, if there's any time left.
         foreach ($parts as $key => &$part) {
             if ($key == 0) {
                 if (isset($parts[$key])) {
@@ -77,7 +78,7 @@ class Router extends Middleware
         if (!isset ($this->getRoute()->_route))
             $this->routes->_route = DEFAULT_CONTROLLER;
 
-        $this->setController($this->getRoute());
+        $this->setController($this->getRoute()->_route);
         $this->requireController($this->getController());
     }
 
@@ -87,8 +88,8 @@ class Router extends Middleware
 
         $urls = ROUTES;
         foreach ($urls as $url => $controller) {
-            if (!$this->checkIfControllerExists($controller)) {
-                array_push($incorrectUrls, "No such controller " . $controller);
+            if (!$this->checkIfControllerExists($controller["controller"])) {
+                array_push($incorrectUrls, "No such controller " . $controller["controller"]);
                 continue;
             }
 
@@ -125,16 +126,18 @@ class Router extends Middleware
     public function setController($route)
     {
         $routes = ROUTES;
-        if (!isset($routes[$route->_route])) {
+        if (!isset($routes[$route])) {
             $this->controller = "home";
         } else {
-            $this->controller = $routes[$route->_route];
+            $this->controller = $routes[$route]["controller"];
         }
     }
 
     private function requireController($controller)
     {
+        var_dump($controller);
         require_once("application/controllers/" . $controller . ".php");
+//        require_once("application/controllers/login.php");
     }
 
     public function getRoute()

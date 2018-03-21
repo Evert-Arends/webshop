@@ -23,7 +23,11 @@ class Middleware extends EmmaModel
     public function init($request)
     {
         $this->request = $request;
-        $this->setUser();
+
+        if(AUTH)
+        {
+            $this->setUser();
+        }
         $this->setRequestParameters();
     }
 
