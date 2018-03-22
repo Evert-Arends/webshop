@@ -22,6 +22,7 @@ $routes = array(
     "profile" => "profile",
     "cart1" => "cart",
     "login" => "login",
+    "admin" => "admin",
 );
 
 $allowed_requests = array(
