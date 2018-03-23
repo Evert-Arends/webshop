@@ -142,11 +142,11 @@ class Middleware extends EmmaModel
 
             if (property_exists($this->request, "User")) {
 
-                if (!property_exists($this->request->User, "level")) {
-                    $this->request->User->level = 0;
+                if (!property_exists($this->request->User->UserRole, "level")) {
+                    $this->request->User->UserRole->level = 0;
                 }
 
-                $level = $this->request->User->level;
+                $level = $this->request->User->UserRole->level;
                 if ($routeArray["protected"]) {
                     if (!$this->request->User->isAuthenticated) {
                         return false;

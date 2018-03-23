@@ -12,7 +12,7 @@ class FourOhFour extends EmmaController
 
     public function index()
     {
-//        var_dump($this->request);
+        var_dump($this->request->User);
         $this->page();
 
     }
