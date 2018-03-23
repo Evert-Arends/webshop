@@ -1,3 +1,18 @@
+/*------------------------------------------------------------------
+Stylesheet webshop WEBS2 (admin side)
+
+[Table of contents]
+
+1.	PageGlobal
+2.	Sidebar
+3.  Navbar
+4.  Utilities
+
+*/
+
+/*	1.	PageGlobal
+-------------------------------------------------------------------*/
+
 body {
     font-size: .875rem;
 }
@@ -8,27 +23,31 @@ body {
     vertical-align: text-bottom;
 }
 
-/*
- * Sidebar
- */
+.content-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important
+}
+
+/*	2.	Sidebar
+-------------------------------------------------------------------*/
 
 .sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100; /* Behind the navbar */
+    z-index: 100;
     padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
 .sidebar-sticky {
     position: relative;
-    top: 48px; /* Height of navbar */
+    top: 48px;
     height: calc(100vh - 48px);
     padding-top: .5rem;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
 }
 
 .sidebar .nav-link {
@@ -55,9 +74,8 @@ body {
     text-transform: uppercase;
 }
 
-/*
- * Navbar
- */
+/*	3.	Navbar
+-------------------------------------------------------------------*/
 
 .navbar-brand {
     padding-top: .75rem;
@@ -84,9 +102,8 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
 
-/*
- * Utilities
- */
+/*	4.	Utilities
+-------------------------------------------------------------------*/
 
 .border-top {
     border-top: 1px solid #e5e5e5;

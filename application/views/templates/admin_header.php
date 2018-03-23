@@ -30,6 +30,12 @@
     <script src="<?= APPPATH ?>/assets/cookie-alert/cookiealert.js"></script>
     <script src="<?= APPPATH ?>/assets/cookie-alert/js-cookie.js"></script>
 
+    <link href="<?= APPPATH ?>/assets/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <script src="<?= APPPATH ?>/assets/datatables/jquery.dataTables.js"></script>
+    <script src="<?= APPPATH ?>/assets/datatables/dataTables.bootstrap4.js"></script>
+    <script src="<?= APPPATH ?>/assets/datatables/sb-admin-datatables.js"></script>
+
     <script>
         (function ($) {
             "use strict"; // Start of use strict
