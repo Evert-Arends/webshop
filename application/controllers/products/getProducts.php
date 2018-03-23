@@ -12,13 +12,12 @@ class getProducts extends EmmaModel
 {
     public function __construct()
     {
-        EmmaModel::__construct();
-        $this->init();
+        parent::__construct();
     }
 
     public function init()
     {
-        $this->ProductModel = Loader::model("ProductModel");
+        Loader::model("ProductModel");
     }
 
     public function countProducts()
@@ -27,6 +26,24 @@ class getProducts extends EmmaModel
         $result = $this->fetch($sql);
 
         return $result;
+    }
+
+    private function getProducts()
+    {
+        $sql = "SELECT * FROM `products`";
+        $result = $this->fetchAll($sql);
+
+        return $result;
+    }
+
+    public function allProductsNotLimited()
+    {
+        $allIDS = $this->getProducts();
+
+        if (!$allIDS) {
+            return "No products found";
+        }
+        return $this->createModels($allIDS);
     }
 
     private function getAllProducts($start, $perpage)
@@ -95,7 +112,8 @@ class getProducts extends EmmaModel
     {
         $products = array();
         foreach ($IDS as $value) {
-            $productModel = clone($this->ProductModel);
+            $productModel = new ProductModel;
+            $productModel->setRetrieveCategories(true);
             $productModel->get($value->id);
 
             if (!$productModel) {

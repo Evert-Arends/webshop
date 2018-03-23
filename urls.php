@@ -63,6 +63,30 @@ $routes = array(
             "protected" => false,
             "level" => array(0)
         ),
+    "admin" =>
+        array(
+            "controller" => "admin",
+            "protected" => true,
+            "level" => array(1)
+        ),
+    "users" =>
+        array(
+            "controller" => "admin_users",
+            "protected" => true,
+            "level" => array(1)
+        ),
+    "products" =>
+        array(
+            "controller" => "admin_products",
+            "protected" => true,
+            "level" => array(1)
+        ),
+    "categories" =>
+        array(
+            "controller" => "admin_categories",
+            "protected" => true,
+            "level" => array(1)
+        ),
     "logout" =>
         array("controller" => "logout",
             "protected" => false,

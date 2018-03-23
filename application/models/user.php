@@ -32,12 +32,11 @@ class UserModel extends EmmaModel
      */
     public function __construct()
     {
-        EmmaModel::__construct();
+        parent::__construct();
         $this->objectChecker = new ObjectChecker();
         $this->UserRole = Loader::model("UserRole");
         Loader::model("AuthModel");
         $this->AuthModel = new AuthModel();
-        return $ref =& $this;
     }
 
     public function getUser($email = "")
@@ -46,7 +45,7 @@ class UserModel extends EmmaModel
             trigger_error("At least one of the parameters required.");
         }
         $user = $this->getUserFromDB($email);
-        if(!$user) {
+        if (!$user) {
             return false;
         }
 
@@ -56,14 +55,13 @@ class UserModel extends EmmaModel
         $this->setFirstName($user->Objects->first_name);
         $this->setDateOfBirth($user->Objects->date_of_birth);
         $this->setDateRegistered($user->Objects->date_registered);
-
-
         // Might need to assign a field (UserRole).
-        $this->setRole($this->UserRole->getRole($user->Objects->roles_name));
+        $role = $this->UserRole->getRole($user->Objects->roles_name);
+        $this->setRole($role);
 
         // Set auth model
         $this->auth = $this->AuthModel->fillModel($this->getId());
-        if(!$this->auth) {
+        if (!$this->auth) {
             trigger_error("No auth details available.");
             return false;
         }
@@ -71,11 +69,12 @@ class UserModel extends EmmaModel
         $this->setHashedPassword($this->auth->getHashedPassword());
 
         // Return reference to model.
-        return $ref =& $this;
+        return $this;
 
     }
 
-    private function getUserFromDB($email) {
+    private function getUserFromDB($email)
+    {
         $user_getter = new UsersTable();
         $user = $user_getter->find("email", $email);
 

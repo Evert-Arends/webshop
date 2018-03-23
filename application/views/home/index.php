@@ -14,217 +14,183 @@
         <h3 class="partial-title" style="">Categorieen</h3>
         <div class="custom-margin">
             <div class="card">
-                <div class="card-body sidebar">
-                    <!--                    --><?php
-                    //                    loopCategories($this->AllRootCategories);
-                    //                    function loopCategories($categories)
-                    //                    {
-                    //                        foreach ($categories as $cat) {
-                    //                            echo "<ul>";
-                    //                            echo "<li>" . $cat->getId() . " - " . $cat->getName() . "</li>";
-                    //                            if ($cat->getChildren()) {
-                    //                                loopCategories($cat->getChildren());
-                    //                            }
-                    //                            echo "</ul>";
-                    //                        }
-                    //                    }
-                    //
-                    //                    ?>
+                <div class="card-body">
+<!--                    --><?php
+//                    loopCategories($this->AllRootCategories);
+//                    function loopCategories($categories)
+//                    {
+//                        foreach ($categories as $cat) {
+//                            echo "<ul class='list-group list-group-flush'>";
+//                            echo "<li class='list-group-item' style='padding: 0 1.25rem;'>" . $cat->getId() . " - " . $cat->getName() . "</li>";
+//                            if ($cat->getChildren()) {
+//                                echo "<li class='list-group-item' style='padding: 0 1.25rem;'>";
+//                                loopCategories($cat->getChildren());
+//                                echo "</li>";
+//                            }
+//                            echo "</ul>";
+//                        }
+//                    }
+//
+//                    ?>
+
+<!--                    <link href="--><?//= APPPATH?><!--/assets/css/sidebar.css" rel="stylesheet">-->
+
+                    <div class="just-padding">
+
+                        <div class="list-group list-group-root well">
+
+                            <a href="#item-1" class="list-group-item" data-toggle="collapse">
+                                <i class="glyphicon glyphicon-chevron-right"></i>Item 1
+                            </a>
+                            <div class="list-group collapse" id="item-1">
+
+                                <a href="#item-1-1" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.1
+                                </a>
+                                <div class="list-group collapse" id="item-1-1">
+                                    <a href="#" class="list-group-item">Item 1.1.1</a>
+                                    <a href="#" class="list-group-item">Item 1.1.2</a>
+                                    <a href="#" class="list-group-item">Item 1.1.3</a>
+                                </div>
+
+                                <a href="#item-1-2" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.2
+                                </a>
+                                <div class="list-group collapse" id="item-1-2">
+                                    <a href="#" class="list-group-item">Item 1.2.1</a>
+                                    <a href="#" class="list-group-item">Item 1.2.2</a>
+                                    <a href="#" class="list-group-item">Item 1.2.3</a>
+                                </div>
+
+                                <a href="#item-1-3" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.3
+                                </a>
+                                <div class="list-group collapse" id="item-1-3">
+                                    <a href="#" class="list-group-item">Item 1.3.1</a>
+                                    <a href="#" class="list-group-item">Item 1.3.2</a>
+                                    <a href="#" class="list-group-item">Item 1.3.3</a>
+                                </div>
+
+                            </div>
+
+                            <a href="#item-2" class="list-group-item" data-toggle="collapse">
+                                <i class="glyphicon glyphicon-chevron-right"></i>Item 2
+                            </a>
+                            <div class="list-group collapse" id="item-2">
+
+                                <a href="#item-2-1" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.1
+                                </a>
+                                <div class="list-group collapse" id="item-2-1">
+                                    <a href="#" class="list-group-item">Item 2.1.1</a>
+                                    <a href="#" class="list-group-item">Item 2.1.2</a>
+                                    <a href="#" class="list-group-item">Item 2.1.3</a>
+                                </div>
+
+                                <a href="#item-2-2" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.2
+                                </a>
+                                <div class="list-group collapse" id="item-2-2">
+                                    <a href="#" class="list-group-item">Item 2.2.1</a>
+                                    <a href="#" class="list-group-item">Item 2.2.2</a>
+                                    <a href="#" class="list-group-item">Item 2.2.3</a>
+                                </div>
+
+                                <a href="#item-2-3" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.3
+                                </a>
+                                <div class="list-group collapse" id="item-2-3">
+                                    <a href="#" class="list-group-item">Item 2.3.1</a>
+                                    <a href="#" class="list-group-item">Item 2.3.2</a>
+                                    <a href="#" class="list-group-item">Item 2.3.3</a>
+                                </div>
+
+                            </div>
 
 
-                    <ul class="list-sidebar bg-defoult">
-                        <li><a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active"> <i
-                                        class="fa fa-th-large"></i> <span class="nav-label"> Dashboards </span> <span
-                                        class="fa fa-chevron-left pull-right"></span> </a>
-                            <ul class="sub-menu collapse" id="dashboard">
-                                <li class="active"><a href="#">CSS3 Animation</a></li>
-                                <li><a href="#">General</a></li>
-                                <li><a href="#">Buttons</a></li>
-                                <li><a href="#">Tabs & Accordions</a></li>
-                                <li><a href="#">Typography</a></li>
-                                <li><a href="#">FontAwesome</a></li>
-                                <li><a href="#">Slider</a></li>
-                                <li><a href="#">Panels</a></li>
-                                <li><a href="#">Widgets</a></li>
-                                <li><a href="#">Bootstrap Model</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a></li>
-                        <li><a href="#" data-toggle="collapse" data-target="#products" class="collapsed active"> <i
-                                        class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span> <span
-                                        class="fa fa-chevron-left pull-right"></span> </a>
-                            <ul class="sub-menu collapse" id="products">
-                                <li class="active"><a href="#">CSS3 Animation</a></li>
-                                <li><a href="#">General</a></li>
-                                <li><a href="#">Buttons</a></li>
-                                <li><a href="#">Tabs & Accordions</a></li>
-                                <li><a href="#">Typography</a></li>
-                                <li><a href="#">FontAwesome</a></li>
-                                <li><a href="#">Slider</a></li>
-                                <li><a href="#">Panels</a></li>
-                                <li><a href="#">Widgets</a></li>
-                                <li><a href="#">Bootstrap Model</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Grid options</span></a>
-                        </li>
-                        <li><a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active"><i
-                                        class="fa fa-table"></i> <span class="nav-label">Tables</span><span
-                                        class="fa fa-chevron-left pull-right"></span></a>
-                            <ul class="sub-menu collapse" id="tables">
-                                <li><a href=""> Static Tables</a></li>
-                                <li><a href=""> Data Tables</a></li>
-                                <li><a href=""> Foo Tables</a></li>
-                                <li><a href=""> jqGrid</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" data-toggle="collapse" data-target="#e-commerce" class="collapsed active"><i
-                                        class="fa fa-shopping-cart"></i> <span class="nav-label">E-commerce</span><span
-                                        class="fa fa-chevron-left pull-right"></span></a>
-                            <ul class="sub-menu collapse" id="e-commerce">
-                                <li><a href=""> Products grid</a></li>
-                                <li><a href=""> Products list</a></li>
-                                <li><a href="">Product edit</a></li>
-                                <li><a href=""> Product detail</a></li>
-                                <li><a href="">Cart</a></li>
-                                <li><a href=""> Orders</a></li>
-                                <li><a href=""> Credit Card form</a></li>
-                            </ul>
-                        </li>
-                        <li><a href=""><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span> </a></li>
-                        <li><a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-files-o"></i> <span class="nav-label">Other Pages</span></a>
-                        </li>
-                    </ul>
+                            <a href="#item-3" class="list-group-item" data-toggle="collapse">
+                                <i class="glyphicon glyphicon-chevron-right"></i>Item 3
+                            </a>
+                            <div class="list-group collapse" id="item-3">
 
-                    <style>
+                                <a href="#item-3-1" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.1
+                                </a>
+                                <div class="list-group collapse" id="item-3-1">
+                                    <a href="#" class="list-group-item">Item 3.1.1</a>
+                                    <a href="#" class="list-group-item">Item 3.1.2</a>
+                                    <a href="#" class="list-group-item">Item 3.1.3</a>
+                                </div>
 
-                        a {
-                            background-color: transparent;
-                            text-decoration: none;
-                        }
+                                <a href="#item-3-2" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.2
+                                </a>
+                                <div class="list-group collapse" id="item-3-2">
+                                    <a href="#" class="list-group-item">Item 3.2.1</a>
+                                    <a href="#" class="list-group-item">Item 3.2.2</a>
+                                    <a href="#" class="list-group-item">Item 3.2.3</a>
+                                </div>
 
-                        a:active, a:hover {
-                            outline: 0;
-                        }
+                                <a href="#item-3-3" class="list-group-item" data-toggle="collapse">
+                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.3
+                                </a>
+                                <div class="list-group collapse" id="item-3-3">
+                                    <a href="#" class="list-group-item">Item 3.3.1</a>
+                                    <a href="#" class="list-group-item">Item 3.3.2</a>
+                                    <a href="#" class="list-group-item">Item 3.3.3</a>
+                                </div>
 
-                        /***********************  TOP Bar ********************/
-                        .sidebar {
-                            transition: all 0.5s ease-in-out;
-                        }
+                            </div>
 
-                        .bg-defoult {
-                            background-color: #222;
-                        }
+                        </div>
 
-                        .sidebar ul {
-                            list-style: none;
-                            margin: 0px;
-                            padding: 0px;
-                        }
-
-                        .sidebar li a, .sidebar li a.collapsed.active {
-                            display: block;
-                            padding: 8px 12px;
-                            color: #fff;
-                            border-left: 0px solid #dedede;
-                            text-decoration: none
-                        }
-
-                        .sidebar li a.active {
-                            background-color: #000;
-                            border-left: 5px solid #dedede;
-                            transition: all 0.5s ease-in-out
-                        }
-
-                        .sidebar li a:hover {
-                            background-color: #000 !important;
-                        }
-
-                        .sidebar li a i {
-                            padding-right: 5px;
-                        }
-
-                        .sidebar ul li .sub-menu li a {
-                            position: relative
-                        }
-
-                        .sidebar ul li .sub-menu li a:before {
-                            font-family: FontAwesome;
-                            content: "\f105";
-                            display: inline-block;
-                            padding-left: 0px;
-                            padding-right: 10px;
-                            vertical-align: middle;
-                        }
-
-                        .sidebar ul li .sub-menu li a:hover:after {
-                            content: "";
-                            position: absolute;
-                            left: -5px;
-                            top: 0;
-                            width: 5px;
-                            background-color: #111;
-                            height: 100%;
-                        }
-
-                        .sidebar ul li .sub-menu li a:hover {
-                            background-color: #222;
-                            padding-left: 20px;
-                            transition: all 0.5s ease-in-out
-                        }
-
-                        .sub-menu {
-                            border-left: 5px solid #dedede;
-                        }
-
-                        .sidebar li a .nav-label, .sidebar li a .nav-label + span {
-                            transition: all 0.5s ease-in-out
-                        }
-
-                        .sidebar.fliph li a .nav-label, .sidebar.fliph li a .nav-label + span {
-                            display: none;
-                            transition: all 0.5s ease-in-out
-                        }
-
-                        .sidebar.fliph {
-                            width: 42px;
-                            transition: all 0.5s ease-in-out;
-
-                        }
-
-                        .sidebar.fliph li {
-                            position: relative
-                        }
-
-                        .sidebar.fliph .sub-menu {
-                            position: absolute;
-                            left: 39px;
-                            top: 0;
-                            background-color: #222;
-                            width: 150px;
-                            z-index: 100;
-                        }
-
-                    </style>
+                    </div>
                     <script>
-                        $(document).ready(function () {
-                            $('button').click(function () {
-                                $('.sidebar').toggleClass('fliph');
-                            });
+                        $(function() {
 
+                            $('.list-group-item').on('click', function() {
+                                $('.glyphicon', this)
+                                    .toggleClass('glyphicon-chevron-right')
+                                    .toggleClass('glyphicon-chevron-down');
+                            });
 
                         });
                     </script>
+                    <style>
+                        .just-padding {
+                            padding: 15px;
+                        }
 
+                        .list-group.list-group-root {
+                            padding: 0;
+                            overflow: hidden;
+                        }
 
+                        .list-group.list-group-root .list-group {
+                            margin-bottom: 0;
+                        }
+
+                        .list-group.list-group-root .list-group-item {
+                            border-radius: 0;
+                            border-width: 1px 0 0 0;
+                        }
+
+                        .list-group.list-group-root > .list-group-item:first-child {
+                            border-top-width: 0;
+                        }
+
+                        .list-group.list-group-root > .list-group > .list-group-item {
+                            padding-left: 30px;
+                        }
+
+                        .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+                            padding-left: 45px;
+                        }
+
+                        .list-group-item .glyphicon {
+                            margin-right: 5px;
+                        }
+                    </style>
                 </div>
             </div>
         </div>
