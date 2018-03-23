@@ -27,16 +27,22 @@ $routes = array(
             "protected" => true,
             "level" => array(0)
         ),
+    "404" =>
+        array(
+            "controller" => "FourOhFour",
+            "protected" => false,
+            "level" => array(0)
+        ),
     "product" =>
         array(
             "controller" => "product",
-            "protected" => true,
+            "protected" => false,
             "level" => array(0)
         ),
     "overview" =>
         array(
             "controller" => "overview",
-            "protected" => true,
+            "protected" => false,
             "level" => array(0)
         ),
     "profile" =>
@@ -48,19 +54,19 @@ $routes = array(
     "cart" =>
         array(
             "controller" => "cart",
-            "protected" => true,
+            "protected" => false,
             "level" => array(1, 2)
         ),
     "login" =>
         array(
             "controller" => "login",
             "protected" => false,
-            "level" => 0
+            "level" => array(0)
         ),
     "logout" =>
         array("controller" => "logout",
             "protected" => false,
-            "level" => 0
+            "level" => array(0)
         ));
 
 // What is this doing here?

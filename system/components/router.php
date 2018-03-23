@@ -74,12 +74,21 @@ class Router extends Middleware
         // Set route object
         $this->setRoutes($this->getCleanRequestObject());
 
-
         if (!isset ($this->getRoute()->_route))
             $this->routes->_route = DEFAULT_CONTROLLER;
 
-        $this->setController($this->getRoute()->_route);
+        if (!empty(ROUTES[$this->getRoute()->_route])) {
+            $this->setController(ROUTES[$this->getRoute()->_route]["controller"]);
+        } else {
+            header("Location: " . BASEPATH . "404");
+        }
+
         $this->requireController($this->getController());
+
+
+        if (!$this->checkPrivileges($this->getRoute()->_route)) {
+            header("Location: " . BASEPATH . "404#NOTALLOWED");
+        }
     }
 
     private function checkRoutes()
@@ -102,6 +111,7 @@ class Router extends Middleware
             die(1);
         }
     }
+
 
     private function getControllerFromRoute($routeName)
     {
@@ -143,19 +153,16 @@ class Router extends Middleware
      */
     public function setController($route)
     {
-        $routes = ROUTES;
-        if (!isset($routes[$route])) {
+        if (!isset($route)) {
             $this->controller = "home";
         } else {
-            $this->controller = $routes[$route]["controller"];
+            $this->controller = $route;
         }
     }
 
     private function requireController($controller)
     {
-        var_dump($controller);
         require_once("application/controllers/" . $controller . ".php");
-//        require_once("application/controllers/login.php");
     }
 
     public function getRoute()

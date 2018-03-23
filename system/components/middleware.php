@@ -14,6 +14,7 @@ class Middleware extends EmmaModel
 
     // request object
     private $request;
+    private $routes = ROUTES;
 
     public function __construct()
     {
@@ -132,4 +133,45 @@ class Middleware extends EmmaModel
         return $this->request;
     }
 
+    public function checkPrivileges($route)
+    {
+        if (!isset($this->routes[$route])) {
+            return false;
+        } else {
+            $routeArray = $this->routes[$route];
+
+            if (property_exists($this->request, "User")) {
+
+                if (!property_exists($this->request->User, "level")) {
+                    $this->request->User->level = 0;
+                }
+
+                $level = $this->request->User->level;
+                if ($routeArray["protected"]) {
+                    if (!$this->request->User->isAuthenticated) {
+                        return false;
+                    }
+
+                    // If the user is logged in, and the level is 0 (accessible to all when logged in).
+                    if (in_array(0, $routeArray["level"])) {
+                        if ($this->request->User->isAuthenticated) {
+                            return true;
+                        }
+                    }
+
+                    if (in_array($level, $routeArray["level"])) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return true;
+                }
+
+            } else {
+                return false;
+            }
+        }
+
+    }
 }
