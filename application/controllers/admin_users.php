@@ -6,7 +6,7 @@
  * Time: 15:07
  */
 
-class admin extends EmmaController
+class admin_users extends EmmaController
 {
     protected $ReturnData;
 
@@ -29,7 +29,7 @@ class admin extends EmmaController
     {
         $this->ReturnData = $this->adminData();
         Loader::view("templates/admin_header.php");
-        Loader::view("admin/" . $page . ".php");
+        Loader::view("users/" . $page . ".php");
         Loader::view("templates/admin_footer.php");
     }
 }

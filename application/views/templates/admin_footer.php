@@ -1,3 +1,6 @@
+</div>
+</div>
+
 <!-- FOOTER -->
 <footer class="py-5 bg-dark mt-3">
     <div class="container">

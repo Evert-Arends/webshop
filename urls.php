@@ -23,6 +23,9 @@ $routes = array(
     "cart1" => "cart",
     "login" => "login",
     "admin" => "admin",
+    "users" => "admin_users",
+    "products" => "admin_products",
+    "categories" => "admin_categories",
 );
 
 $allowed_requests = array(
