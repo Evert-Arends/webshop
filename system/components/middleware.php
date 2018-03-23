@@ -24,8 +24,7 @@ class Middleware extends EmmaModel
     {
         $this->request = $request;
 
-        if(AUTH)
-        {
+        if (AUTH) {
             $this->setUser();
         }
         $this->setRequestParameters();

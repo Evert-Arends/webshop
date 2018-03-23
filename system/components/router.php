@@ -103,6 +103,24 @@ class Router extends Middleware
         }
     }
 
+    private function getControllerFromRoute($routeName)
+    {
+        $route = $this->getRouteObjectByName($routeName);
+        return $route["controller"];
+
+    }
+
+    private function getRouteObjectByName($routeName)
+    {
+        if (isset($routeName)) {
+            $route = ROUTES[$routeName];
+        } else {
+            $route = ROUTES[DEFAULT_CONTROLLER];
+        }
+
+        return $route;
+    }
+
     private function checkIfControllerExists($controller)
     {
         if (!file_exists("application/controllers/" . $controller . ".php")) {
