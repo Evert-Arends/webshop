@@ -58,7 +58,7 @@
                         <div class="card-body-icon">
                             <i class="fa fa-fw fa-user"></i>
                         </div>
-                        <div class="mr-5">username</div>
+                        <div class="mr-5"><?= $this->user->first_name . " " . $this->user->last_name ?></div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="/webshop/logout">
                         <span class="float-left">Uitloggen</span>

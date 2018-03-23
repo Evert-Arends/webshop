@@ -8,7 +8,7 @@
 
 class admin extends EmmaController
 {
-    protected $ReturnData;
+    protected $user;
 
     public function init()
     {
@@ -17,17 +17,21 @@ class admin extends EmmaController
 
     public function index()
     {
+        $this->adminData();
         $this->page();
+    }
+
+    private function getUser(){
+        return $this->request->User;
     }
 
     public function adminData()
     {
-        //required data
+        $this->user = $this->getUser();
     }
 
     public function page($page = "index")
     {
-        $this->ReturnData = $this->adminData();
         Loader::view("templates/admin_header.php");
         Loader::view("admin/" . $page . ".php");
         Loader::view("templates/admin_footer.php");
