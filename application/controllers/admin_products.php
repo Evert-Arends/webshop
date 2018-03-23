@@ -8,26 +8,34 @@
 
 class admin_products extends EmmaController
 {
-    protected $ReturnData;
+    protected $Products;
 
     public function init()
     {
-        // init required classes
+        require_once('./controllers/products/getProducts.php');
     }
 
     public function index()
     {
+        $this->adminData();
         $this->page();
     }
 
-    public function adminData()
+    public function productData()
     {
-        //required data
+        $product = new getProducts();
+        $product->init();
+
+        return $product->allProductsNotLimited();
+    }
+
+    private function adminData()
+    {
+        $this->Products = $this->productData();
     }
 
     public function page($page = "index")
     {
-        $this->ReturnData = $this->adminData();
         Loader::view("templates/admin_header.php");
         Loader::view("products/" . $page . ".php");
         Loader::view("templates/admin_footer.php");

@@ -25,13 +25,13 @@ class ProductModel extends EmmaModel
      */
     public function __construct()
     {
-        EmmaModel::__construct();
+        parent::__construct();
         $this->objectChecker = new ObjectChecker();
     }
 
     public function init()
     {
-        $this->CategoryModel = Loader::model("CategoryModel");
+        Loader::model("CategoryModel");
     }
 
     /**
@@ -238,7 +238,7 @@ class ProductModel extends EmmaModel
      */
     private function buildCategoryTree($category_id)
     {
-        $categoryModel = clone($this->CategoryModel);
+        $categoryModel = new CategoryModel;
         $categoryTable = new CategoriesTable();
         $category = $categoryTable->find("id", $category_id);
 
@@ -246,7 +246,6 @@ class ProductModel extends EmmaModel
             return false;
         }
 
-        $categoryModel->setRecursiveLinking(false, true);
         $categoryModel->setId($category_id);
         $categoryModel->setName($category->Objects->name);
         $categoryModel->setDescription($category->Objects->description);
