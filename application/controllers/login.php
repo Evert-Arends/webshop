@@ -13,41 +13,45 @@ class login extends EmmaController
     public function init()
     {
         Loader::model("UserModel");
-        $this->userLogin();
     }
 
     public function index()
     {
-        $this->page();
+        $this->userLogin();
     }
 
     private function userLogin()
     {
         $request = $this->request;
-        if (isset($request->get["login"])) {
-            $username = $request->get["email"];
+        if (isset($request->post["login"])) {
+            if(isset($request->post["email"])) {
+                $username = $request->post["email"];
+            } else {
+                return $this->msg("Please provide an email");
+            }
+
+            if (isset($request->post["password"])) {
+                $password = $request->post["password"];
+            } else {
+                return $this->msg("Please provide a password");
+            }
 
             $userToCheckWith = new UserModel();
             $userToCheckWith->getUser($username);
 
-            var_dump($userToCheckWith->getHashedPassword());
-
-            $check = password_verify("admin", (string)$userToCheckWith->getHashedPassword());
+            $check = password_verify($password, (string)$userToCheckWith->getHashedPassword());
             if ($check) {
                 Session::set("id", $userToCheckWith->getId());
+                return $this->msg("ok");
+            } else {
+                return "Username and Password do not match";
             }
-            // redirect
-            $this->redirect("home");
-
         } else {
             // render view
+            return $this->msg("Form not posted.");
         }
     }
-
-    public function page($page = "login")
-    {
-        Loader::view("templates/header.php");
-        Loader::view("login/" . $page . ".php");
-        Loader::view("templates/footer.php");
+    private function msg($error) {
+        echo $error;
     }
 }

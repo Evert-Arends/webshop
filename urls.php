@@ -24,10 +24,16 @@
 
 
 $routes = array(
-    "home" =>
+    "" =>
         array(
             "controller" => "home",
             "protected" => true,
+            "level" => array(0)
+        ),
+    "home" =>
+        array(
+            "controller" => "home",
+            "protected" => false,
             "level" => array(0)
         ),
     "404" =>

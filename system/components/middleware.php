@@ -141,7 +141,7 @@ class Middleware extends EmmaModel
             $routeArray = $this->routes[$route];
 
             if (property_exists($this->request, "User")) {
-                if(!property_exists($this->request->User, "UserRole")) {
+                if (!property_exists($this->request->User, "UserRole")) {
                     $this->request->User->UserRole = new stdClass();
                 }
                 if (!property_exists($this->request->User->UserRole, "level")) {
