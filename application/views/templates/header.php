@@ -85,18 +85,23 @@
                 <button type="button" class="close" data-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
+                <div id="error" class="alert alert-danger" role="alert"></div>
                 <form id="login-form" name="login" class="form-signin" method="post">
                     <span id="reauth-email" class="reauth-email"></span>
-                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="E-mailadres" required
+                    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="E-mailadres"
+                           required
                            autofocus>
-                    <input type="password" id="password" class="form-control" name="password" placeholder="Wachtwoord" required>
-                    <input type="password" id="thingy" class="form-control" name="login" placeholder="Wachtwoord" hidden>
+                    <input type="password" id="password" class="form-control" name="password" placeholder="Wachtwoord"
+                           required>
+                    <input type="password" id="thingy" class="form-control" name="login" placeholder="Wachtwoord"
+                           hidden>
                     <div id="remember" class="checkbox">
                         <label>
                             <input type="checkbox" value="remember-me"> Onthouden
                         </label>
                     </div>
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" onclick="submitForm();" name="btn-login"
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="button"
+                            onclick="submitLoginForm();" name="btn-login"
                             id="btn-login">Inloggen
                     </button>
                 </form>
@@ -110,109 +115,102 @@
     </div>
 </div>
 
-<!-- REGISTERMODAL -->
-<!--<div id="myModal3" class="modal fade cuztomz" role="dialog" style="z-index: 9999">-->
-<!--    <div class="modal-dialog">-->
-<!---->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <h4 class="modal-title">Registreren</h4>-->
-<!--                <button type="button" class="close" data-dismiss="modal">X</button>-->
-<!--            </div>-->
-<!--            <div class="modal-body">-->
-<!---->
-<!--                <form id="sendMailForm" class="form-signin">-->
-<!--                    <span id="reauth-email" class="reauth-email"></span>-->
-<!--                    <input type="email" id="inputEmaild" class="form-control" placeholder="E-mailadres" required-->
-<!--                           autofocus>-->
-<!--                    <p>-->
-<!--                        Nadat u een e-mail adres heeft ingevuld wordt er een activatiecode naar dat adres gestuurd.-->
-<!--                    </p>-->
-<!---->
-<!--                    <button id="sendMail" class="btn btn-lg btn-primary btn-block btn-signin">Mail versturen</button>-->
-<!--                </form>-->
-<!---->
-<!--                <form id="authKeyForm" class="form-signin" style="display: none">-->
-<!--                    <input type="text" id="inputKey" class="form-control" placeholder="Authenticatiecode" required>-->
-<!--                    <p>-->
-<!--                        Vul hier de code in die u zojuist in de mail ontvangen heeft.-->
-<!--                    </p>-->
-<!---->
-<!--                    <button id="makeAuth" class="btn btn-lg btn-primary btn-block btn-signin">Doorgaan</button>-->
-<!--                </form>-->
-<!---->
-<!--                <form id="personalInformation" class="form" role="form" autocomplete="off" style="display: none">-->
-<!---->
-<!--                    <div class="form-group row">-->
-<!--                        <label class="col-md-12">Naam</label>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <input type="text" id="inputFirstName" class="form-control" placeholder="Voornaam" required-->
-<!--                                   autofocus>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-6">-->
-<!--                            <input type="text" id="inputLastName" class="form-control" placeholder="Achternaam" required-->
-<!--                                   autofocus>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="form-group row">-->
-<!--                        <label class="col-md-12">Afleveradres</label>-->
-<!--                        <div class="col-md-8">-->
-<!--                            <input type="text" id="inputStreet" class="form-control" placeholder="Straatnaam" required-->
-<!--                                   autofocus>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4">-->
-<!--                            <input type="text" id="inputHouseNumber" class="form-control" placeholder="Huisnummer"-->
-<!--                                   required autofocus>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="form-group row">-->
-<!--                        <div class="col-md-5">-->
-<!--                            <input type="text" id="inputPostalCode" class="form-control" placeholder="Postcode" required-->
-<!--                                   autofocus>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-7">-->
-<!--                            <input type="text" id="inputCityName" class="form-control" placeholder="Plaatsnaam" required-->
-<!--                                   autofocus>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="form-group">-->
-<!--                        <label>Telefoonnummer</label>-->
-<!--                        <input type="text" id="inputPhone" class="form-control" placeholder="Telefoon" required-->
-<!--                               autofocus>-->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="form-group">-->
-<!--                        <button id="RegisterUser" class="btn btn-lg btn-primary btn-block btn-signin">Registreren-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!---->
-<!--                <script type="text/javascript">-->
-<!--                    $('#sendMail').on('click', function (event) {-->
-<!--                        event.preventDefault();-->
-<!--                        $('#sendMailForm').hide();-->
-<!--                        $('#authKeyForm').show();-->
-<!--                    });-->
-<!---->
-<!--                    $('#makeAuth').on('click', function (event) {-->
-<!--                        event.preventDefault();-->
-<!--                        $('#authKeyForm').hide();-->
-<!--                        $('#personalInformation').show();-->
-<!--                    });-->
-<!---->
-<!--                    $('#RegisterUser').on('click', function (event) {-->
-<!--                        event.preventDefault();-->
-<!--                    });-->
-<!--                </script>-->
-<!---->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
-<!--</div>-->
+<!-- REGISTERMODAL-->
+<div id="myModal3" class="modal fade cuztomz" role="dialog" style="z-index: 9999" data-attr="<?php echo BASEPATH; ?>">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registreren</h4>
+                <button type="button" class="close" data-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                <div id="register-error" class="alert alert-danger" role="alert"></div>
+
+                <form id="register-form" class="form-signin" name="register" role="form" autocomplete="off">
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Naam</label>
+                        <div class="col-md-6">
+                            <input type="text" id="inputFirstName" name="inputFirstName" class="form-control"
+                                   placeholder="Voornaam" required
+                                   autofocus>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="inputLastName" name="inputLastName" class="form-control"
+                                   placeholder="Achternaam" required
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Afleveradres</label>
+                        <div class="col-md-5">
+                            <input type="text" id="inputStreet" name="inputStreet" class="form-control"
+                                   placeholder="Straatnaam" required
+                                   autofocus>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="inputHouseNumber" name="inputHouseNumber" class="form-control"
+                                   placeholder="Huisnummer"
+                                   required autofocus>
+                        </div>
+                        <div class="col-md-3">
+
+                            <input type="text" id="inputHouseAddition" name="inputHouseAddition"" class="form-control"
+                            placeholder="Toevgsl"
+                            required autofocus>
+                        </div>
+                        <div class="col-md-5">
+                            <input type="text" id="inputPostalCode" name="inputPostalCode" class="form-control"
+                                   placeholder="Postcode" required
+                                   autofocus>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" id="inputCityName" name="inputCityName" class="form-control"
+                                   placeholder="Plaatsnaam" required
+                                   autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefoonnummer</label>
+                        <input type="text" id="inputPhone" name="inputPhone" class="form-control" placeholder="Telefoon"
+                               required
+                               autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="E-mail" required
+                               autofocus>
+                        <label>Wachtwoord</label>
+                        <input type="password" id="password" class="form-control" name="password"
+                               placeholder="Wachtwoord"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" id="thingy" class="form-control" name="register" placeholder="Wachtwoord"
+                               hidden>
+                        <!--                        <button id="RegisterUser" class="btn btn-lg btn-primary btn-block btn-signin">Registreren-->
+                        <!--                        </button>-->
+                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="button" name="btn-register"
+                                id="btn-register"> Registreren
+                        </button>
+                    </div>
+                </form>
+
+                <script type="text/javascript">
+                    $('#btn-register').on('click', function (event) {
+                        submitRegisterForm();
+                    });
+                </script>
+
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" id="menu">

@@ -24,8 +24,8 @@ class login extends EmmaController
     {
         $request = $this->request;
         if (isset($request->post["login"])) {
-            if(isset($request->post["email"])) {
-                $username = $request->post["email"];
+            if (isset($request->post["email"])) {
+                $email = $request->post["email"];
             } else {
                 return $this->msg("Please provide an email");
             }
@@ -37,21 +37,23 @@ class login extends EmmaController
             }
 
             $userToCheckWith = new UserModel();
-            $userToCheckWith->getUser($username);
+            $userToCheckWith->getUser($email);
 
             $check = password_verify($password, (string)$userToCheckWith->getHashedPassword());
             if ($check) {
                 Session::set("id", $userToCheckWith->getId());
                 return $this->msg("ok");
             } else {
-                return "Username and Password do not match";
+                return $this->msg("Username and Password do not match");
             }
         } else {
             // render view
             return $this->msg("Form not posted.");
         }
     }
-    private function msg($error) {
+
+    private function msg($error)
+    {
         echo $error;
     }
 }

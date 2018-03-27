@@ -72,6 +72,12 @@ $routes = array(
             "protected" => false,
             "level" => array(0)
         ),
+    "register" =>
+        array(
+            "controller" => "register",
+            "protected" => false,
+            "level" => array(0)
+        ),
     "admin" =>
         array(
             "controller" => "admin",
