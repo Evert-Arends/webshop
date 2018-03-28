@@ -4,13 +4,9 @@ $('document').ready(function () {
 });
 
 function submitRegisterForm() {
-    console.log("REGISTER!");
-
     let data = $("#register-form").serialize();
 
     let dataUrl = $("#myModal3").attr("data-attr");
-
-    console.log(dataUrl);
     $.ajax({
         type: 'POST',
         url: dataUrl + 'register/',

@@ -155,6 +155,10 @@ abstract class EmmaTable implements ITable
 
             $stmt = $this->db->connection->prepare($query);
 
+            if (PRINT_INSERT_QUERY) {
+                $stmt->debugDumpParams();
+            }
+
             $stmt->execute($valuesArray);
 
             $error = $this->db->connection->errorInfo();

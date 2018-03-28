@@ -37,8 +37,10 @@ class register extends EmmaController
             $userRole = new UserRole();
             $userAuth = new AuthModel();
 
-            $check = $newUser->getUser($form["email"]);
-            if ($check != false) {
+            $check = $newUser->checkIfUserExists($form["email"]);
+
+
+            if ($check) {
                 return $this->msg(json_encode(array("Er is al een gebruiker met dit E-mail adres.")));
             }
 
@@ -47,6 +49,7 @@ class register extends EmmaController
             $newUser->setFirstName($form["inputFirstName"]);
             $newUser->setLastName($form["inputLastName"]);
             $newUser->setEmail($form["email"]);
+            $newUser->setPhoneNumber($form["inputPhone"]);
             $newUser->setDateRegistered(date('Y-m-d H:i:s'));
             $newUser->setDateOfBirth(date('Y-m-d H:i:s'));
 
