@@ -24,7 +24,7 @@
                                 <th>Naam</th>
                                 <th>Prijs(Ex btw)</th>
                                 <th>Categorie</th>
-                                <th>Bewerken</th>
+                                <th>Korting</th>
                                 <th>Verwijderen</th>
                             </tr>
                             </thead>
@@ -33,7 +33,7 @@
                                 <th>Naam</th>
                                 <th>Prijs(Ex btw)</th>
                                 <th>Categorie</th>
-                                <th>Bewerken</th>
+                                <th>Korting</th>
                                 <th>Verwijderen</th>
                             </tr>
                             </tfoot>
@@ -47,8 +47,26 @@
                                         <td><?= $product->getPrice(); ?></td>
                                         <?php $cat = $product->getCategory(); ?>
                                         <td><?= $cat->getName(); ?></td>
-                                        <td><?= $product->getName(); ?></td>
-                                        <td><?= $product->getName(); ?></td>
+                                        <?php
+                                        if ($product->getDiscount()) {
+                                            ?>
+                                            <td><?= $product->getDiscount(); ?></td>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <td>-</td>
+                                            <?php
+                                        }
+                                        ?>
+                                        <td>
+                                            <a href="/webshop/edit_product/?id=<?= $product->getId(); ?>"
+                                               class="btn btn-warning btn-sm" role="button">Bewerken</a>
+                                            <button type="button" class="deleteModelOpener btn btn-danger btn-sm"
+                                                    data-toggle="modal" data-target="#deleteModal"
+                                                    data-id="<?= $product->getId(); ?>">
+                                                Verwijderen
+                                            </button>
+                                        </td>
                                     </tr>
                                     <?php
                                 }
@@ -62,3 +80,36 @@
         </div>
     </div>
 </main>
+
+<script>
+    $(document).on("click", ".deleteModelOpener", function () {
+        var productId = $(this).data('id');
+        $(".modal-footer #productId").val(productId);
+    });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Product verwijderen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Weet u zeker dat u dit product wilt verwijderen?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Annuleren</button>
+                <form id="deleteProduct" name="deleteProduct" method="POST" action="/webshop/delete_product/">
+                    <input type="hidden" name="productId" id="productId" value=""/>
+                    <button type="submit" id="deleteProductBtn" name="deleteProductBtn" class="btn btn-danger">
+                        Verwijderen
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -108,6 +108,12 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
+    "delete_product" =>
+        array(
+            "controller" => "delete_product",
+            "protected" => true,
+            "level" => array(1)
+        ),
     "logout" =>
         array("controller" => "logout",
             "protected" => false,
