@@ -15,6 +15,7 @@ class register extends EmmaController
         Loader::model("UserModel");
         Loader::model("UserRole");
         Loader::model("AuthModel");
+        Loader::model("AddressModel");
     }
 
     public function index()
@@ -36,6 +37,7 @@ class register extends EmmaController
             $newUser = new UserModel();
             $userRole = new UserRole();
             $userAuth = new AuthModel();
+            $addressModel = new AddressModel();
 
             $check = $newUser->checkIfUserExists($form["email"]);
 
@@ -53,12 +55,20 @@ class register extends EmmaController
             $newUser->setDateRegistered(date('Y-m-d H:i:s'));
             $newUser->setDateOfBirth(date('Y-m-d H:i:s'));
 
-            $userId = $newUser->create(true);
 
+            $userId = $newUser->create(true);
             if (!$userId) {
                 return $this->msg(json_encode(array("Er ging iets fout met het opslaan van de gegevens1.")));
 
             }
+
+            $addressModel->setUserId($userId);
+            $addressModel->setPostcode($form["inputPostalCode"]);
+            $addressModel->setStreet($form["inputStreet"]);
+            $addressModel->setAddition($form["inputHouseAddition"]);
+            $addressModel->setHouseNumber($form["inputHouseNumber"]);
+
+            $addressModel->create(true);
 
             $userAuth->setLastLogin(date('Y-m-d H:i:s'));
             $userAuth->setIpAddress("127.0.0.1");
@@ -90,7 +100,7 @@ class register extends EmmaController
             "inputStreet",
             "inputHouseNumber",
             "inputPostalCode",
-            "inputPostalCode",
+            "inputHouseAddition",
             "inputCityName",
             "inputPhone",
             "inputLastName"
