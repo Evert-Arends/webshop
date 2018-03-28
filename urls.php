@@ -102,6 +102,12 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
+    "edit_product" =>
+        array(
+            "controller" => "admin_edit_product",
+            "protected" => true,
+            "level" => array(1)
+        ),
     "logout" =>
         array("controller" => "logout",
             "protected" => false,
