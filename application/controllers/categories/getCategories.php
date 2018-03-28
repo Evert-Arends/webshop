@@ -43,6 +43,24 @@ class getCategories extends EmmaModel
         return false;
     }
 
+    private function getAllCategories()
+    {
+        $sql = "SELECT * FROM categories";
+        $result = $this->fetchAll($sql);
+
+        return $result;
+    }
+
+    public function allCategories()
+    {
+        $allIDS = $this->getAllCategories();
+
+        if (!$allIDS) {
+            return "No categories found";
+        }
+        return $this->createModels($allIDS);
+    }
+
     private function createModels($IDS)
     {
         $categories = array();

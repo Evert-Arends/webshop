@@ -10,6 +10,7 @@ class admin_products extends EmmaController
 {
     protected $Products;
 
+
     public function init()
     {
         require_once('./controllers/products/getProducts.php');

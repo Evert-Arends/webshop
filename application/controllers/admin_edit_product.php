@@ -2,23 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: ardjan
- * Date: 10-2-18
- * Time: 10:51
+ * Date: 27-3-18
+ * Time: 21:48
  */
 
-class product extends EmmaController
+class admin_edit_product extends EmmaController
 {
     protected $product;
+    protected $allCategories;
 
     public function init()
     {
-        // current directory
+        Loader::model("CategoryModel");
+
+        require_once('./controllers/categories/getCategories.php');
         require_once('./controllers/products/getProducts.php');
     }
 
     public function index()
     {
-        $this->loadTemplateData();
+        $this->adminData();
         $this->page();
     }
 
@@ -39,8 +42,17 @@ class product extends EmmaController
         return $product->getProductOnId($productId);
     }
 
-    private function loadTemplateData()
+    private function getAllCategories(){
+        $categories = new getCategories();
+        $categories->init();
+        return $categories->allCategories();
+    }
+
+
+    private function adminData()
     {
+        $this->allCategories = $this->getAllCategories();
+
         if ($this->getProductId()) {
             $this->product = $this->getProduct($this->getProductId());
         } else {
@@ -50,8 +62,8 @@ class product extends EmmaController
 
     public function page($page = "index")
     {
-        Loader::view("templates/header.php");
-        Loader::view("product/" . $page . ".php");
-        Loader::view("templates/footer.php");
+        Loader::view("templates/admin_header.php");
+        Loader::view("edit_product/" . $page . ".php");
+        Loader::view("templates/admin_footer.php");
     }
 }
