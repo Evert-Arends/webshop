@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <style>
-                        .no-border{
+                        .no-border {
                             border: none !important;
                             margin: 0 !important;
                             padding: 1px 7px !important;
@@ -37,6 +37,7 @@
                             echo "</ul>";
                         }
                     }
+
                     ?>
                 </div>
             </div>
@@ -56,6 +57,7 @@
         <!-- PRODUCTEN -->
         <div class="row" style="margin-top: 1rem">
             <?php
+            if (isset($this->Products)) {
             foreach ($this->Products as $product) {
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
@@ -73,7 +75,8 @@
                             ?>
                             <a href="/webshop/product/?id=<?= $product->getID(); ?>"
                                style="height: 200px; overflow: hidden;">
-                                <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png" alt="">
+                                <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
+                                     alt="">
                             </a>
                             <?php
                         }
@@ -82,7 +85,8 @@
                         <?php
                         if ($product->getDiscount()) {
                             ?>
-                            <h1><span class="badge badge-danger deal-badge"><?= $product->getDiscount() ?>%</span></h1>
+                            <h1><span class="badge badge-danger deal-badge"><?= $product->getDiscount() ?>%</span>
+                            </h1>
                             <?php
                         }
                         ?>
@@ -173,6 +177,11 @@
                 ?>
             </ul>
         </nav>
+        <?php
+        } else {
+            echo "<div class='alert alert-danger col-md-6' style='margin-left: 15px;'>Geen producten gevonden.</div>";
+        }
+        ?>
     </div>
 
 

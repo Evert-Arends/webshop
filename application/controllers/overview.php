@@ -57,7 +57,14 @@ class overview extends EmmaController
         $calc = $per_page * $page;
         $start = $calc - $per_page;
 
-        return $product->allProducts($start, $per_page);
+        if (isset($this->request->get["cat"])) {
+            $category = $this->request->get["cat"];
+            $products = $product->allProductsInCategory($category, $start, $per_page);
+        } else {
+            $products = $product->allProducts($start, $per_page);
+        }
+
+        return $products;
     }
 
     public function countProducts()
@@ -65,7 +72,14 @@ class overview extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        return $product->countProducts();
+        if (isset($this->request->get["cat"])) {
+            $category = $this->request->get["cat"];
+            $count = $product->countProductsInCategory($category);
+        } else {
+            $count = $product->countProducts();
+        }
+
+        return $count;
     }
 
     private function loadTemplateData()

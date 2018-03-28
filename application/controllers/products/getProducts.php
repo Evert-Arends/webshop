@@ -28,6 +28,14 @@ class getProducts extends EmmaModel
         return $result;
     }
 
+    public function countProductsInCategory($category)
+    {
+        $sql = "SELECT COUNT(*) AS Total FROM `products` WHERE categories_id = ?";
+        $result = $this->fetch($sql, array((int)$category));
+
+        return $result;
+    }
+
     private function getProducts()
     {
         $sql = "SELECT * FROM `products`";
@@ -41,7 +49,7 @@ class getProducts extends EmmaModel
         $allIDS = $this->getProducts();
 
         if (!$allIDS) {
-            return "No products found";
+            return NULL;
         }
         return $this->createModels($allIDS);
     }
@@ -59,7 +67,25 @@ class getProducts extends EmmaModel
         $allIDS = $this->getAllProducts($start, $perpage);
 
         if (!$allIDS) {
-            return "No products found";
+            return NULL;
+        }
+        return $this->createModels($allIDS);
+    }
+
+    private function getAllProductsInCategory($category, $start, $perpage)
+    {
+        $sql = "SELECT * FROM `products` WHERE categories_id = ? LIMIT ?, ?";
+        $result = $this->fetchAll($sql, array((int)$category, (int)$start, (int)$perpage));
+
+        return $result;
+    }
+
+    public function allProductsInCategory($category, $start, $perpage)
+    {
+        $allIDS = $this->getAllProductsInCategory($category, $start, $perpage);
+
+        if (!$allIDS) {
+            return NULL;
         }
         return $this->createModels($allIDS);
     }
@@ -77,7 +103,7 @@ class getProducts extends EmmaModel
         $allIDS = $this->getDiscountProducts();
 
         if (!$allIDS) {
-            return "No discount products found";
+            return NULL;
         }
         return $this->createModels($allIDS);
     }
@@ -95,7 +121,7 @@ class getProducts extends EmmaModel
         $allIDS = $this->getRandomProducts();
 
         if (!$allIDS) {
-            return "No random products found";
+            return NULL;
         }
         return $this->createModels($allIDS);
     }
