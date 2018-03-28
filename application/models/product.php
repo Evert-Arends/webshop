@@ -290,16 +290,17 @@ class ProductModel extends EmmaModel
     private function buildCategoryTree($category_id)
     {
         $categoryModel = new CategoryModel;
-        $categoryTable = new CategoriesTable();
-        $category = $categoryTable->find("id", $category_id);
+//        $category = $categoryTable->find("id", $category_id);
+        $sql = "SELECT * FROM categories WHERE id= ?";
+        $category = $this->fetch($sql, array($category_id));
 
         if (!$category) {
             return false;
         }
 
         $categoryModel->setId($category_id);
-        $categoryModel->setName($category->Objects->name);
-        $categoryModel->setDescription($category->Objects->description);
+        $categoryModel->setName($category->name);
+        $categoryModel->setDescription($category->description);
 
         $this->setCategory($categoryModel);
 
