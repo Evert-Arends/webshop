@@ -8,42 +8,7 @@
 ?>
 
 <div class="row">
-
-    <!-- SIDEBAR -->
-    <div class="col-lg-3 col-md-3 sidebar" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
-        <h3 class="partial-title" style="">Categorieen</h3>
-        <div class="custom-margin">
-            <div class="card">
-                <div class="card-body">
-                    <style>
-                        .no-border {
-                            border: none !important;
-                            margin: 0 !important;
-                            padding: 1px 7px !important;
-                        }
-                    </style>
-                    <?php
-                    loopCategories($this->AllRootCategories);
-                    function loopCategories($categories)
-                    {
-                        foreach ($categories as $cat) {
-                            echo "<ul class='list-group list-group-flush no-border'>";
-                            echo "<li class='list-group-item no-border'><a href='/webshop/overview/?cat=" . $cat->getId() . "'>" . $cat->getId() . " - " . $cat->getName() . "</a></li>";
-                            if ($cat->getChildren()) {
-                                echo "<li class='list-group-item no-border'>";
-                                loopCategories($cat->getChildren());
-                                echo "</li>";
-                            }
-                            echo "</ul>";
-                        }
-                    }
-
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <?php $this->loadSnippet("sidebar"); ?>
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">
 
@@ -131,6 +96,15 @@
             <ul class="pagination justify-content-center">
                 <?php
 
+                function checkUrlParameter($parameter)
+                {
+                    if (isset($_GET[$parameter])) {
+                        return "&" . $parameter . "=" . $_GET[$parameter];
+                    } else {
+                        return "";
+                    }
+                }
+
                 $page = $this->pageNumber;
 
                 if (isset($page)) {
@@ -139,11 +113,8 @@
                     $perpage = 16;
                     $totalPages = ceil($total / $perpage);
 
-                    if (isset($_GET['cat'])) {
-                        $cat = "&cat=" . $_GET['cat'];
-                    } else {
-                        $cat = "";
-                    }
+                    $cat = checkUrlParameter("cat");
+                    $search = checkUrlParameter("q");
 
                     if ($page <= 1) {
 
@@ -151,13 +122,13 @@
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     } else {
                         $j = $page - 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=1$cat' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=1$cat$search' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat$search' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     }
 
                     for ($i = 1; $i <= $totalPages; $i++) {
                         if ($i <> $page) {
-                            echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$i$cat'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$i$cat$search'>$i</a></li>";
                         } else {
                             echo "<li class='page-item'><a class='page-link'>$i</a></li>";
                         }
@@ -168,8 +139,8 @@
                         echo "<li class='page-item disabled'><a class='page-link'><i class='fas fa-angle-double-right'></i></a></li>";
                     } else {
                         $j = $page + 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat'><i class='fas fa-angle-right'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$totalPages$cat'><i class='fas fa-angle-double-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat$search'><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$totalPages$cat$search'><i class='fas fa-angle-double-right'></i></a></li>";
                     }
 
 

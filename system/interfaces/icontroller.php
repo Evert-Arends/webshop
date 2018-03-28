@@ -77,5 +77,12 @@ interface IController
      * Instructs the Loader to load the designated 404 page.
      */
     function fourOhFour ();
-    
+
+    /**
+     * Instructs the loader to include a small piece of a template.
+     * @param $name
+     * @param $location
+     * @return mixed
+     */
+    static function setSnippet ($name, $location);
 }

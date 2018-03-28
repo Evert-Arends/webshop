@@ -111,7 +111,7 @@ class Loader implements ISystemComponent
         //Find, include and make the model ready
         $modelFileName = str_replace("Model", "", $paramModel);
         $modelName = ucfirst($paramModel);
-        if(!$path) {
+        if (!$path) {
             require_once("models/" . strtolower($modelFileName) . ".php");
         } else {
             require_once($path);
@@ -157,6 +157,12 @@ class Loader implements ISystemComponent
 
         }
 
+    }
+
+    public static function setSnippet($snipName, $snipLocation)
+    {
+        $snipLocation = $snipLocation . ".php";
+        EmmaController::$instance->setSnippet($snipName, $snipLocation);
     }
 
     /**
