@@ -22,11 +22,12 @@ class AuthModel extends EmmaModel
         return $ref =& $this;
     }
 
-    public function fillModel($user_id) {
+    public function fillModel($user_id)
+    {
         $authTable = new AuthTable();
         $auth = $authTable->find("users_id", $user_id);
 
-        if(!$auth) {
+        if (!$auth) {
             return false;
         }
 
@@ -103,5 +104,27 @@ class AuthModel extends EmmaModel
         $this->userId = $userId;
     }
 
+    public function create($commit)
+    {
+        $authTable = new AuthTable();
+
+        $values = array(
+            "hashed_password" => $this->getHashedPassword(),
+            "password_hash" => "lol",
+            "last_login" => $this->getLastLogin(),
+            "users_id" => $this->getUserId(),
+            "ip_address" => "127.0.0.1",
+        );
+        if ($commit) {
+            $id = $authTable->insert(
+                $values
+            );
+
+            $this->setUserId($id);
+
+            return $id;
+        }
+
+    }
 
 }

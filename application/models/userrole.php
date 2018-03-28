@@ -101,4 +101,23 @@ class UserRole extends EmmaModel
     {
         $this->image = $image;
     }
+
+    /**
+     * @param $commit
+     * NOT READY YET
+     */
+    public function save($commit) {
+        $roleTable = new RolesTable();
+        $roleTable->Objects->name = $this->getName();
+        $roleTable->Objects->level = $this->getLevel();
+        $roleTable->Objects->description = $this->getDescription();
+        $roleTable->Objects->image = $this->getImage();
+
+        if($commit) {
+            $roleTable->save();
+        }
+
+
+    }
+
 }

@@ -62,7 +62,6 @@ class UserModel extends EmmaModel
         // Set auth model
         $this->auth = $this->AuthModel->fillModel($this->getId());
         if (!$this->auth) {
-            trigger_error("No auth details available.");
             return false;
         }
 
@@ -244,5 +243,39 @@ class UserModel extends EmmaModel
     public function setAuth($auth)
     {
         $this->auth = $auth;
+    }
+
+    /**
+     * @param $commit
+     * This is NOT an update, only an insert!
+     * @return int
+     */
+    public function create($commit)
+    {
+        $newUser = new UsersTable();
+        $values = array(
+            "email" => $this->getEmail(),
+            "first_name" => $this->getFirstName(),
+            "last_name" => $this->getLastName(),
+            "roles_name" => $this->getRole()->getName(),
+            "date_of_birth" => date('Y-m-d H:i:s'),
+            "date_registered" => date('Y-m-d H:i:s'),
+        );
+
+        if ($commit) {
+            $id = $newUser->insert(
+                $values
+            );
+
+            $this->setId($id);
+
+            return $id;
+        }
+    }
+
+
+    public function getLastUserID()
+    {
+        $tempUser = $this->fetch("id");
     }
 }

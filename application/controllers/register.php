@@ -14,7 +14,7 @@ class register extends EmmaController
     {
         Loader::model("UserModel");
         Loader::model("UserRole");
-        Loader::model("UserModel");
+        Loader::model("AuthModel");
     }
 
     public function index()
@@ -31,23 +31,49 @@ class register extends EmmaController
 
             if (!empty($validate)) {
                 return $this->msg(json_encode($validate));
-            } else {
-                return $this->msg(json_encode("Gelukt!"));
             }
 
             $newUser = new UserModel();
-            $newUser->getUser($email);
+            $userRole = new UserRole();
+            $userAuth = new AuthModel();
 
-            $check = password_verify($password, (string)$newUser->getHashedPassword());
-            if ($check) {
-                Session::set("id", $newUser->getId());
+            $check = $newUser->getUser($form["email"]);
+            if ($check != false) {
+                return $this->msg(json_encode(array("Er is al een gebruiker met dit E-mail adres.")));
+            }
+
+            $role = $userRole->getRole("Customer");
+            $newUser->setRole($role);
+            $newUser->setFirstName($form["inputFirstName"]);
+            $newUser->setLastName($form["inputLastName"]);
+            $newUser->setEmail($form["email"]);
+            $newUser->setDateRegistered(date('Y-m-d H:i:s'));
+            $newUser->setDateOfBirth(date('Y-m-d H:i:s'));
+
+            $userId = $newUser->create(true);
+
+            if (!$userId) {
+                return $this->msg(json_encode(array("Er ging iets fout met het opslaan van de gegevens1.")));
+
+            }
+
+            $userAuth->setLastLogin(date('Y-m-d H:i:s'));
+            $userAuth->setIpAddress("127.0.0.1");
+            $userAuth->setHashedPassword(password_hash($form["password"], PASSWORD_DEFAULT));
+            $userAuth->setUserId($userId);
+            $newUser->setAuth($userAuth);
+
+            $authId = $userAuth->create(true);
+
+
+            if ($authId == 0) {
                 return $this->msg("ok");
             } else {
-                return $this->msg("Username and Password do not match");
+                return $this->msg(json_encode(array("Er ging iets fout met het opslaan van de gegevens.")));
             }
         } else {
             // render view
-            return $this->msg("Form not posted.");
+            return $this->msg(json_encode(array("Form not posted.")));
         }
     }
 
