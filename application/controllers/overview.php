@@ -14,9 +14,16 @@ class overview extends EmmaController
 
     public function init()
     {
-        // current directory
+        // Load models
+        Loader::model("CategoryModel");
+        Loader::setSnippet("sidebar", "templates/sidebar");
+        // Load specific external helpers
         require_once('./controllers/products/getProducts.php');
+        require_once('./controllers/categories/getCategories.php');
+
+
     }
+
 
     public function index()
     {
@@ -24,13 +31,21 @@ class overview extends EmmaController
         $this->page();
     }
 
-    public function getPageNumber() {
+    public function getPageNumber()
+    {
         if (isset($this->request->get["page"])) {
             $page = $this->request->get["page"];
         } else {
             $page = 1;
         }
         return $page;
+    }
+
+    private function getRootCategories()
+    {
+        $categories = new getCategories();
+        $categories->init();
+        return $categories->allRootCategories();
     }
 
     public function productData()
@@ -45,7 +60,14 @@ class overview extends EmmaController
         $calc = $per_page * $page;
         $start = $calc - $per_page;
 
-        return $product->allProducts($start, $per_page);
+        if (isset($this->request->get["cat"])) {
+            $category = $this->request->get["cat"];
+            $products = $product->allProductsInCategory($category, $start, $per_page);
+        } else {
+            $products = $product->allProducts($start, $per_page);
+        }
+
+        return $products;
     }
 
     public function countProducts()
@@ -53,7 +75,14 @@ class overview extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        return $product->countProducts();
+        if (isset($this->request->get["cat"])) {
+            $category = $this->request->get["cat"];
+            $count = $product->countProductsInCategory($category);
+        } else {
+            $count = $product->countProducts();
+        }
+
+        return $count;
     }
 
     private function loadTemplateData()
@@ -61,6 +90,7 @@ class overview extends EmmaController
         $this->pageNumber = $this->getPageNumber();
         $this->Products = $this->productData();
         $this->productCount = $this->countProducts();
+        $this->AllRootCategories = $this->getRootCategories();
     }
 
     public function page($page = "index")

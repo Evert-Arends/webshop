@@ -16,6 +16,7 @@ abstract class EmmaController implements IController
     protected $method;
     protected $arg;
     protected $request;
+    protected $requires = array();
 
     /**
      * @see IController::constructor()
@@ -51,6 +52,31 @@ abstract class EmmaController implements IController
 
         AutoLoader::getInstance();
 
+    }
+
+    /**
+     * loads TemplateSnippet
+     * @param $name
+     * @param bool $suppress
+     * @return iTemplate|string
+     */
+    public function loadSnippet($name, $suppress = false)
+    {
+        $file = "views/" . $this->requires[$name];
+
+        if ($file && file_exists($file)) {
+            return include($file);
+        }
+
+        if (!$suppress) {
+            return "404! Template " . $name . " is not specified on init, or might not exist.";
+        }
+        return "";
+    }
+
+    private function doSetTemplateSnippets($name, $location)
+    {
+        $this->requires[$name] = $location;
     }
 
     /**
@@ -103,6 +129,16 @@ abstract class EmmaController implements IController
 
         self::$instance->doInitView($paramView);
 
+    }
+
+    /**
+     * @see IController::setSnippet()
+     * @param $name
+     * @param $location
+     */
+    static function setSnippet($name, $location)
+    {
+        self::$instance->doSetTemplateSnippets($name, $location);
     }
 
     /**
