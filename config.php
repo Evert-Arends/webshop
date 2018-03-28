@@ -31,6 +31,7 @@ define("DB_PASSWORD", "!webshop!");
 // If you create tables with lowercase and underscores, set this to true.
 define("DB_TABLES_LOWERCASE", true);
 
+define("PRINT_INSERT_QUERY", false);
 /****************************************************
  *                    Autoloader                    *
  ****************************************************/

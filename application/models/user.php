@@ -20,6 +20,7 @@ class UserModel extends EmmaModel
     private $dateOfBirth;
     private $dateRegistered;
     private $userRole;
+    private $phoneNumber;
     private $auth;
 
     // Models
@@ -260,6 +261,7 @@ class UserModel extends EmmaModel
             "roles_name" => $this->getRole()->getName(),
             "date_of_birth" => date('Y-m-d H:i:s'),
             "date_registered" => date('Y-m-d H:i:s'),
+            "phone_number" => $this->getPhoneNumber(),
         );
 
         if ($commit) {
@@ -274,8 +276,29 @@ class UserModel extends EmmaModel
     }
 
 
-    public function getLastUserID()
+    public function checkIfUserExists($email)
     {
-        $tempUser = $this->fetch("id");
+        $tempUser = new UsersTable();
+        if($tempUser->find("email", $email)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param mixed $phoneNumber
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
     }
 }
