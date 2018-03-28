@@ -11,6 +11,7 @@ class overview extends EmmaController
     protected $Products;
     protected $productCount;
     protected $pageNumber;
+    protected $AllRootCategories;
 
     public function init()
     {
@@ -60,10 +61,17 @@ class overview extends EmmaController
         $calc = $per_page * $page;
         $start = $calc - $per_page;
 
-        if (isset($this->request->get["cat"])) {
+        if (isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
+            $category = $this->request->get["cat"];
+            $searchFor = $this->request->get["q"];
+            $products = $product->allProductsInCategoryOnSearch($category, $searchFor, $start, $per_page);
+        } elseif (isset($this->request->get["cat"]) && !isset($this->request->get["q"])) {
             $category = $this->request->get["cat"];
             $products = $product->allProductsInCategory($category, $start, $per_page);
-        } else {
+        }  elseif (!isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
+            $searchFor = $this->request->get["q"];
+            $products = $product->allProductsOnSearch($searchFor, $start, $per_page);
+        }else {
             $products = $product->allProducts($start, $per_page);
         }
 
@@ -75,14 +83,30 @@ class overview extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        if (isset($this->request->get["cat"])) {
+        if (isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
+            $category = $this->request->get["cat"];
+            $searchFor = $this->request->get["q"];
+            $count = $product->countProductsInCategoryOnSearch($category, $searchFor);
+        } elseif (isset($this->request->get["cat"]) && !isset($this->request->get["q"])) {
             $category = $this->request->get["cat"];
             $count = $product->countProductsInCategory($category);
+        } elseif (!isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
+            $searchFor = $this->request->get["q"];
+            $count = $product->countProductsOnSearch($searchFor);
         } else {
             $count = $product->countProducts();
         }
 
         return $count;
+    }
+
+    public function checkUrlParameter($parameter)
+    {
+        if (isset($this->request->get[$parameter])) {
+            return "&" . $parameter . "=" . $_GET[$parameter];
+        } else {
+            return "";
+        }
     }
 
     private function loadTemplateData()
