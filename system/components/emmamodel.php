@@ -57,6 +57,9 @@ abstract class EmmaModel implements IModel
             $stmt = $this->db->connection->prepare($query);
             $stmt->execute($params);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (PRINT_SELECT_QUERY) {
+                $stmt->debugDumpParams();
+            }
             $stmt->closeCursor();
 
             $error = $this->db->connection->errorInfo();
@@ -64,6 +67,7 @@ abstract class EmmaModel implements IModel
             if (DEBUG_MODE)
                 if ($error[0] != "00000")
                     die (print_r($this->db->connection->errorInfo()));
+
 
             //Send single data object
             return $result

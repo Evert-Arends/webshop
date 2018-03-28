@@ -22,18 +22,54 @@ class getProducts extends EmmaModel
 
     public function countProducts()
     {
-        $sql = "SELECT COUNT(*) AS Total FROM `products`";
-        $result = $this->fetch($sql);
+        $sql = "SELECT id FROM `products`";
+        $result = $this->fetchAll($sql);
 
-        return $result;
+        $total = count($result);
+        if ($result) {
+            return $total;
+        } else {
+            return false;
+        }
     }
 
     public function countProductsInCategory($category)
     {
-        $sql = "SELECT COUNT(*) AS Total FROM `products` WHERE categories_id = ?";
-        $result = $this->fetch($sql, array((int)$category));
+        $sql = "SELECT id FROM `products` WHERE categories_id = ?";
+        $result = $this->fetchAll($sql, array((int)$category));
 
-        return $result;
+        $total = count($result);
+        if ($result) {
+            return $total;
+        } else {
+            return false;
+        }
+    }
+
+    public function countProductsOnSearch($searchKey)
+    {
+        $sql = "SELECT id FROM `products` WHERE name LIKE CONCAT('%', ?, '%') OR manufacturer LIKE CONCAT('%', ?, '%') OR description LIKE CONCAT('%', ?, '%')";
+        $result = $this->fetchAll($sql, array($searchKey, $searchKey, $searchKey));
+
+        $total = count($result);
+        if ($result) {
+            return $total;
+        } else {
+            return false;
+        }
+    }
+
+    public function countProductsInCategoryOnSearch($category, $searchKey)
+    {
+        $sql = "SELECT categories_id FROM `products` WHERE name LIKE CONCAT('%', ?, '%') OR manufacturer LIKE CONCAT('%', ?, '%') OR description LIKE CONCAT('%', ?, '%') HAVING categories_id = ?";
+        $result = $this->fetchAll($sql, array($searchKey, $searchKey, $searchKey, (int)$category));
+
+        $total = count($result);
+        if ($result) {
+            return $total;
+        } else {
+            return false;
+        }
     }
 
     private function getProducts()
@@ -83,6 +119,42 @@ class getProducts extends EmmaModel
     public function allProductsInCategory($category, $start, $perpage)
     {
         $allIDS = $this->getAllProductsInCategory($category, $start, $perpage);
+
+        if (!$allIDS) {
+            return NULL;
+        }
+        return $this->createModels($allIDS);
+    }
+
+    private function getAllProductsInCategoryOnSearch($category, $searchKey, $start, $perpage)
+    {
+        $sql = "SELECT * FROM `products` WHERE name LIKE CONCAT('%', ?, '%') OR manufacturer LIKE CONCAT('%', ?, '%') OR description LIKE CONCAT('%', ?, '%') HAVING categories_id = ? LIMIT ?, ?";
+        $result = $this->fetchAll($sql, array($searchKey, $searchKey, $searchKey, (int)$category, (int)$start, (int)$perpage));
+
+        return $result;
+    }
+
+    public function allProductsInCategoryOnSearch($category, $searchKey, $start, $perpage)
+    {
+        $allIDS = $this->getAllProductsInCategoryOnSearch($category, $searchKey, $start, $perpage);
+
+        if (!$allIDS) {
+            return NULL;
+        }
+        return $this->createModels($allIDS);
+    }
+
+    private function getAllProductsOnSearch($searchKey, $start, $perpage)
+    {
+        $sql = "SELECT * FROM `products` WHERE name LIKE CONCAT('%', ?, '%') OR manufacturer LIKE CONCAT('%', ?, '%') OR description LIKE CONCAT('%', ?, '%') LIMIT ?, ?";
+        $result = $this->fetchAll($sql, array($searchKey, $searchKey, $searchKey, (int)$start, (int)$perpage));
+
+        return $result;
+    }
+
+    public function allProductsOnSearch($searchKey, $start, $perpage)
+    {
+        $allIDS = $this->getAllProductsOnSearch($searchKey, $start, $perpage);
 
         if (!$allIDS) {
             return NULL;

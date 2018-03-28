@@ -9,6 +9,7 @@
 
 <div class="row">
     <?php $this->loadSnippet("sidebar"); ?>
+
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">
 
@@ -96,25 +97,17 @@
             <ul class="pagination justify-content-center">
                 <?php
 
-                function checkUrlParameter($parameter)
-                {
-                    if (isset($_GET[$parameter])) {
-                        return "&" . $parameter . "=" . $_GET[$parameter];
-                    } else {
-                        return "";
-                    }
-                }
+
 
                 $page = $this->pageNumber;
 
                 if (isset($page)) {
-                    $rs = $this->productCount;
-                    $total = $rs->Total;
+                    $total = $this->productCount;
                     $perpage = 16;
                     $totalPages = ceil($total / $perpage);
 
-                    $cat = checkUrlParameter("cat");
-                    $search = checkUrlParameter("q");
+                    $cat = $this->checkUrlParameter("cat");
+                    $search = $this->checkUrlParameter("q");
 
                     if ($page <= 1) {
 
