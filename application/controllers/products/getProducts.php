@@ -66,7 +66,7 @@ class getProducts extends EmmaModel
 
     private function getDiscountProducts()
     {
-        $sql = "SELECT products.id FROM products JOIN product_has_discount ON products.id = product_has_discount.products_id LIMIT 4";
+        $sql = "SELECT * FROM products JOIN product_has_discount ON products.id = product_has_discount.products_id LIMIT 4";
         $result = $this->fetchAll($sql);
         return $result;
 
@@ -84,7 +84,7 @@ class getProducts extends EmmaModel
 
     private function getRandomProducts()
     {
-        $sql = "SELECT id FROM products ORDER BY RAND() LIMIT 4";
+        $sql = "SELECT * FROM products ORDER BY RAND() LIMIT 4";
         $result = $this->fetchAll($sql);
         return $result;
 
@@ -112,9 +112,11 @@ class getProducts extends EmmaModel
     {
         $products = array();
         foreach ($IDS as $value) {
-            $productModel = new ProductModel;
+            $productModel = new ProductModel();
             $productModel->setRetrieveCategories(true);
-            $productModel->get($value->id);
+            $productModel->fillModel($value);
+
+//            $productModel->get($value->id);
 
             if (!$productModel) {
                 continue;

@@ -25,7 +25,7 @@ class ProductImageModel extends EmmaModel
      * @param $photo_id
      * @return bool|ProductImageModel
      */
-    public function fillModel($photo_id)
+    public function autoFillModel($photo_id)
     {
         $photoTable = new PhotosTable();
         $images = $photoTable->find("photo_id", $photo_id);
@@ -34,10 +34,26 @@ class ProductImageModel extends EmmaModel
             return false;
         }
 
-        $this->setProductId($photo_id);
+        $this->setProductId($images->Objects->products_id);
         $this->setPhotoId($images->Objects->photo_id);
         $this->setLocation($images->Objects->locatie);
         $this->setDescription($images->Objects->description);
+
+        return $this;
+    }
+
+    /**
+     * @param $dataArray
+     * @return bool|ProductImageModel
+     */
+    public function fillModel($dataArray) {
+        if(!$dataArray) {
+            return false;
+        }
+        $this->setProductId($dataArray->products_id);
+        $this->setPhotoId($dataArray->photo_id);
+        $this->setLocation($dataArray->locatie);
+        $this->setDescription($dataArray->description);
 
         return $this;
     }

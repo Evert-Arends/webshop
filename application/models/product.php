@@ -37,6 +37,28 @@ class ProductModel extends EmmaModel
         Loader::model("ProductImageModel");
     }
 
+    public function fillModel($dataObject)
+    {
+        $this->setId($dataObject->id);
+        $this->setCategoryId($dataObject->categories_id);
+        $this->setName($dataObject->name);
+        $this->setDescription($dataObject->description);
+        $this->setManufacturer($dataObject->manufacturer);
+
+        # Retrieve product images
+        $photoIDS = $this->getImagesFromDB($this->getId());
+        $photos = $this->createPhotoModels($photoIDS);
+        $this->setImages($photos);
+
+        $this->setPrice($dataObject->price);
+        $this->setDiscount($this->getDiscountFromDB());
+
+        if ($this->retrieve_categories) {
+            $this->buildCategoryTree($this->getCategoryId());
+        }
+        return $this;
+    }
+
     /**
      * @return mixed
      */
@@ -135,7 +157,7 @@ class ProductModel extends EmmaModel
 
     private function getImagesFromDB($productId)
     {
-        $sql = "SELECT photo_id FROM photos WHERE products_id = ?";
+        $sql = "SELECT * FROM photos WHERE products_id = ?";
         $result = $this->fetchAll($sql, array($productId));
 
         return $result;
@@ -219,7 +241,7 @@ class ProductModel extends EmmaModel
         if ($dbObject) {
             foreach ($dbObject as $item) {
                 $tempModel = new ProductImageModel();
-                $tempModel->fillModel($item->photo_id);
+                $tempModel->fillModel($item);
                 array_push($models, $tempModel);
             }
         }

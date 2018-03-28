@@ -22,10 +22,11 @@ class UserModel extends EmmaModel
     private $userRole;
     private $phoneNumber;
     private $auth;
-
+    private $address;
     // Models
     private $AuthModel;
     private $UserRole;
+    private $AddressModel;
 
 
     /**
@@ -36,6 +37,8 @@ class UserModel extends EmmaModel
         parent::__construct();
         $this->objectChecker = new ObjectChecker();
         $this->UserRole = Loader::model("UserRole");
+        Loader::model("AddressModel");
+        $this->AddressModel = new AddressModel();
         Loader::model("AuthModel");
         $this->AuthModel = new AuthModel();
     }
@@ -65,6 +68,7 @@ class UserModel extends EmmaModel
         if (!$this->auth) {
             return false;
         }
+        $this->setAddress($this->AddressModel->fillModel($this->getId()));
 
         $this->setHashedPassword($this->auth->getHashedPassword());
 
@@ -279,7 +283,7 @@ class UserModel extends EmmaModel
     public function checkIfUserExists($email)
     {
         $tempUser = new UsersTable();
-        if($tempUser->find("email", $email)) {
+        if ($tempUser->find("email", $email)) {
             return true;
         }
 
@@ -300,5 +304,21 @@ class UserModel extends EmmaModel
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
     }
 }
