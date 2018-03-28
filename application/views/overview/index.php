@@ -18,6 +18,12 @@
             <div class="col-12">
                 <h3 class="partial-title" style="">Producten</h3>
             </div>
+            <form method="GET">
+                <input type="search" name="q" />
+                <input type="search" hidden name="cat" value="<?php echo !empty($this->request->get["cat"]) ?htmlspecialchars($this->request->get["cat"]) :''; ?>" />
+                <input type="search" hidden name="page" value="<?php echo !empty($this->request->get["page"]) ?htmlspecialchars($this->request->get["page"]) :''; ?>" />
+                <input type="submit"/>
+            </form>
         </div>
 
         <!-- PRODUCTEN -->

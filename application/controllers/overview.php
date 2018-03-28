@@ -34,8 +34,11 @@ class overview extends EmmaController
 
     public function getPageNumber()
     {
-        if (isset($this->request->get["page"])) {
+        if (isset($this->request->get["page"]) || !empty($this->request->get["page"])) {
             $page = $this->request->get["page"];
+            if ($page < 1) {
+                $page = 1;
+            }
         } else {
             $page = 1;
         }
@@ -68,10 +71,10 @@ class overview extends EmmaController
         } elseif (isset($this->request->get["cat"]) && !isset($this->request->get["q"])) {
             $category = $this->request->get["cat"];
             $products = $product->allProductsInCategory($category, $start, $per_page);
-        }  elseif (!isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
+        } elseif (!isset($this->request->get["cat"]) && isset($this->request->get["q"])) {
             $searchFor = $this->request->get["q"];
             $products = $product->allProductsOnSearch($searchFor, $start, $per_page);
-        }else {
+        } else {
             $products = $product->allProducts($start, $per_page);
         }
 
