@@ -19,7 +19,6 @@ class AuthModel extends EmmaModel
     public function __construct()
     {
         parent::__construct();
-        return $ref =& $this;
     }
 
     public function fillModel($user_id)

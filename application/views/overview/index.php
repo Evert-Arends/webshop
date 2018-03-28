@@ -37,9 +37,22 @@
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
-                        <a href="/webshop/index/product/ID/<?= $product->getID(); ?>/"><img class="card-img-top"
-                                                                                            src="<?= $product->getPhoto(); ?>"
-                                                                                            alt=""></a>
+                        <?php
+                            $images = $product->getImages();
+                            if($images) {
+                                ?>
+                                <a href="/webshop/product/?id=<?= $product->getID(); ?>"><img class="card-img-top"
+                                                                                              src="<?= $images[0]->getLocation(); ?>"
+                                                                                              alt=""></a>
+                                <?php
+                            } else {
+                                ?>
+                                <a href="/webshop/product/?id=<?= $product->getID(); ?>">
+                                    <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png" alt=""></a>
+                                <?php
+                            }
+                        ?>
+
                         <?php
                         if ($product->getDiscount()) {
                             ?>
@@ -52,7 +65,7 @@
                         } ?>>
 
                             <h4 class="card-title">
-                                <a href="/webshop/index/product/ID/<?= $product->getID(); ?>/"><?= $product->getName(); ?></a>
+                                <a href="/webshop/product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
                             </h4>
 
                             <?php
@@ -110,19 +123,25 @@
                     $perpage = 16;
                     $totalPages = ceil($total / $perpage);
 
+                    if (isset($_GET['cat'])) {
+                        $cat = "&cat=" . $_GET['cat'];
+                    } else {
+                        $cat = "";
+                    }
+
                     if ($page <= 1) {
 
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     } else {
                         $j = $page - 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=1' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=1$cat' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     }
 
                     for ($i = 1; $i <= $totalPages; $i++) {
                         if ($i <> $page) {
-                            echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$i'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$i$cat'>$i</a></li>";
                         } else {
                             echo "<li class='page-item'><a class='page-link'>$i</a></li>";
                         }
@@ -133,8 +152,8 @@
                         echo "<li class='page-item disabled'><a class='page-link'><i class='fas fa-angle-double-right'></i></a></li>";
                     } else {
                         $j = $page + 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j'><i class='fas fa-angle-right'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$totalPages'><i class='fas fa-angle-double-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat'><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$totalPages$cat'><i class='fas fa-angle-double-right'></i></a></li>";
                     }
 
 

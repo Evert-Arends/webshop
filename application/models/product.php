@@ -13,13 +13,15 @@ class ProductModel extends EmmaModel
     private $name;
     private $description;
     private $price;
-    private $photo;
+    private $images;
     private $manufacturer;
     private $category_id;
     private $category; // Only category objects
     private $discount;
     private $objectChecker;
     private $retrieve_categories;
+
+
     /**
      * return reference
      */
@@ -32,6 +34,7 @@ class ProductModel extends EmmaModel
     public function init()
     {
         Loader::model("CategoryModel");
+        Loader::model("ProductImageModel");
     }
 
     /**
@@ -117,17 +120,25 @@ class ProductModel extends EmmaModel
     /**
      * @return mixed
      */
-    public function getPhoto()
+    public function getImages()
     {
-        return $this->photo;
+        return $this->images;
     }
 
     /**
-     * @param mixed $photo
+     * @param array $images , Models
      */
-    public function setPhoto($photo)
+    public function setImages($images)
     {
-        $this->photo = $photo;
+        $this->images = $images;
+    }
+
+    private function getImagesFromDB($productId)
+    {
+        $sql = "SELECT photo_id FROM photos WHERE products_id = ?";
+        $result = $this->fetchAll($sql, array($productId));
+
+        return $result;
     }
 
     /**
@@ -182,19 +193,37 @@ class ProductModel extends EmmaModel
             return null; // Return null instead of model.
         }
 
+        # Set product info
         $this->setId($product->Objects->id);
         $this->setCategoryId($product->Objects->categories_id);
         $this->setName($product->Objects->name);
         $this->setDescription($product->Objects->description);
         $this->setManufacturer($product->Objects->manufacturer);
-        $this->setPhoto($product->Objects->photo);
+
+        # Retrieve product images
+        $photoIDS = $this->getImagesFromDB($this->getId());
+        $photos = $this->createPhotoModels($photoIDS);
+        $this->setImages($photos);
+
         $this->setPrice($product->Objects->price);
         $this->setDiscount($this->getDiscountFromDB());
-        if($this->retrieve_categories) {
+        if ($this->retrieve_categories) {
             $this->buildCategoryTree($this->getCategoryId());
         }
-
         return $this;
+    }
+
+    private function createPhotoModels($dbObject)
+    {
+        $models = array();
+        if ($dbObject) {
+            foreach ($dbObject as $item) {
+                $tempModel = new ProductImageModel();
+                $tempModel->fillModel($item->photo_id);
+                array_push($models, $tempModel);
+            }
+        }
+        return $models;
     }
 
     /**

@@ -10,187 +10,34 @@
 <div class="row">
 
     <!-- SIDEBAR -->
-    <div class="col-lg-3 col-md-3" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
+    <div class="col-lg-3 col-md-3 sidebar" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
         <h3 class="partial-title" style="">Categorieen</h3>
         <div class="custom-margin">
             <div class="card">
                 <div class="card-body">
-<!--                    --><?php
-//                    loopCategories($this->AllRootCategories);
-//                    function loopCategories($categories)
-//                    {
-//                        foreach ($categories as $cat) {
-//                            echo "<ul class='list-group list-group-flush'>";
-//                            echo "<li class='list-group-item' style='padding: 0 1.25rem;'>" . $cat->getId() . " - " . $cat->getName() . "</li>";
-//                            if ($cat->getChildren()) {
-//                                echo "<li class='list-group-item' style='padding: 0 1.25rem;'>";
-//                                loopCategories($cat->getChildren());
-//                                echo "</li>";
-//                            }
-//                            echo "</ul>";
-//                        }
-//                    }
-//
-//                    ?>
-
-<!--                    <link href="--><?//= APPPATH?><!--/assets/css/sidebar.css" rel="stylesheet">-->
-
-                    <div class="just-padding">
-
-                        <div class="list-group list-group-root well">
-
-                            <a href="#item-1" class="list-group-item" data-toggle="collapse">
-                                <i class="glyphicon glyphicon-chevron-right"></i>Item 1
-                            </a>
-                            <div class="list-group collapse" id="item-1">
-
-                                <a href="#item-1-1" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.1
-                                </a>
-                                <div class="list-group collapse" id="item-1-1">
-                                    <a href="#" class="list-group-item">Item 1.1.1</a>
-                                    <a href="#" class="list-group-item">Item 1.1.2</a>
-                                    <a href="#" class="list-group-item">Item 1.1.3</a>
-                                </div>
-
-                                <a href="#item-1-2" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.2
-                                </a>
-                                <div class="list-group collapse" id="item-1-2">
-                                    <a href="#" class="list-group-item">Item 1.2.1</a>
-                                    <a href="#" class="list-group-item">Item 1.2.2</a>
-                                    <a href="#" class="list-group-item">Item 1.2.3</a>
-                                </div>
-
-                                <a href="#item-1-3" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 1.3
-                                </a>
-                                <div class="list-group collapse" id="item-1-3">
-                                    <a href="#" class="list-group-item">Item 1.3.1</a>
-                                    <a href="#" class="list-group-item">Item 1.3.2</a>
-                                    <a href="#" class="list-group-item">Item 1.3.3</a>
-                                </div>
-
-                            </div>
-
-                            <a href="#item-2" class="list-group-item" data-toggle="collapse">
-                                <i class="glyphicon glyphicon-chevron-right"></i>Item 2
-                            </a>
-                            <div class="list-group collapse" id="item-2">
-
-                                <a href="#item-2-1" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.1
-                                </a>
-                                <div class="list-group collapse" id="item-2-1">
-                                    <a href="#" class="list-group-item">Item 2.1.1</a>
-                                    <a href="#" class="list-group-item">Item 2.1.2</a>
-                                    <a href="#" class="list-group-item">Item 2.1.3</a>
-                                </div>
-
-                                <a href="#item-2-2" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.2
-                                </a>
-                                <div class="list-group collapse" id="item-2-2">
-                                    <a href="#" class="list-group-item">Item 2.2.1</a>
-                                    <a href="#" class="list-group-item">Item 2.2.2</a>
-                                    <a href="#" class="list-group-item">Item 2.2.3</a>
-                                </div>
-
-                                <a href="#item-2-3" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 2.3
-                                </a>
-                                <div class="list-group collapse" id="item-2-3">
-                                    <a href="#" class="list-group-item">Item 2.3.1</a>
-                                    <a href="#" class="list-group-item">Item 2.3.2</a>
-                                    <a href="#" class="list-group-item">Item 2.3.3</a>
-                                </div>
-
-                            </div>
-
-
-                            <a href="#item-3" class="list-group-item" data-toggle="collapse">
-                                <i class="glyphicon glyphicon-chevron-right"></i>Item 3
-                            </a>
-                            <div class="list-group collapse" id="item-3">
-
-                                <a href="#item-3-1" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.1
-                                </a>
-                                <div class="list-group collapse" id="item-3-1">
-                                    <a href="#" class="list-group-item">Item 3.1.1</a>
-                                    <a href="#" class="list-group-item">Item 3.1.2</a>
-                                    <a href="#" class="list-group-item">Item 3.1.3</a>
-                                </div>
-
-                                <a href="#item-3-2" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.2
-                                </a>
-                                <div class="list-group collapse" id="item-3-2">
-                                    <a href="#" class="list-group-item">Item 3.2.1</a>
-                                    <a href="#" class="list-group-item">Item 3.2.2</a>
-                                    <a href="#" class="list-group-item">Item 3.2.3</a>
-                                </div>
-
-                                <a href="#item-3-3" class="list-group-item" data-toggle="collapse">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>Item 3.3
-                                </a>
-                                <div class="list-group collapse" id="item-3-3">
-                                    <a href="#" class="list-group-item">Item 3.3.1</a>
-                                    <a href="#" class="list-group-item">Item 3.3.2</a>
-                                    <a href="#" class="list-group-item">Item 3.3.3</a>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <script>
-                        $(function() {
-
-                            $('.list-group-item').on('click', function() {
-                                $('.glyphicon', this)
-                                    .toggleClass('glyphicon-chevron-right')
-                                    .toggleClass('glyphicon-chevron-down');
-                            });
-
-                        });
-                    </script>
                     <style>
-                        .just-padding {
-                            padding: 15px;
-                        }
-
-                        .list-group.list-group-root {
-                            padding: 0;
-                            overflow: hidden;
-                        }
-
-                        .list-group.list-group-root .list-group {
-                            margin-bottom: 0;
-                        }
-
-                        .list-group.list-group-root .list-group-item {
-                            border-radius: 0;
-                            border-width: 1px 0 0 0;
-                        }
-
-                        .list-group.list-group-root > .list-group-item:first-child {
-                            border-top-width: 0;
-                        }
-
-                        .list-group.list-group-root > .list-group > .list-group-item {
-                            padding-left: 30px;
-                        }
-
-                        .list-group.list-group-root > .list-group > .list-group > .list-group-item {
-                            padding-left: 45px;
-                        }
-
-                        .list-group-item .glyphicon {
-                            margin-right: 5px;
+                        .no-border{
+                            border: none !important;
+                            margin: 0 !important;
+                            padding: 1px 7px !important;
                         }
                     </style>
+                    <?php
+                    loopCategories($this->AllRootCategories);
+                    function loopCategories($categories)
+                    {
+                        foreach ($categories as $cat) {
+                            echo "<ul class='list-group list-group-flush no-border'>";
+                            echo "<li class='list-group-item no-border'><a href='/webshop/overview/?cat=" . $cat->getId() . "'>" . $cat->getId() . " - " . $cat->getName() . "</a></li>";
+                            if ($cat->getChildren()) {
+                                echo "<li class='list-group-item no-border'>";
+                                loopCategories($cat->getChildren());
+                                echo "</li>";
+                            }
+                            echo "</ul>";
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>

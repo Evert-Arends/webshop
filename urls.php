@@ -27,7 +27,7 @@ $routes = array(
     "" =>
         array(
             "controller" => "home",
-            "protected" => true,
+            "protected" => false,
             "level" => array(0)
         ),
     "home" =>

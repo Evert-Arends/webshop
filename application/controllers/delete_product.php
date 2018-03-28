@@ -27,20 +27,11 @@ class delete_product extends EmmaController
 
                 $deleteProduct = new deleteProducts();
                 $deleteProduct->init();
+
                 $deleteProduct->deleteProductOnId($productId);
 
-            } else {
-                return $this->msg("No product found");
+                header("Location: ". BASEPATH ."products/");
             }
-
-        } else {
-            return $this->msg("Form not posted.");
         }
-        return $this->msg("Product deleted.");
-    }
-
-    private function msg($error)
-    {
-        echo $error;
     }
 }
