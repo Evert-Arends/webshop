@@ -14,8 +14,12 @@ class overview extends EmmaController
 
     public function init()
     {
-        // current directory
+        // Load models
+        Loader::model("CategoryModel");
+
+        // Load specific external helpers
         require_once('./controllers/products/getProducts.php');
+        require_once('./controllers/categories/getCategories.php');
     }
 
     public function index()
@@ -24,13 +28,21 @@ class overview extends EmmaController
         $this->page();
     }
 
-    public function getPageNumber() {
+    public function getPageNumber()
+    {
         if (isset($this->request->get["page"])) {
             $page = $this->request->get["page"];
         } else {
             $page = 1;
         }
         return $page;
+    }
+
+    private function getRootCategories()
+    {
+        $categories = new getCategories();
+        $categories->init();
+        return $categories->allRootCategories();
     }
 
     public function productData()
@@ -61,6 +73,7 @@ class overview extends EmmaController
         $this->pageNumber = $this->getPageNumber();
         $this->Products = $this->productData();
         $this->productCount = $this->countProducts();
+        $this->AllRootCategories = $this->getRootCategories();
     }
 
     public function page($page = "index")

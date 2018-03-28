@@ -15,7 +15,29 @@
         <div class="custom-margin">
             <div class="card">
                 <div class="card-body">
-
+                    <style>
+                        .no-border{
+                            border: none !important;
+                            margin: 0 !important;
+                            padding: 1px 7px !important;
+                        }
+                    </style>
+                    <?php
+                    loopCategories($this->AllRootCategories);
+                    function loopCategories($categories)
+                    {
+                        foreach ($categories as $cat) {
+                            echo "<ul class='list-group list-group-flush no-border'>";
+                            echo "<li class='list-group-item no-border'><a href='/webshop/overview/?cat=" . $cat->getId() . "'>" . $cat->getId() . " - " . $cat->getName() . "</a></li>";
+                            if ($cat->getChildren()) {
+                                echo "<li class='list-group-item no-border'>";
+                                loopCategories($cat->getChildren());
+                                echo "</li>";
+                            }
+                            echo "</ul>";
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -31,6 +53,7 @@
             </div>
         </div>
 
+        <!-- PRODUCTEN -->
         <div class="row" style="margin-top: 1rem">
             <?php
             foreach ($this->Products as $product) {
@@ -38,19 +61,22 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
                         <?php
-                            $images = $product->getImages();
-                            if($images) {
-                                ?>
-                                <a href="/webshop/product/?id=<?= $product->getID(); ?>"><img class="card-img-top"
-                                                                                              src="<?= $images[0]->getLocation(); ?>"
-                                                                                              alt=""></a>
-                                <?php
-                            } else {
-                                ?>
-                                <a href="/webshop/product/?id=<?= $product->getID(); ?>">
-                                    <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png" alt=""></a>
-                                <?php
-                            }
+                        $images = $product->getImages();
+                        if ($images) {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png" alt="">
+                            </a>
+                            <?php
+                        }
                         ?>
 
                         <?php
@@ -88,20 +114,6 @@
                             <p class="card-text">
                                 <?= $string = strlen($product->getDescription()) > 100 ? substr($product->getDescription(), 0, 30) . "... " : $product->getDescription(); ?>
                             </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="reviews_product col-10">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
-                                <div class="col-2">
-                                    <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
