@@ -9,10 +9,13 @@
 class admin_orders extends EmmaController
 {
     protected $user;
+    protected $allOrders;
 
     public function init()
     {
-        // init required classes
+        Loader::model("OrderModel");
+
+        require_once('./controllers/orders/getOrders.php');
     }
 
     public function index()
@@ -21,12 +24,20 @@ class admin_orders extends EmmaController
         $this->page();
     }
 
+    private function getAllOrders(){
+        $orders = new getOrders();
+        $orders->init();
+
+        return $orders->allOrders();
+    }
+
     private function getUser(){
         return $this->request->User;
     }
 
     public function adminData()
     {
+        $this->allOrders = $this->getAllOrders();
         $this->user = $this->getUser();
     }
 

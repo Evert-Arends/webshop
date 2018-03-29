@@ -39,15 +39,17 @@ class OrderModel extends EmmaModel
     public function fillModel($dataObject)
     {
         $this->setId($dataObject->id);
-        $this->setUserId($dataObject->user_id);
+        $this->setUserId($dataObject->users_id);
 
         # Retrieve order rules
         $rules = $this->getOrderRulesFromDB($this->getId());
         $ruleModels = $this->createRuleModels($rules);
+
         $this->setOrderRules($ruleModels);
 
         # Retrieve order user
         $user = $this->getUserFromDB($this->getUserId());
+
         $userModel = $this->createUserModel($user);
         $this->setUser($userModel);
 
@@ -108,7 +110,7 @@ class OrderModel extends EmmaModel
      */
     private function getUserFromDB($user_id)
     {
-        $sql = "SELECT email FROM users WHERE id = ?";
+        $sql = "SELECT * FROM users WHERE id = ?";
         $result = $this->fetchAll($sql, array($user_id));
 
         return $result;
@@ -124,7 +126,7 @@ class OrderModel extends EmmaModel
         if ($dbObject) {
             foreach ($dbObject as $item) {
                 $tempModel = new UserModel();
-                $tempModel->getUser($item);
+                $tempModel->getUser($item->email);
                 array_push($models, $tempModel);
             }
         }

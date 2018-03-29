@@ -94,7 +94,9 @@ abstract class EmmaModel implements IModel
             $stmt = $this->db->connection->prepare($query);
             $stmt->execute($params);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+            if (PRINT_SELECT_QUERY) {
+                $stmt->debugDumpParams();
+            }
             $stmt->closeCursor();
 
             $error = $this->db->connection->errorInfo();

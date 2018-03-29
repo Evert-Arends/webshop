@@ -58,9 +58,9 @@ class OrderRuleModel extends EmmaModel
             return false;
         }
         $this->setId($dataArray->id);
-        $this->setOrderId($dataArray->order_id);
-        $this->setProductId($dataArray->product_id);
-        $this->setAmount($dataArray->amount);
+        $this->setOrderId($dataArray->orders_id);
+        $this->setProductId($dataArray->products_id);
+        $this->setAmount($dataArray->order_rulescol);
 
         # Retrieve product
         $product = $this->getProductFromDB($this->getProductId());
