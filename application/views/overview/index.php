@@ -105,6 +105,14 @@
                                 <?= $string = strlen($product->getDescription()) > 100 ? substr($product->getDescription(), 0, 30) . "... " : $product->getDescription(); ?>
                             </p>
                         </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="reviews_product col-10"></div>
+                                <div class="col-2">
+                                    <button class="btn heart-button float-right"><i class="fa fa-cart-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <?php

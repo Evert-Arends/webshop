@@ -51,7 +51,7 @@ class home extends EmmaController
         $product = new getProducts();
         $product->init();
 
-        return $product->randomProducts();
+        return $product->randomProducts(4);
     }
 
     private function getRootCategories(){

@@ -36,6 +36,12 @@ $routes = array(
             "protected" => false,
             "level" => array(0)
         ),
+    "contact" =>
+        array(
+            "controller" => "contact",
+            "protected" => false,
+            "level" => array(0)
+        ),
     "404" =>
         array(
             "controller" => "FourOhFour",

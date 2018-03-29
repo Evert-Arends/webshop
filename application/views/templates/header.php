@@ -224,12 +224,17 @@
         <div class="collapse navbar-collapse" id="menu-content">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="<?php echo BASEPATH; ?>" role="button">
                         Home
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="<?php echo BASEPATH; ?>overview/" role="button">
+                        Producten
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="<?php echo BASEPATH; ?>contact/" role="button">
                         Contact
                     </a>
                 </li>

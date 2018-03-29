@@ -9,9 +9,12 @@
 class product extends EmmaController
 {
     protected $product;
+    protected $randomProduct;
 
     public function init()
     {
+        Loader::model("ProductModel");
+        Loader::setSnippet("sidebar_product", "templates/sidebar_product");
         // current directory
         require_once('./controllers/products/getProducts.php');
     }
@@ -39,6 +42,14 @@ class product extends EmmaController
         return $product->getProductOnId($productId);
     }
 
+    private function randomProduct()
+    {
+        $product = new getProducts();
+        $product->init();
+
+        return $product->randomProducts(1);
+    }
+
     private function loadTemplateData()
     {
         if ($this->getProductId()) {
@@ -46,6 +57,7 @@ class product extends EmmaController
         } else {
             $this->product = null;
         }
+        $this->RandomProduct = $this->randomProduct();
     }
 
     public function page($page = "index")

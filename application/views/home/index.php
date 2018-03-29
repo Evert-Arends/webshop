@@ -27,7 +27,27 @@
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="<?= $product->getPhoto(); ?>" alt=""></a>
+
+                        <?php
+                        $images = $product->getImages();
+                        if ($images) {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
+                                     alt="">
+                            </a>
+                            <?php
+                        }
+                        ?>
+
                         <?php
                         if ($product->getDiscount()) {
                             ?>
@@ -64,15 +84,9 @@
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="reviews_product col-10">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
+                                <div class="reviews_product col-10"></div>
                                 <div class="col-2">
-                                    <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                                    <button class="btn heart-button float-right"><i class="fa fa-cart-plus"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +111,27 @@
                 ?>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-2">
                     <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src="<?= $product->getPhoto(); ?>" alt=""></a>
+
+                        <?php
+                        $images = $product->getImages();
+                        if ($images) {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
+                            </a>
+                            <?php
+                        } else {
+                            ?>
+                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                               style="height: 200px; overflow: hidden;">
+                                <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
+                                     alt="">
+                            </a>
+                            <?php
+                        }
+                        ?>
+
                         <?php
                         if ($product->getDiscount()) {
                             ?>
@@ -134,15 +168,9 @@
                         </div>
                         <div class="card-footer">
                             <div class="row">
-                                <div class="reviews_product col-10">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                </div>
+                                <div class="reviews_product col-10"></div>
                                 <div class="col-2">
-                                    <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
+                                    <button class="btn heart-button float-right"><i class="fa fa-cart-plus"></i></button>
                                 </div>
                             </div>
                         </div>

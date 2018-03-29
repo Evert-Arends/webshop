@@ -9,38 +9,7 @@
 
 <div class="row">
 
-    <!-- SIDEBAR -->
-    <div class="col-lg-3 col-md-3 sidebar" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
-        <h3 class="partial-title" style="">Uitgelicht</h3>
-        <div class="custom-margin">
-            <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#">Item Four</a>
-                    </h4>
-                    <h5>$24.99</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                        numquam
-                        aspernatur!</p>
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="reviews_product col-10">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn heart-button float-right"><i class="far fa-heart"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php $this->loadSnippet("sidebar_product"); ?>
 
     <script>
         $(document).ready(function () {
@@ -127,9 +96,9 @@
                                                     <label for="colors">Kleur</label>
                                                     <select class="custom-select" id="colors">
                                                         <option selected>Select</option>
-                                                        <option value="1">Blue</option>
-                                                        <option value="2">Red</option>
-                                                        <option value="3">Green</option>
+                                                        <option value="1">Blauw</option>
+                                                        <option value="2">Rood</option>
+                                                        <option value="3">Groen</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -160,19 +129,6 @@
                                                     <i class="fa fa-shopping-cart"></i> Toevoegen
                                                 </a>
                                             </form>
-                                            <div class="reviews_product p-3 mb-2 ">
-                                                3 reviews
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <a class="pull-right" href="#reviews">Bekijk alle beoordelingen</a>
-                                            </div>
-                                            <div class="datasheet p-3 mb-2 bg-info text-white">
-                                                <a href="" class="text-white"><i class="fa fa-file"></i> Download
-                                                    productgegevens</a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,55 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row custom-margin">
-                            <!-- Reviews -->
-                            <div class="col-12" id="reviews">
-                                <div class="card border-light mb-3">
-                                    <div class="card-header bg-primary text-white text-uppercase"><i
-                                                class="fa fa-comment"></i>
-                                        Beoordelingen
-                                    </div>
-                                    <div class="card-body product-information-card">
-                                        <div class="review reviews_product">
-                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                            <meta itemprop="datePublished" content="01-01-2016">
-                                            January 01, 2018
 
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            by Paul Smith
-                                            <p class="blockquote">
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Integer
-                                                posuere erat a ante.</p>
-                                            </p>
-                                            <hr>
-                                        </div>
-                                        <div class="review reviews_product">
-                                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                            <meta itemprop="datePublished" content="01-01-2016">
-                                            January 01, 2018
-
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            by Paul Smith
-                                            <p class="blockquote">
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                Integer
-                                                posuere erat a ante.</p>
-                                            </p>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             <?php }

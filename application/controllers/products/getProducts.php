@@ -180,17 +180,17 @@ class getProducts extends EmmaModel
         return $this->createModels($allIDS);
     }
 
-    private function getRandomProducts()
+    private function getRandomProducts($amount)
     {
-        $sql = "SELECT * FROM products ORDER BY RAND() LIMIT 4";
+        $sql = "SELECT * FROM products ORDER BY RAND() LIMIT $amount";
         $result = $this->fetchAll($sql);
         return $result;
 
     }
 
-    public function randomProducts()
+    public function randomProducts($amount)
     {
-        $allIDS = $this->getRandomProducts();
+        $allIDS = $this->getRandomProducts($amount);
 
         if (!$allIDS) {
             return NULL;
