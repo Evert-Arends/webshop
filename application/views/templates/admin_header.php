@@ -36,33 +36,6 @@
     <script src="<?= APPPATH ?>/assets/datatables/dataTables.bootstrap4.js"></script>
     <script src="<?= APPPATH ?>/assets/datatables/sb-admin-datatables.js"></script>
 
-    <script>
-        (function ($) {
-            "use strict"; // Start of use strict
-
-            // Smooth scrolling using jQuery easing
-            $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
-                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-                    var target = $(this.hash);
-                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                    if (target.length) {
-                        $('html, body').animate({
-                            scrollTop: (target.offset().top - 50)
-                        }, 1000, "easeInOutExpo");
-                        return false;
-                    }
-                }
-            });
-
-            // Activate scrollspy to add active class to navbar items on scroll
-            $('body').scrollspy({
-                target: '#mainNav',
-                offset: 57
-            });
-        })(jQuery); // End of use strict
-
-    </script>
-
 </head>
 <body>
 
@@ -70,7 +43,7 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Administratiepaneel</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/logout">Uitloggen</a>
+            <a class="nav-link" href="<?= BASEPATH ?>logout">Uitloggen</a>
         </li>
     </ul>
 </nav>
@@ -88,22 +61,22 @@
                 </h6>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="/webshop/admin">
+                        <a class="nav-link" href="<?= BASEPATH ?>admin">
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/webshop/products">
+                        <a class="nav-link" href="<?= BASEPATH ?>products">
                             Producten
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/webshop/categories">
+                        <a class="nav-link" href="<?= BASEPATH ?>categories">
                             Categorieen
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/webshop/users">
+                        <a class="nav-link" href="<?= BASEPATH ?>users">
                             Klantgegevens
                         </a>
                     </li>

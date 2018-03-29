@@ -9,17 +9,7 @@
 
 <div class="row">
 
-    <!-- SIDEBAR -->
-    <div class="col-lg-3 col-md-3 sidebar" style="border-right: 1px solid #215678; margin-top: 1.5rem;">
-        <h3 class="partial-title" style="">Categorieen</h3>
-        <div class="custom-margin">
-            <div class="card">
-                <div class="card-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php $this->loadSnippet("sidebar_product"); ?>
 
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">

@@ -32,14 +32,14 @@
                         $images = $product->getImages();
                         if ($images) {
                             ?>
-                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                            <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                                style="height: 200px; overflow: hidden;">
                                 <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
                             </a>
                             <?php
                         } else {
                             ?>
-                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                            <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                                style="height: 200px; overflow: hidden;">
                                 <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
                                      alt="">
@@ -58,7 +58,7 @@
                         <div class="card-body">
 
                             <h4 class="card-title">
-                                <a href="#"><?= $product->getName(); ?></a>
+                                <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
                             </h4>
 
                             <?php
@@ -101,7 +101,6 @@
         <div class="row custom-margin">
             <div class="col-12">
                 <h3 class="partial-title" style="">Uitgelicht</h3>
-
             </div>
         </div>
 
@@ -116,14 +115,14 @@
                         $images = $product->getImages();
                         if ($images) {
                             ?>
-                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                            <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                                style="height: 200px; overflow: hidden;">
                                 <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
                             </a>
                             <?php
                         } else {
                             ?>
-                            <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                            <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                                style="height: 200px; overflow: hidden;">
                                 <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
                                      alt="">
@@ -142,7 +141,7 @@
                         <div class="card-body">
 
                             <h4 class="card-title">
-                                <a href="#"><?= $product->getName(); ?></a>
+                                <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
                             </h4>
 
                             <?php
@@ -180,8 +179,5 @@
             }
             ?>
         </div>
-
     </div>
-
-
 </div>

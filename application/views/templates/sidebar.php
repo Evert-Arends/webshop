@@ -17,7 +17,7 @@
                 {
                     foreach ($categories as $cat) {
                         echo "<ul class='list-group list-group-flush no-border'>";
-                        echo "<li class='list-group-item no-border'><a href='/webshop/overview/?cat=" . $cat->getId() . "'>" . $cat->getId() . " - " . $cat->getName() . "</a></li>";
+                        echo "<li class='list-group-item no-border'><a href='" . BASEPATH . "overview/?cat=" . $cat->getId() . "'>" . $cat->getId() . " - " . $cat->getName() . "</a></li>";
                         if ($cat->getChildren()) {
                             echo "<li class='list-group-item no-border'>";
                             loopCategories($cat->getChildren());

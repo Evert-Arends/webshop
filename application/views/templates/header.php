@@ -224,22 +224,21 @@
         <div class="collapse navbar-collapse" id="menu-content">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="<?php echo BASEPATH; ?>" role="button">
+                    <a class="nav-link" href="<?= BASEPATH; ?>" role="button">
                         Home
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="<?php echo BASEPATH; ?>overview/" role="button">
+                    <a class="nav-link" href="<?= BASEPATH; ?>overview/" role="button">
                         Producten
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="<?php echo BASEPATH; ?>contact/" role="button">
+                    <a class="nav-link" href="<?= BASEPATH; ?>contact/" role="button">
                         Contact
                     </a>
                 </li>
             </ul>
-
             <?php
             $userIsLoggedIn = $this->request->User->isAuthenticated;
             if ($userIsLoggedIn) {
@@ -252,15 +251,11 @@
                             Profiel
                         </a>
                         <div class="dropdown-menu">
-                            <a href="my_profile.html" class="dropdown-item">My Profile</a>
-                            <a href="my_password.html" class="dropdown-item">Change Password</a>
-                            <a href="my_notifications.html" class="dropdown-item">Notifications</a>
-                            <a href="my_membership.html" class="dropdown-item">Membership</a>
-                            <a href="<?php echo BASEPATH ?>/logout/" class="dropdown-item">Logout</a>
-                            <a href="my_account.html" class="dropdown-item">Account</a>
+                            <a href="<?= BASEPATH ?>profile" class="dropdown-item">Account</a>
+                            <a href="<?= BASEPATH ?>logout" class="dropdown-item">Logout</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link nav-btn" href="my_listing_add.html"><span><i
+                    <li class="nav-item"><a class="nav-link nav-btn" href="<?= BASEPATH ?>cart"><span><i
                                         class="fa fa-shopping-cart" aria-hidden="true"></i> Winkelwagen</span></a></li>
                 </ul>
                 <?php
@@ -275,7 +270,8 @@
                                                                      data-target="#myModal3"><span><i
                                         class="fas fa-sign-in-alt" aria-hidden="true"> </i>   Registreren</span></a>
                     </li>
-
+                    <li class="nav-item"><a class="nav-link nav-btn" href="<?= BASEPATH ?>cart"><span><i
+                                        class="fa fa-shopping-cart" aria-hidden="true"></i> Winkelwagen</span></a></li>
                 </ul>
                 <?php
             }
@@ -299,7 +295,6 @@
                     <p class="ls-subheading banner-title">
                         A responsive banner
                     </p>
-
                 </div>
             </div>
         </div>

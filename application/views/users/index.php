@@ -12,7 +12,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/webshop/admin">Dashboard</a>
+                    <a href="<?= BASEPATH ?>admin">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Klantgegevens</li>
             </ol>

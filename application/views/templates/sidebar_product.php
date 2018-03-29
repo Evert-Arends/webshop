@@ -12,14 +12,14 @@
                     $images = $product->getImages();
                     if ($images) {
                         ?>
-                        <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                        <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                            style="height: 200px; overflow: hidden;">
                             <img class="card-img-top" src="<?= $images[0]->getLocation(); ?>" alt="">
                         </a>
                         <?php
                     } else {
                         ?>
-                        <a href="/webshop/product/?id=<?= $product->getID(); ?>"
+                        <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"
                            style="height: 200px; overflow: hidden;">
                             <img class="card-img-top" src="<?php echo APPPATH ?>assets/images/notfound.png"
                                  alt="">
@@ -38,7 +38,7 @@
                     <div class="card-body">
 
                         <h4 class="card-title">
-                            <a href="#"><?= $product->getName(); ?></a>
+                            <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
                         </h4>
 
                         <?php

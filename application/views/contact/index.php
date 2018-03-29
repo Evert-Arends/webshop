@@ -88,42 +88,6 @@
                         </div>
                     </div>
                 </form>
-                <script>
-                    // when the form is submitted
-                    $('#contact-form').on('submit', function (e) {
-
-                        e.preventDefault();
-                        // if the validator does not prevent form submit
-                        if (e.isDefaultPrevented()) {
-                            var url = "http://localhost/webshop/index.php?c=contact";
-
-                            // POST values in the background the the script URL
-                            $.ajax({
-                                type: "POST",
-                                url: url,
-                                data: $(this).serialize(),
-                                success: function () {
-                                    var alertBox = '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Bericht is verzonden</div>';
-
-                                    // inject the alert to .messages div in our form
-                                    $('#contact-form').find('.messages').html(alertBox);
-                                    // empty the form
-                                    $('#contact-form')[0].reset();
-
-                                },
-                                error: function () {
-                                    var alertBox = '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Er is een fout opgetreden</div>';
-
-                                    // inject the alert to .messages div in our form
-                                    $('#contact-form').find('.messages').html(alertBox);
-                                    // empty the form
-                                    $('#contact-form')[0].reset();
-                                }
-                            });
-                            return false;
-                        }
-                    })
-                </script>
             </div>
         </div>
     </div>

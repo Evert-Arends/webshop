@@ -12,7 +12,7 @@
                         </div>
                         <div class="mr-5">2 nieuwe berichten</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="/webshop/contact">
+                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>contact">
                         <span class="float-left">Bekijk berichten</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="mr-5">Producten</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="/webshop/products">
+                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>products">
                         <span class="float-left">Bekijk producten</span>
                         <span class="float-right">
                             <i class="fa fa-angle-right"></i>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="mr-5">Klanten</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="/webshop/users">
+                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>users">
                         <span class="float-left">Bekijk klanten</span>
                         <span class="float-right">
                             <i class="fa fa-angle-right"></i>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="mr-5"><?= $this->user->first_name . " " . $this->user->last_name ?></div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="/webshop/logout">
+                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>logout">
                         <span class="float-left">Uitloggen</span>
                         <span class="float-right">
                             <i class="fa fa-angle-right"></i>

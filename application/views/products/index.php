@@ -7,7 +7,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/webshop/admin">Dashboard</a>
+                    <a href="<?= BASEPATH ?>admin">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Producten</li>
             </ol>
@@ -59,7 +59,7 @@
                                         }
                                         ?>
                                         <td>
-                                            <a href="/webshop/edit_product/?id=<?= $product->getId(); ?>"
+                                            <a href="<?= BASEPATH ?>edit_product/?id=<?= $product->getId(); ?>"
                                                class="btn btn-warning btn-sm" role="button">Bewerken</a>
                                             <button type="button" class="deleteModelOpener btn btn-danger btn-sm"
                                                     data-toggle="modal" data-target="#deleteModal"
@@ -103,7 +103,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Annuleren</button>
-                <form id="deleteProduct" name="deleteProduct" method="POST" action="/webshop/delete_product/">
+                <form id="deleteProduct" name="deleteProduct" method="POST" action="<?= BASEPATH ?>delete_product/">
                     <input type="hidden" name="productId" id="productId" value=""/>
                     <button type="submit" id="deleteProductBtn" name="deleteProductBtn" class="btn btn-danger">
                         Verwijderen
