@@ -8,12 +8,12 @@
                 <div class="card text-white bg-primary o-hidden h-100">
                     <div class="card-body">
                         <div class="card-body-icon">
-                            <i class="fa fa-fw fa-comments"></i>
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
                         </div>
-                        <div class="mr-5">2 nieuwe berichten</div>
+                        <div class="mr-5">Ordergeschiedenis</div>
                     </div>
-                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>contact">
-                        <span class="float-left">Bekijk berichten</span>
+                    <a class="card-footer text-white clearfix small z-1" href="<?= BASEPATH ?>orders">
+                        <span class="float-left">Bekijk ordergeschiedenis</span>
                         <span class="float-right">
                 <i class="fa fa-angle-right"></i>
               </span>

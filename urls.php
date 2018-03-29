@@ -22,7 +22,6 @@
  * prevent errors.
  */
 
-
 $routes = array(
     "" =>
         array(
@@ -105,6 +104,12 @@ $routes = array(
     "categories" =>
         array(
             "controller" => "admin_categories",
+            "protected" => true,
+            "level" => array(1)
+        ),
+    "orders" =>
+        array(
+            "controller" => "admin_orders",
             "protected" => true,
             "level" => array(1)
         ),
