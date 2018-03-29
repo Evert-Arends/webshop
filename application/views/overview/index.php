@@ -18,12 +18,26 @@
             <div class="col-12">
                 <h3 class="partial-title" style="">Producten</h3>
             </div>
-            <form method="GET">
-                <input type="search" name="q" />
-                <input type="search" hidden name="cat" value="<?php echo !empty($this->request->get["cat"]) ?htmlspecialchars($this->request->get["cat"]) :''; ?>" />
-                <input type="search" hidden name="page" value="<?php echo !empty($this->request->get["page"]) ?htmlspecialchars($this->request->get["page"]) :''; ?>" />
-                <input type="submit"/>
-            </form>
+            <div class="col-12">
+                <form method="GET" class="form form-inline">
+                    <input type="search" name="q" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Zoeken..."/>
+                    <?php
+                    if (!empty($this->request->get["cat"])) {
+                        ?>
+                        <input type="search" hidden name="cat"
+                               value="<?php echo !empty($this->request->get["cat"]) ? htmlspecialchars($this->request->get["cat"]) : ''; ?>"/>
+                        <?php
+                    }
+                    if (!empty($this->request->get["page"])) {
+                        ?>
+                        <input type="search" hidden name="page"
+                               value="<?php echo !empty($this->request->get["page"]) ? htmlspecialchars($this->request->get["page"]) : ''; ?>"/>
+                        <?php
+                    }
+                    ?>
+                    <input type="submit" class="form-control btn btn-primary" value="Zoeken"/>
+                </form>
+            </div>
         </div>
 
         <!-- PRODUCTEN -->
@@ -104,7 +118,6 @@
                 <?php
 
 
-
                 $page = $this->pageNumber;
 
                 if (isset($page)) {
@@ -115,19 +128,21 @@
                     $cat = $this->checkUrlParameter("cat");
                     $search = $this->checkUrlParameter("q");
 
+                    $basePath = BASEPATH . "overview";
+
                     if ($page <= 1) {
 
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
                         echo "<li class='page-item disabled'><a class='page-link' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     } else {
                         $j = $page - 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=1$cat$search' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat$search' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='" . $basePath . "?page=1$cat$search' tabindex='-2'><i class='fas fa-angle-double-left'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='" . $basePath . "?page=$j$cat$search' tabindex='-1'><i class='fas fa-angle-left'></i></a></li>";
                     }
 
                     for ($i = 1; $i <= $totalPages; $i++) {
                         if ($i <> $page) {
-                            echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$i$cat$search'>$i</a></li>";
+                            echo "<li class='page-item'><a class='page-link' href='" . $basePath . "?page=$i$cat$search'>$i</a></li>";
                         } else {
                             echo "<li class='page-item'><a class='page-link'>$i</a></li>";
                         }
@@ -138,8 +153,8 @@
                         echo "<li class='page-item disabled'><a class='page-link'><i class='fas fa-angle-double-right'></i></a></li>";
                     } else {
                         $j = $page + 1;
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$j$cat$search'><i class='fas fa-angle-right'></i></a></li>";
-                        echo "<li class='page-item'><a class='page-link' href='/webshop/overview/?page=$totalPages$cat$search'><i class='fas fa-angle-double-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='" . $basePath . "?page=$j$cat$search'><i class='fas fa-angle-right'></i></a></li>";
+                        echo "<li class='page-item'><a class='page-link' href='" . $basePath . "?page=$totalPages$cat$search'><i class='fas fa-angle-double-right'></i></a></li>";
                     }
 
 

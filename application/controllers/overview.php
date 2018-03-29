@@ -21,10 +21,7 @@ class overview extends EmmaController
         // Load specific external helpers
         require_once('./controllers/products/getProducts.php');
         require_once('./controllers/categories/getCategories.php');
-
-
     }
-
 
     public function index()
     {
