@@ -12,6 +12,7 @@ class OrderRuleModel extends EmmaModel
     private $order_id;
     private $product_id;
     private $amount;
+    private $product;
 
     /**
      * return reference
@@ -39,6 +40,11 @@ class OrderRuleModel extends EmmaModel
         $this->setProductId($rules->Objects->product_id);
         $this->setAmount($rules->Objects->amount);
 
+        # Retrieve product
+        $product = $this->getProductFromDB($this->getProductId());
+        $productModel = $this->createProductModel($product);
+        $this->setProduct($productModel);
+
         return $this;
     }
 
@@ -55,6 +61,11 @@ class OrderRuleModel extends EmmaModel
         $this->setOrderId($dataArray->order_id);
         $this->setProductId($dataArray->product_id);
         $this->setAmount($dataArray->amount);
+
+        # Retrieve product
+        $product = $this->getProductFromDB($this->getProductId());
+        $productModel = $this->createProductModel($product);
+        $this->setProduct($productModel);
 
         return $this;
     }
@@ -105,6 +116,51 @@ class OrderRuleModel extends EmmaModel
     public function setProductId($product_id)
     {
         $this->product_id = $product_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @param $product_id
+     * @return array|bool
+     */
+    private function getProductFromDB($product_id)
+    {
+        $sql = "SELECT * FROM products WHERE id = ?";
+        $result = $this->fetchAll($sql, array($product_id));
+
+        return $result;
+    }
+
+    /**
+     * @param $dbObject
+     * @return array
+     */
+    private function createProductModel($dbObject)
+    {
+        $models = array();
+        if ($dbObject) {
+            foreach ($dbObject as $item) {
+                $tempModel = new ProductModel();
+                $tempModel->fillModel($item);
+                array_push($models, $tempModel);
+            }
+        }
+        return $models;
     }
 
     /**
