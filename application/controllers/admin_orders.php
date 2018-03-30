@@ -14,6 +14,7 @@ class admin_orders extends EmmaController
     public function init()
     {
         Loader::model("OrderModel");
+//        Loader::model("/controllers/orders/", "getOrders");
 
         require_once('./controllers/orders/getOrders.php');
     }
