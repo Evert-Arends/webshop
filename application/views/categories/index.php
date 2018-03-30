@@ -27,7 +27,7 @@
                         foreach ($categories as $cat) {
                             echo "<ul class='list-group list-group-flush no-border'>";
                             echo "<li class='list-group-item no-border'>";
-                            echo $cat->getName();
+                            echo $cat->getId() . " " . $cat->getName();
                             echo " <button type='button' class='editModalOpener btn btn-warning btn-sm' data-toggle='modal' data-target='#editModal' data-id='" . $cat->getId() . "' data-name='" . $cat->getName() . "'>Bewerken</button>";
                             echo " <button type='button' class='deleteModalOpener btn btn-danger btn-sm' data-toggle='modal' data-target='#deleteModal' data-id='" . $cat->getId() . "'>Verwijderen</button>";
                             echo "</li>";
@@ -35,7 +35,7 @@
                                 echo "<li class='list-group-item no-border'>";
                                 loopCategories($cat->getChildren());
                                 echo "</li>";
-                                echo " <li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
+                                echo "<li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
                             }
                             echo "</ul>";
                         }
@@ -60,6 +60,11 @@
     $(document).on("click", ".deleteModalOpener", function () {
         var productId = $(this).data('id');
         $(".modal-footer #CategoryId").val(productId);
+    });
+
+    $(document).on("click", ".createModalOpener", function () {
+        var productId = $(this).data('id');
+        $(".modal-body #CategoryId").val(productId);
     });
 </script>
 
