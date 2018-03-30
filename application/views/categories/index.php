@@ -38,7 +38,6 @@
                                 echo "<li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
                             }else{
                                 echo "<li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
-
                             }
                             echo "</ul>";
                         }
