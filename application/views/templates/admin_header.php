@@ -80,6 +80,11 @@
                             Klantgegevens
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASEPATH ?>orders">
+                            Bestellingen
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

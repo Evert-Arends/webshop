@@ -19,25 +19,25 @@
                     <div class="form-group row">
                         <label for="name" class="col-2 col-form-label">Productnaam</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getName(); ?>" id="name">
+                            <input class="form-control" type="text" value="<?= $product->getName(); ?>" id="name" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="description" class="col-2 col-form-label">Omschrijving</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getDescription(); ?>" id="description">
+                            <input class="form-control" type="text" value="<?= $product->getDescription(); ?>" id="description" name="description">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="manufacturer" class="col-2 col-form-label">Leverancier</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getManufacturer(); ?>" id="manufacturer">
+                            <input class="form-control" type="text" value="<?= $product->getManufacturer(); ?>" id="manufacturer" name="manufacturer">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="category" class="col-2 col-form-label">Categorie</label>
                         <div class="col-10">
-                            <select class="form-control" id="category">
+                            <select class="form-control" id="category" name="category">
                                 <?php
                                 $category = $product->getCategory();
                                 ?>
@@ -46,7 +46,7 @@
                                 if ($this->allCategories) {
                                     foreach ($this->allCategories as $cat) { ?>
                                         ?>
-                                        <option><?= $cat->getName(); ?></option>
+                                        <option id="<?= $cat->getId(); ?>"><?= $cat->getName(); ?></option>
                                         <?php
                                     }
                                 }
@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-dark form-control">Veranderingen opslaan</button>
+                            <button type="submit" id="editProductBtn" name="editProductBtn" class="btn btn-dark form-control">Veranderingen opslaan</button>
                         </div>
                     </div>
                     <?php

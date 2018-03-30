@@ -10,11 +10,13 @@ class admin_edit_product extends EmmaController
 {
     protected $product;
     protected $allCategories;
+    protected $msg;
 
     public function init()
     {
         Loader::model("CategoryModel");
 
+        require_once('./controllers/products/editProducts.php');
         require_once('./controllers/categories/getCategories.php');
         require_once('./controllers/products/getProducts.php');
     }
@@ -48,6 +50,22 @@ class admin_edit_product extends EmmaController
         return $categories->allCategories();
     }
 
+    private function editProduct()
+    {
+        $request = $this->request;
+        if (isset($request->post["deleteProductBtn"])) {
+            if (isset($request->post["productId"])) {
+                $productId = $request->post["productId"];
+
+                $deleteProduct = new deleteProducts();
+                $deleteProduct->init();
+
+                $deleteProduct->deleteProductOnId($productId);
+
+                header("Location: ". BASEPATH ."products/");
+            }
+        }
+    }
 
     private function adminData()
     {
