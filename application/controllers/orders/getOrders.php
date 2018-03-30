@@ -39,6 +39,23 @@ class getOrders extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    private function getUserOrders($user_id)
+    {
+        $sql = "SELECT * FROM `orders` WHERE users_id = ?";
+        $result = $this->fetchAll($sql, array($user_id));
+        return $result;
+    }
+
+    public function userOrders($user_id)
+    {
+        $allIDS = $this->getUserOrders($user_id);
+
+        if (!$allIDS) {
+            return NULL;
+        }
+        return $this->createModels($allIDS);
+    }
+
     private function createModels($IDS)
     {
         $orders = array();

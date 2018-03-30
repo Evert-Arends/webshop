@@ -81,7 +81,7 @@
                         } ?>>
 
                             <h4 class="card-title">
-                                <a href="/webshop/product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
+                                <a href="<?= BASEPATH ?>product/?id=<?= $product->getID(); ?>"><?= $product->getName(); ?></a>
                             </h4>
 
                             <?php

@@ -41,7 +41,7 @@ class profile extends EmmaController
         $orders = new getOrders();
         $orders->init();
 
-        return $orders->getOrdersOnUsername($this->getUser()->id);
+        return $orders->userOrders($this->request->User->id);
     }
 
     private function getUser(){
