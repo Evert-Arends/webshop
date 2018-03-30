@@ -10,6 +10,7 @@ class OrderModel extends EmmaModel
 {
     private $id;
     private $user_id;
+    private $order_date;
     private $user;
     private $rules;
     private $objectChecker;
@@ -40,6 +41,7 @@ class OrderModel extends EmmaModel
     {
         $this->setId($dataObject->id);
         $this->setUserId($dataObject->users_id);
+        $this->setOrderDate($dataObject->order_date);
 
         # Retrieve order rules
         $rules = $this->getOrderRulesFromDB($this->getId());
@@ -94,6 +96,22 @@ class OrderModel extends EmmaModel
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @param mixed $order_date
+     */
+    public function setOrderDate($order_date)
+    {
+        $this->order_date = $order_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderDate()
+    {
+        return $this->order_date;
     }
 
     /**
@@ -201,6 +219,7 @@ class OrderModel extends EmmaModel
         # Set product info
         $this->setId($order->Objects->id);
         $this->setUserId($order->Objects->user_id);
+        $this->setOrderDate($order->Objects->order_date);
 
         # Retrieve order rules
         $rolesIDS = $this->getOrderRulesFromDB($this->getId());

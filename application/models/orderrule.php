@@ -60,7 +60,7 @@ class OrderRuleModel extends EmmaModel
         $this->setId($dataArray->id);
         $this->setOrderId($dataArray->orders_id);
         $this->setProductId($dataArray->products_id);
-        $this->setAmount($dataArray->order_rulescol);
+        $this->setAmount($dataArray->amount);
 
         # Retrieve product
         $product = $this->getProductFromDB($this->getProductId());
@@ -178,7 +178,6 @@ class OrderRuleModel extends EmmaModel
     {
         $this->amount = $amount;
     }
-
 
     /**
      * @param $commit
