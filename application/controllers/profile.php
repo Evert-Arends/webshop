@@ -10,13 +10,17 @@ class profile extends EmmaController
 {
     protected $ReturnData;
     protected $RandomProduct;
+    protected $user;
+    protected $userOrders;
 
     public function init()
     {
         Loader::model("ProductModel");
+        Loader::model("OrderModel");
         Loader::setSnippet("sidebar_product", "templates/sidebar_product");
-        // current directory
+
         require_once('./controllers/products/getProducts.php');
+        require_once('./controllers/orders/getOrders.php');
     }
 
     public function index()
@@ -33,8 +37,21 @@ class profile extends EmmaController
         return $product->randomProducts(1);
     }
 
+    private function getUserOrders(){
+        $orders = new getOrders();
+        $orders->init();
+
+        return $orders->getOrdersOnUsername($this->getUser()->id);
+    }
+
+    private function getUser(){
+        return $this->request->User;
+    }
+
     private function loadTemplateData()
     {
+        $this->user = $this->getUser();
+        $this->userOrders = $this->getUserOrders();
         $this->RandomProduct = $this->randomProduct();
     }
 
