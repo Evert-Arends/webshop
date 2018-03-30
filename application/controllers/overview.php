@@ -17,10 +17,10 @@ class overview extends EmmaController
     {
         // Load models
         Loader::model("CategoryModel");
+        Loader::model("getProducts", "/controllers/products/");
+        Loader::model("getCategories", "/controllers/categories/");
         Loader::setSnippet("sidebar", "templates/sidebar");
         // Load specific external helpers
-        require_once('./controllers/products/getProducts.php');
-        require_once('./controllers/categories/getCategories.php');
     }
 
     public function index()

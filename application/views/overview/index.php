@@ -109,7 +109,9 @@
                             <div class="row">
                                 <div class="reviews_product col-10"></div>
                                 <div class="col-2">
-                                    <button class="btn heart-button float-right"><i class="fa fa-cart-plus"></i></button>
+                                    <button class="btn heart-button float-right" onclick="addToCart('<?php echo BASEPATH . "cart"; ?>', '<?= $product->getID()?>', '<?= $product->getName()?>', '1')"><i class="fa fa-cart-plus"></i>
+                                    </button>
+
                                 </div>
                             </div>
                         </div>
