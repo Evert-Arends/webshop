@@ -52,17 +52,6 @@ class Session
     }
 
     /**
-     * @param $key
-     * @param $value
-     */
-    static function replace($key, $value)
-    {
-
-        array_replace($_SESSION [$key], $value);
-
-    }
-
-    /**
      * @param $varName
      */
     static function nullify($varName)

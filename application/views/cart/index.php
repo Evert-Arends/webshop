@@ -52,57 +52,59 @@
                             </td>
                             <script>
                                 $(document).ready(function () {
-                                    var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
+                                    var quantity = parseInt($('#<?php echo $key . "-quantity"; ?>').val());
                                     editSubtotal(quantity);
                                     refreshPrice();
 
-                                    $('#<?php echo $productID . "-plus"; ?>').click(function (e) {
+                                    $('#<?php echo $key . "-plus"; ?>').click(function (e) {
                                         e.preventDefault();
-                                        var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
-                                        $('#<?php echo $productID . "-quantity"; ?>').val(quantity + 1);
+                                        var quantity = parseInt($('#<?php echo $key . "-quantity"; ?>').val());
+                                        $('#<?php echo $key . "-quantity"; ?>').val(quantity + 1);
                                         editSubtotal(quantity + 1);
+                                            updateAmount('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>', quantity + 1, '<?= $productID ?>');
                                         refreshPrice();
                                     });
 
-                                    $('#<?php echo $productID . "-minus"; ?>').click(function (e) {
+                                    $('#<?php echo $key . "-minus"; ?>').click(function (e) {
                                         e.preventDefault();
-                                        var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
+                                        var quantity = parseInt($('#<?php echo $key . "-quantity"; ?>').val());
                                         if (quantity > 1) {
-                                            $('#<?php echo $productID . "-quantity"; ?>').val(quantity - 1);
+                                            $('#<?php echo $key . "-quantity"; ?>').val(quantity - 1);
                                             editSubtotal(quantity - 1);
+                                            updateAmount('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>', quantity - 1, '<?= $productID ?>');
                                             refreshPrice();
                                         }
                                     });
 
                                     function editSubtotal(quantity) {
-                                        var price = $('#<?php echo $productID . "-price"; ?>').text();
+                                        var price = $('#<?php echo $key . "-price"; ?>').text();
                                         var stripped = price.replace(/\€/g, '');
                                         var intPrice = parseFloat(stripped) * quantity;
                                         var fixedPrice = intPrice.toFixed(2);
-                                        document.getElementById('<?php echo $productID . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
+                                        document.getElementById('<?php echo $key . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
                                     }
 
                                 });
                             </script>
-                            <td data-th="Prijs" <?php echo "id=" . $productID . "-price"; ?>>
-                                €<?= $product["model"]->getPrice(); ?></td>
+                            <td data-th="Prijs" <?php echo "id=" . $key . "-price"; ?>>
+                                €<?= $product["model"]->getDiscountPrice(); ?></td>
                             <td data-th="Aantal">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <button type="button"
-                                            <?php echo "id=" . $productID . "-minus"; ?>
+                                            <?php echo "id=" . $key . "-minus"; ?>
                                                 class="quantity-left-minus btn btn-danger btn-number"
                                                 data-type="minus" data-field="">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
                                     <input readonly type="text"
-                                           class="form-control" <?php echo "id=" . $productID . "-quantity"; ?>
+                                           class="form-control" <?php echo "id=" . $key . "-quantity"; ?>
                                            name="quantity"
                                            min="1" max="100" value="<?= $product["amount"] ?>">
                                     <div class="input-group-append">
                                         <button type="button"
-                                            <?php echo "id=" . $productID . "-plus"; ?>
+                                            <?php echo "id=" . $key . "-plus"; ?>
                                                 class="quantity-right-plus btn btn-success btn-number"
                                                 data-type="plus" data-field="">
                                             <i class="fa fa-plus"></i>
@@ -111,13 +113,13 @@
                                 </div>
                             </td>
                             <td data-th="Subtotaal"
-                                class="text-center subtotal" <?php echo "id=" . $productID . "-subtotal"; ?>>
+                                class="text-center subtotal" <?php echo "id=" . $key . "-subtotal"; ?>>
                                 1.99
                             </td>
 
                             <td class="actions" data-th="">
                                 <button data-attr="<?= $key ?>" id="rmv" class="btn btn-danger btn-sm"
-                                        onclick="clickHandler(this)">
+                                        onclick="clickHandler(this, '<?= $key ?>')">
 
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -150,9 +152,9 @@
                     </tfoot>
                 </table>
                 <script>
-                    function clickHandler(o) {
+                    function clickHandler(o, key) {
                         $(o).parent().parent().remove();
-                        deleteFromCart('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>');
+                        deleteFromCart('<?php echo BASEPATH . "cart"; ?>', key);
                     }
 
                     function refreshPrice() {

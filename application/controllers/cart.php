@@ -58,6 +58,18 @@ class cart extends EmmaController
                 return $this->ajax_msg("No session key provided.");
             $sessionKey = $this->request->post["session_key"];
             $this->removeProduct($sessionKey);
+        } elseif ($this->checkPost("edit_product")) {
+            if (!$this->checkPost("session_key"))
+                return $this->ajax_msg("No session key provided.");
+            if (!$this->checkPost("amount"))
+                return $this->ajax_msg("No new amount provided.");
+            if (!$this->checkPost("product_id"))
+                return $this->ajax_msg("No product id provided.");
+
+            $amount = $this->request->post["amount"];
+            $sessionKey = $this->request->post["session_key"];
+            $product_id = $this->request->post["product_id"];
+            $this->editProduct($sessionKey, $product_id, $amount);
         }
 
         return false;
@@ -85,10 +97,16 @@ class cart extends EmmaController
 
     private function editProduct($session_key, $id, $amount)
     {
-        Session::replace($session_key, array(
+        $session = $this->getCartSession();
+        $session[$session_key] = array(
             "product" => $id,
             "amount" => $amount
-        ));
+        );
+
+        $this->setCartSession($session);
+        var_dump($this->getCartSession());
+        return $this->ajax_msg("success");
+
     }
 
     private function removeProduct($session_key)

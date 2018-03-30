@@ -195,6 +195,14 @@ class ProductModel extends EmmaModel
         $this->discount = $discount;
     }
 
+    public function getDiscountPrice()
+    {
+        $discount = $this->getPrice() * $this->getDiscount() / 100;
+        $endPrice = $this->getPrice() - $discount;
+
+        return $endPrice;
+    }
+
     /**
      * @param null $id
      * @param null $name

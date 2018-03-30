@@ -18,11 +18,27 @@ function addToCart(postTo, productID, productName, productAmount) {
 
 
 function deleteFromCart(postTo, sessionKey) {
+    let sendData = {
+        ajax: true,
+        delete_product: true,
+        session_key: sessionKey
+    };
+    $.post(postTo, sendData, function (data) {
+        console.log(data);
+        if (data === "success") {
+            console.log("Product deleted.");
+        }
+    })
+}
+
+function updateAmount(postTo, sessionKey, amount, productKey) {
     console.log(postTo);
     console.log(sessionKey);
     let sendData = {
         ajax: true,
-        delete_product: true,
+        amount: amount,
+        edit_product: true,
+        product_id: productKey,
         session_key: sessionKey
     };
     $.post(postTo, sendData, function (data) {
