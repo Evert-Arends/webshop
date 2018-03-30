@@ -9,7 +9,8 @@
 
 <div class="row">
 
-    <?php $this->loadSnippet("sidebar_product"); ?>
+    <?php $this->loadSnippet("sidebar_product");
+    ?>
 
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">
@@ -33,157 +34,97 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr <?php echo "id=product1 "; ?>>
-                        <td data-th="Product">
-                            <div class="row">
-                                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
-                                                                     class="img-responsive"/></div>
-                                <div class="col-sm-10">
-                                    <h5 style="margin-top: 0.5rem !important;">Product 1</h5>
-                                </div>
-                            </div>
-                        </td>
-                        <script>
-                            $(document).ready(function () {
-                                var quantity = parseInt($('#<?php echo "product1" . "-quantity"; ?>').val());
-                                editSubtotal(quantity);
-                                refreshPrice();
+                    <?php
 
-                                $('#<?php echo "product1" . "-plus"; ?>').click(function (e) {
-                                    e.preventDefault();
-                                    var quantity = parseInt($('#<?php echo "product1" . "-quantity"; ?>').val());
-                                    $('#<?php echo "product1" . "-quantity"; ?>').val(quantity + 1);
-                                    editSubtotal(quantity + 1);
+                    foreach ($this->cart as $key => $product) {
+                        $productID = $product["product"];
+                        ?>
+
+                        <tr <?php echo "id=" . $product["product"]; ?>>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
+                                                                         class="img-responsive"/></div>
+                                    <div class="col-sm-10">
+                                        <h5 style="margin-top: 0.5rem !important;"><?= $product["model"]->getName() ?></h5>
+                                    </div>
+                                </div>
+                            </td>
+                            <script>
+                                $(document).ready(function () {
+                                    var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
+                                    editSubtotal(quantity);
                                     refreshPrice();
-                                });
 
-                                $('#<?php echo "product1" . "-minus"; ?>').click(function (e) {
-                                    e.preventDefault();
-                                    var quantity = parseInt($('#<?php echo "product1" . "-quantity"; ?>').val());
-                                    if (quantity > 1) {
-                                        $('#<?php echo "product1" . "-quantity"; ?>').val(quantity - 1);
-                                        editSubtotal(quantity - 1);
+                                    $('#<?php echo $productID . "-plus"; ?>').click(function (e) {
+                                        e.preventDefault();
+                                        var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
+                                        $('#<?php echo $productID . "-quantity"; ?>').val(quantity + 1);
+                                        editSubtotal(quantity + 1);
                                         refreshPrice();
+                                    });
+
+                                    $('#<?php echo $productID . "-minus"; ?>').click(function (e) {
+                                        e.preventDefault();
+                                        var quantity = parseInt($('#<?php echo $productID . "-quantity"; ?>').val());
+                                        if (quantity > 1) {
+                                            $('#<?php echo $productID . "-quantity"; ?>').val(quantity - 1);
+                                            editSubtotal(quantity - 1);
+                                            refreshPrice();
+                                        }
+                                    });
+
+                                    function editSubtotal(quantity) {
+                                        var price = $('#<?php echo $productID . "-price"; ?>').text();
+                                        var stripped = price.replace(/\€/g, '');
+                                        var intPrice = parseFloat(stripped) * quantity;
+                                        var fixedPrice = intPrice.toFixed(2);
+                                        document.getElementById('<?php echo $productID . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
                                     }
+
                                 });
-
-                                function editSubtotal(quantity) {
-                                    var price = $('#<?php echo "product1" . "-price"; ?>').text();
-                                    var stripped = price.replace(/\€/g, '');
-                                    var intPrice = parseFloat(stripped) * quantity;
-                                    var fixedPrice = intPrice.toFixed(2);
-                                    document.getElementById('<?php echo "product1" . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
-                                }
-
-                            });
-                        </script>
-                        <td data-th="Prijs" <?php echo "id=product1" . "-price"; ?>>€1.99</td>
-                        <td data-th="Aantal">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button"
-                                        <?php echo "id=product1" . "-minus"; ?>
-                                            class="quantity-left-minus btn btn-danger btn-number"
-                                            data-type="minus" data-field="">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
+                            </script>
+                            <td data-th="Prijs" <?php echo "id=" . $productID . "-price"; ?>>
+                                €<?= $product["model"]->getPrice(); ?></td>
+                            <td data-th="Aantal">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="button"
+                                            <?php echo "id=" . $productID . "-minus"; ?>
+                                                class="quantity-left-minus btn btn-danger btn-number"
+                                                data-type="minus" data-field="">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input readonly type="text"
+                                           class="form-control" <?php echo "id=" . $productID . "-quantity"; ?>
+                                           name="quantity"
+                                           min="1" max="100" value="<?= $product["amount"] ?>">
+                                    <div class="input-group-append">
+                                        <button type="button"
+                                            <?php echo "id=" . $productID . "-plus"; ?>
+                                                class="quantity-right-plus btn btn-success btn-number"
+                                                data-type="plus" data-field="">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <input readonly type="text"
-                                       class="form-control" <?php echo "id=product1" . "-quantity"; ?> name="quantity"
-                                       min="1" max="100" value="1">
-                                <div class="input-group-append">
-                                    <button type="button"
-                                        <?php echo "id=product1" . "-plus"; ?>
-                                            class="quantity-right-plus btn btn-success btn-number"
-                                            data-type="plus" data-field="">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product1" . "-subtotal"; ?>>
-                            1.99
-                        </td>
-                        <td class="actions" data-th="">
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
+                            </td>
+                            <td data-th="Subtotaal"
+                                class="text-center subtotal" <?php echo "id=" . $productID . "-subtotal"; ?>>
+                                1.99
+                            </td>
 
-                    <tr <?php echo "id=product2 "; ?>>
-                        <td data-th="Product">
-                            <div class="row">
-                                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
-                                                                     class="img-responsive"/></div>
-                                <div class="col-sm-10">
-                                    <h5 style="margin-top: 0.5rem !important;">Product 2</h5>
-                                </div>
-                            </div>
-                        </td>
-                        <script>
-                            $(document).ready(function () {
-                                var quantity = parseInt($('#<?php echo "product2" . "-quantity"; ?>').val());
-                                editSubtotal(quantity);
-                                refreshPrice();
+                            <td class="actions" data-th="">
+                                <button data-attr="<?= $key ?>" id="rmv" class="btn btn-danger btn-sm"
+                                        onclick="clickHandler(this)">
 
-                                $('#<?php echo "product2" . "-plus"; ?>').click(function (e) {
-                                    e.preventDefault();
-                                    var quantity = parseInt($('#<?php echo "product2" . "-quantity"; ?>').val());
-                                    $('#<?php echo "product2" . "-quantity"; ?>').val(quantity + 1);
-                                    editSubtotal(quantity + 1);
-                                    refreshPrice();
-                                });
-
-                                $('#<?php echo "product2" . "-minus"; ?>').click(function (e) {
-                                    e.preventDefault();
-                                    var quantity = parseInt($('#<?php echo "product2" . "-quantity"; ?>').val());
-                                    if (quantity > 1) {
-                                        $('#<?php echo "product2" . "-quantity"; ?>').val(quantity - 1);
-                                        editSubtotal(quantity - 1);
-                                        refreshPrice();
-                                    }
-                                });
-
-                                function editSubtotal(quantity) {
-                                    var price = $('#<?php echo "product2" . "-price"; ?>').text();
-                                    var stripped = price.replace(/\€/g, '');
-                                    var intPrice = parseFloat(stripped) * quantity;
-                                    var fixedPrice = intPrice.toFixed(2);
-                                    document.getElementById('<?php echo "product2" . "-subtotal"; ?>').innerHTML = "€" + fixedPrice;
-                                }
-                            });
-                        </script>
-                        <td data-th="Prijs" <?php echo "id=product2" . "-price"; ?>>€1.99</td>
-                        <td data-th="Aantal">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button"
-                                        <?php echo "id=product2" . "-minus"; ?>
-                                            class="quantity-left-minus btn btn-danger btn-number"
-                                            data-type="minus" data-field="">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input readonly type="text"
-                                       class="form-control" <?php echo "id=product2" . "-quantity"; ?> name="quantity"
-                                       min="1" max="100" value="1">
-                                <div class="input-group-append">
-                                    <button type="button"
-                                        <?php echo "id=product2" . "-plus"; ?>
-                                            class="quantity-right-plus btn btn-success btn-number"
-                                            data-type="plus" data-field="">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-th="Subtotaal" class="text-center subtotal" <?php echo "id=product2" . "-subtotal"; ?>>
-                            1.99
-                        </td>
-                        <td class="actions" data-th="">
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                    </tr>
-
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <?php
+                    } ?>
                     </tbody>
                     <tfoot>
                     <tr>
@@ -202,12 +143,18 @@
                         <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Doorwinkelen</a>
                         </td>
                         <td colspan="3" class="hidden-xs"></td>
-                        <td><a href="<?= BASEPATH ?>" class="btn btn-success btn-block">Betalen <i class="fa fa-angle-right"></i></a>
+                        <td><a href="<?= BASEPATH ?>" class="btn btn-success btn-block">Betalen <i
+                                        class="fa fa-angle-right"></i></a>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
                 <script>
+                    function clickHandler(o) {
+                        $(o).parent().parent().remove();
+                        deleteFromCart('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>');
+                    }
+
                     function refreshPrice() {
                         //Var init
                         var sum = 0;

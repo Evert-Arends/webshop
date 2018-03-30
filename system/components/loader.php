@@ -114,7 +114,7 @@ class Loader implements ISystemComponent
         if (!$path) {
             require_once("models/" . strtolower($modelFileName) . ".php");
         } else {
-            require_once($path);
+            require_once(".".$path . $paramModel . ".php");
         }
         //Create the model object
         $modelObject = new $modelName ();
@@ -136,6 +136,10 @@ class Loader implements ISystemComponent
         EmmaController::$instance->$modelName =& self::$model;
 
         return $ref =& self::$model;
+    }
+
+    public static function helper($paramModel, $path = null) {
+
     }
 
     /**

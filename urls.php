@@ -125,6 +125,12 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
+    "test" =>
+        array(
+            "controller" => "test",
+            "protected" => false,
+            "level" => array(1)
+        ),
     "logout" =>
         array("controller" => "logout",
             "protected" => false,
