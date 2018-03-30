@@ -53,8 +53,13 @@
     $(document).on("click", ".editModalOpener", function () {
         var productId = $(this).data('id');
         var productName = $(this).data('name');
-        $(".modal-body #CategoryOd").val(productId);
+        $(".modal-body #CategoryId").val(productId);
         $(".modal-body #CategoryName").val(productName);
+    });
+
+    $(document).on("click", ".deleteModalOpener", function () {
+        var productId = $(this).data('id');
+        $(".modal-footer #CategoryId").val(productId);
     });
 </script>
 
