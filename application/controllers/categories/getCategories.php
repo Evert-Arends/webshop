@@ -51,6 +51,13 @@ class getCategories extends EmmaModel
         return $result;
     }
 
+    public function checkIfCategoryExists($id) {
+
+        $sql = "SELECT COUNT(id) as total FROM categories WHERE id=?";
+        $result = $this->fetchAll($sql, array($id));
+        return $result ? ($result->total > 0 ? true : false) : false;
+    }
+
     public function allCategories()
     {
         $allIDS = $this->getAllCategories();

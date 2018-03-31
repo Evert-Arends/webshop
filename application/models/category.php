@@ -125,4 +125,26 @@ class CategoryModel extends EmmaModel
         $category_getter = new CategoriesTable();
         return $id ? $category_getter->find("id", $id) : $category_getter->find("name", $name);
     }
+
+    /**
+     * @param $commit
+     * @return int
+     */
+    public function create($commit)
+    {
+        $categoryTable = new CategoriesTable();
+
+        $values = array(
+            "name" => $this->getName(),
+            "description" => $this->getDescription()
+        );
+        if ($commit) {
+            $id = $categoryTable->insert(
+                $values
+            );
+
+            $this->setId($id);
+            return $id;
+        }
+    }
 }

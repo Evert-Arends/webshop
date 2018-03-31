@@ -119,13 +119,19 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
+    "edit_category" =>
+        array(
+            "controller" => "admin_crud_categories",
+            "protected" => true,
+            "level" => array(1)
+        ),
     "delete_product" =>
         array(
             "controller" => "delete_product",
             "protected" => true,
             "level" => array(1)
         ),
-    "test" =>
+    "test@lol" =>
         array(
             "controller" => "test",
             "protected" => false,

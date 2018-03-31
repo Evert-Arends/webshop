@@ -15,7 +15,7 @@
                             border-left: 1px solid black;
                         }
 
-                        .btn-sm{
+                        .btn-sm {
                             margin-top: 3px !important;
                         }
                     </style>
@@ -36,12 +36,13 @@
                                 loopCategories($cat->getChildren());
                                 echo "</li>";
                                 echo "<li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
-                            }else{
+                            } else {
                                 echo "<li class='list-group-item no-border'><button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . $cat->getId() . "'>Nieuwe categorie</button></li>";
                             }
                             echo "</ul>";
                         }
                     }
+
                     echo "<button type='button' class='createModalOpener btn btn-success btn-sm' data-toggle='modal' data-target='#createModal' data-id='" . NULL . "'>Nieuwe categorie</button>";
                     ?>
 
@@ -82,10 +83,12 @@
             </div>
             <div class="modal-body">
                 Bewerk categorie naam.
-                <form class="form form-outline" id="editCategory" name="editCategory" method="POST" action="<?= BASEPATH ?>edit_category/">
+                <form class="form form-outline" id="editCategory" name="editCategory" method="POST"
+                      action="<?= BASEPATH ?>edit_category/">
                     <input type="hidden" name="CategoryId" id="CategoryId" value=""/>
                     <input class="form-control" type="text" name="CategoryName" id="CategoryName" value=""/>
-                    <button type="submit" id="editCategoryBtn" name="editCategoryBtn" class="btn btn-danger mt-1 form-control">
+                    <button type="submit" id="editCategoryBtn" name="editCategoryBtn"
+                            class="btn btn-danger mt-1 form-control">
                         Aanpassen
                     </button>
                 </form>
@@ -117,7 +120,8 @@
                 <button type="button" class="btn btn-success" data-dismiss="modal">Annuleren</button>
                 <form id="deleteCategory" name="deleteCategory" method="POST" action="<?= BASEPATH ?>delete_category/">
                     <input type="hidden" name="CategoryId" id="CategoryId" value=""/>
-                    <button type="submit" id="deleteCategoryBtn" name="deleteCategoryBtn" class="btn btn-danger">
+                    <button type="button" id="deleteCategoryBtn" name="deleteCategoryBtn"
+                            onclick="postForm($(this), '<?= BASEPATH ?>edit_category/')" class="btn btn-danger">
                         Verwijderen
                     </button>
                 </form>
@@ -138,10 +142,16 @@
             </div>
             <div class="modal-body">
                 Vul een categorienaam in.
-                <form class="form form-outline" id="createCategory" name="createCategory" method="POST" action="<?= BASEPATH ?>create_category/">
-                    <input type="hidden" name="CategoryId" id="CategoryId" value=""/>
-                    <input class="form-control" type="text" name="CategoryName" id="CategoryName" value=""/>
-                    <button type="submit" id="createCategoryBtn" name="createCategoryBtn" class="btn btn-danger mt-1 form-control">
+                <form class="form form-outline" id="createCategory" name="createCategory" method="POST"
+                      action="<?= BASEPATH ?>edit_category/">
+                    <input type="hidden" name="create_category" id="CategoryId" value=""/>
+                    <input class="form-control" type="text" name="name" id="CategoryName" value=""/>
+                    Vul een categorie beschrijving in.
+                    <input class="form-control" type="text" name="desc" id="CategoryDescription" value=""/>
+                    <input type="hidden" name="parent" id="CategoryId" value="0"/>
+                    <button type="button" id="createCategoryBtn" name="createCategoryBtn"
+                            onclick="postForm('<?= BASEPATH ?>edit_category/', 'createCategory')"
+                            class="btn btn-danger mt-1 form-control">
                         Opslaan
                     </button>
                 </form>
@@ -152,3 +162,18 @@
         </div>
     </div>
 </div>
+
+<script>
+    function postForm(url, target) {
+        if (target === "deleteCategory") {
+            $("#deleteCategory").serialize();
+        } else if (target === "createCategory") {
+            let data = $("#createCategory").serialize();
+            $.post(url, data, function (returnData) {
+                console.log(returnData);
+            });
+        }
+    }
+</script>
+
+<script src="<?= APPPATH ?>/assets/custom-js/crud_category.js"></script>
