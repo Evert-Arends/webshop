@@ -15,6 +15,9 @@ class cart extends EmmaController
     public function init()
     {
         Loader::model("ProductModel");
+        Loader::model("OrderModel");
+        Loader::model("OrderRuleModel");
+        Loader::model("UserModel");
         Loader::setSnippet("sidebar_product", "templates/sidebar_product");
         Loader::model("getProducts", "/controllers/products/");
     }
@@ -70,9 +73,53 @@ class cart extends EmmaController
             $sessionKey = $this->request->post["session_key"];
             $product_id = $this->request->post["product_id"];
             $this->editProduct($sessionKey, $product_id, $amount);
+        } elseif ($this->checkPost("payday")) {
+            if (!$this->request->User->isAuthenticated) {
+                return $this->ajax_msg("U moet geregisteerd en ingelogd zijn om een besttelling te kunnen plaatsen.");
+            } else {
+                return $this->translateCartToOrder();
+            }
         }
 
+        var_dump($this->request->post);
+
         return false;
+    }
+
+    private function translateCartToOrder()
+    {
+        $cart = Session::get("cart");
+
+        if (empty($cart)) {
+            return $this->ajax_msg("Geen producten gevonden");
+        }
+        $userModel = new UserModel();
+        $userModel->getUser($this->request->User->email);
+
+        $orderModel = new OrderModel();
+        $orderModel->setUserId($this->request->User->id);
+        $orderModel->setUser($userModel);
+        $orderModel->setOrderDate(date("Y-m-d H:i:s"));
+        $orderModel->setId($orderModel->getLastInsertedId() + 1);
+
+        $orderRules = array();
+
+        foreach ($cart as $item) {
+            $productModel = new ProductModel();
+            $productModel->get($item["product"]);
+
+            $orderRuleModel = new OrderRuleModel();
+            $orderRuleModel->setProductId($productModel->getId());
+            $orderRuleModel->setAmount($item["amount"]);
+            $orderRuleModel->setOrderId($orderModel->getId());
+            array_push($orderRules, $orderRuleModel);
+        }
+        $orderModel->setOrderRules($orderRules);
+        $orderModel->create();
+
+        Session::nullify("cart");
+
+        return $this->ajax_msg("Uw bestelling is geplaatst, u ontvant spoedig meer details. Bedankt!");
     }
 
     private function checkPost($var)
@@ -104,7 +151,6 @@ class cart extends EmmaController
         );
 
         $this->setCartSession($session);
-        var_dump($this->getCartSession());
         return $this->ajax_msg("success");
 
     }

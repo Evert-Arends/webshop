@@ -188,18 +188,16 @@ class OrderRuleModel extends EmmaModel
         $orderRuleTable = new OrderRulesTable();
 
         $values = array(
-            "id" => $this->getId(),
-            "order_id" => $this->getOrderId(),
-            "product_id" => $this->getProductId(),
+            "orders_id" => $this->getOrderId(),
+            "products_id" => $this->getProductId(),
             "amount" => $this->getAmount(),
         );
+
         if ($commit) {
             $id = $orderRuleTable->insert(
                 $values
             );
-
             $this->setId($id);
-
             return $id;
         }
     }

@@ -137,7 +137,7 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
-    "test@lol" =>
+    "test" =>
         array(
             "controller" => "test",
             "protected" => false,
