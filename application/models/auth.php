@@ -21,6 +21,10 @@ class AuthModel extends EmmaModel
         parent::__construct();
     }
 
+    /**
+     * @param $user_id
+     * @return AuthModel|bool
+     */
     public function fillModel($user_id)
     {
         $authTable = new AuthTable();

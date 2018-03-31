@@ -83,8 +83,6 @@ class cart extends EmmaController
             }
         }
 
-        var_dump($this->request->post);
-
         return false;
     }
 

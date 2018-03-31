@@ -26,7 +26,6 @@ class FillModel extends EmmaModel
         foreach ($products as $product) {
             array_push($prdri, $product->getId());
         }
-        var_dump($prdri);
         foreach ($prdri as $prd) {
             $sql = "INSERT INTO `photos`(`photo_id`, `products_id`, `locatie`, `description`) VALUES (NULL, $prd, \"https://i.imgur.com/M1o4gih.png\", NULL);";
             $i = 0;

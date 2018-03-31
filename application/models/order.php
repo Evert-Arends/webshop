@@ -58,6 +58,9 @@ class OrderModel extends EmmaModel
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getLastInsertedId() {
         $sql = "SELECT MAX(id) as max_id FROM orders";
         return $this->fetch($sql)->max_id;
@@ -240,6 +243,9 @@ class OrderModel extends EmmaModel
     }
 
 
+    /**
+     * Creates instance of model
+     */
     public function create() {
         $ordersTable = new OrdersTable();
         $value = array(

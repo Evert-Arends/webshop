@@ -37,6 +37,10 @@ class ProductModel extends EmmaModel
         Loader::model("ProductImageModel");
     }
 
+    /**
+     * @param $dataObject
+     * @return $this
+     */
     public function fillModel($dataObject)
     {
         $this->setId($dataObject->id);
@@ -155,6 +159,10 @@ class ProductModel extends EmmaModel
         $this->images = $images;
     }
 
+    /**
+     * @param $productId
+     * @return array|bool
+     */
     private function getImagesFromDB($productId)
     {
         $sql = "SELECT * FROM photos WHERE products_id = ?";
@@ -195,6 +203,9 @@ class ProductModel extends EmmaModel
         $this->discount = $discount;
     }
 
+    /**
+     * @return float|int|mixed
+     */
     public function getDiscountPrice()
     {
         $discount = $this->getPrice() * $this->getDiscount() / 100;
@@ -243,6 +254,10 @@ class ProductModel extends EmmaModel
         return $this;
     }
 
+    /**
+     * @param $dbObject
+     * @return array
+     */
     private function createPhotoModels($dbObject)
     {
         $models = array();
@@ -298,7 +313,6 @@ class ProductModel extends EmmaModel
     private function buildCategoryTree($category_id)
     {
         $categoryModel = new CategoryModel;
-//        $category = $categoryTable->find("id", $category_id);
         $sql = "SELECT * FROM categories WHERE id= ?";
         $category = $this->fetch($sql, array($category_id));
 

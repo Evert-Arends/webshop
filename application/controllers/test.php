@@ -25,11 +25,8 @@ class test extends EmmaController
 //         $fill->init();
 
 //        $ar = array("1" => "HEy!", "2" => "LOL!");
-//        var_dump($ar);
 //
 //        $ar = array_replace($ar, array("1" => "HOI!"));
-//
-//        var_dump($ar);
 //
 //        Session::nullify("cart");
 

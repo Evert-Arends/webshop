@@ -27,6 +27,10 @@ class AddressModel extends EmmaModel
 
     }
 
+    /**
+     * @param $user_id
+     * @return $this|bool
+     */
     public function fillModel($user_id)
     {
         $this->setUserId($user_id);

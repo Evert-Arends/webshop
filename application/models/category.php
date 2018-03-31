@@ -13,6 +13,7 @@ class CategoryModel extends EmmaModel
     private $name;
     private $description;
     private $parent;
+
     // Linked properties
     private $children = array(); // Must be null or a parent category object in an array
 
@@ -97,11 +98,17 @@ class CategoryModel extends EmmaModel
     }
 
 
+    /**
+     * @return mixed
+     */
     public function getParent()
     {
         return $this->parent;
     }
 
+    /**
+     * @param $parent_id
+     */
     public function setParent($parent_id)
     {
         $newModel = clone($this);
@@ -134,6 +141,11 @@ class CategoryModel extends EmmaModel
         return $this;
     }
 
+    /**
+     * @param null $id
+     * @param null $name
+     * @return bool|EmmaTable
+     */
     private function getCategory($id = null, $name = null)
     {
         $category_getter = new CategoriesTable();
