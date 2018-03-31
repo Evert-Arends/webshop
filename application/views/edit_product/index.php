@@ -9,6 +9,9 @@
                 <li class="breadcrumb-item">
                     <a href="<?= BASEPATH ?>admin">Dashboard</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="<?= BASEPATH ?>products">Producten</a>
+                </li>
                 <li class="breadcrumb-item active">Product bewerken</li>
             </ol>
 
