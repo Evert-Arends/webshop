@@ -44,9 +44,7 @@
                         <tr <?php echo "id=" . $product["product"]; ?>>
                             <td data-th="Product">
                                 <div class="row">
-                                    <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..."
-                                                                         class="img-responsive"/></div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <h5 style="margin-top: 0.5rem !important;"><?= $product["model"]->getName() ?></h5>
                                     </div>
                                 </div>
@@ -100,7 +98,7 @@
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input readonly type="text"
+                                    <input readonly type="text" style="margin-bottom: 0 !important;"
                                            class="form-control" <?php echo "id=" . $key . "-quantity"; ?>
                                            name="quantity"
                                            min="1" max="100" value="<?= $product["amount"] ?>">
