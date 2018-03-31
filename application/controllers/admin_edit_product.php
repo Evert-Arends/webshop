@@ -54,14 +54,22 @@ class admin_edit_product extends EmmaController
     private function editProduct()
     {
         $request = $this->request;
+        var_dump($request->post);
         if (isset($request->post["editProductBtn"])) {
-            if (isset($request->post["productId"])) {
-                $productId = $request->post["productId"];
+            if (isset($request->post["id"])) {
+
+                $productId = $request->post["id"];
+                $name = $request->post["name"];
+                $description = $request->post["description"];
+                $manufacturer = $request->post["manufacturer"];
+                $category = $request->post["category"];
+                $price = $request->post["price"];
+                $discount = $request->post["sale"];
 
                 $editProduct = new editProducts();
                 $editProduct->init();
 
-                $editProduct->editProduct($productId);
+                $editProduct->editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount);
 
                 header("Location: ". BASEPATH ."products/");
             }
