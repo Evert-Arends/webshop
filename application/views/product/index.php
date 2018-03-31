@@ -50,8 +50,12 @@
                                             <div class="preview">
                                                 <style>
                                                     .imgholder-big {
-                                                        height: 300px;
-                                                        width: 550px;
+                                                        max-height: 400px;
+                                                        overflow: hidden;
+                                                    }
+
+                                                    .imgholder-small {
+                                                        height: 75px;
                                                         overflow: hidden;
                                                     }
                                                 </style>
@@ -73,24 +77,24 @@
                                                     </div>
                                                 </div>
                                                 <ul class="preview-thumbnail nav nav-tabs">
-                                                    <li class="active"><a data-target="#pic-1" data-toggle="tab"><img
-                                                                    class="imgholder-small"
+                                                    <li class="active imgholder-small"><a data-target="#pic-1"
+                                                                                          data-toggle="tab"><img
                                                                     src="<?= $product->getImages()[0]->getLocation(); ?>"/></a>
                                                     </li>
-                                                    <li><a data-target="#pic-2" data-toggle="tab"><img
-                                                                    class="imgholder-small"
+                                                    <li class=" imgholder-small"><a data-target="#pic-2"
+                                                                                    data-toggle="tab"><img
                                                                     src="<?= $product->getImages()[1]->getLocation(); ?>"/></a>
                                                     </li>
-                                                    <li><a data-target="#pic-3" data-toggle="tab"><img
-                                                                    class="imgholder-small"
+                                                    <li class=" imgholder-small"><a data-target="#pic-3"
+                                                                                    data-toggle="tab"><img
                                                                     src="<?= $product->getImages()[2]->getLocation(); ?>"/></a>
                                                     </li>
-                                                    <li><a data-target="#pic-4" data-toggle="tab"><img
-                                                                    class="imgholder-small"
+                                                    <li class=" imgholder-small"><a data-target="#pic-4"
+                                                                                    data-toggle="tab"><img
                                                                     src="<?= $product->getImages()[3]->getLocation(); ?>"/></a>
                                                     </li>
-                                                    <li><a data-target="#pic-5" data-toggle="tab"><img
-                                                                    class="imgholder-small"
+                                                    <li class=" imgholder-small"><a data-target="#pic-5"
+                                                                                    data-toggle="tab"><img
                                                                     src="<?= $product->getImages()[4]->getLocation(); ?>"/></a>
                                                     </li>
                                                 </ul>
@@ -108,7 +112,7 @@
                                             <?php } else { ?>
                                                 <p class="price">€<?= $product->getPrice() * 1.21 ?></p>
                                             <?php } ?>
-                                            <form method="get" action="cart.html">
+                                            <form method="get" action="">
                                                 <div class="form-group">
                                                     <label for="colors">Kleur</label>
                                                     <select class="custom-select" id="colors">

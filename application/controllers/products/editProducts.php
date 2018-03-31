@@ -19,7 +19,7 @@ class editProducts extends EmmaModel
         Loader::model("ProductModel");
     }
 
-    public function editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount)
+    public function editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount, $images, $imgIDS)
     {
         $productTable = new ProductsTable();
         $productTable->find('id', $productId);
@@ -29,10 +29,13 @@ class editProducts extends EmmaModel
         $productTable->Objects->categories_id = $category;
         $productTable->Objects->price = $price;
 
+        $allImages = array_combine($imgIDS, $images);
+
         if($discount){
             $discountTable = new product_has_discount();
             if($discountTable->find('products_id', $productId)){
                 $discountTable->Objects->discount = $discount;
+                $discountTable->save();
             } else{
                 $discountTable->insert(array(
                     "products_id" => $productId,
@@ -40,6 +43,28 @@ class editProducts extends EmmaModel
                 ));
             }
         }
+
         $productTable->save();
+
+        if($allImages) {
+            $photoTable = new PhotosTable();
+            $value = array(
+                "photo_id" => "",
+                "products_id" => $productId,
+                "locatie" => ""
+            );
+            foreach ($allImages as $id => $location) {
+                if($photoTable->find('photo_id', $id)){
+                    $photoTable->Objects->locatie = $location;
+                    $photoTable->save();
+                }else{
+                    $value["photo_id"] = $id;
+                    $value["locatie"] = $location;
+                    $photoTable->insert($value);
+                }
+            }
+        }else{
+            echo "IM DONEEEEEEEEEEEEEEEEEE";
+        }
     }
 }

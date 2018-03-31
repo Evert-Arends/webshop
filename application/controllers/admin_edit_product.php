@@ -53,6 +53,7 @@ class admin_edit_product extends EmmaController
 
     private function editProduct()
     {
+        var_dump($this->request->post);
         $request = $this->request;
         if (isset($request->post["editProductBtn"])) {
             if (isset($request->post["id"])) {
@@ -64,11 +65,25 @@ class admin_edit_product extends EmmaController
                 $category = $request->post["category"];
                 $price = $request->post["price"];
                 $discount = $request->post["sale"];
+                $img1 = $request->post["image1"];
+                $img2 = $request->post["image2"];
+                $img3 = $request->post["image3"];
+                $img4 = $request->post["image4"];
+                $img5 = $request->post["image5"];
+
+                $imgId1 = $request->post["imgId1"];
+                $imgId2 = $request->post["imgId2"];
+                $imgId3 = $request->post["imgId3"];
+                $imgId4 = $request->post["imgId4"];
+                $imgId5 = $request->post["imgId5"];
+
+                $imgIDS = array($imgId1, $imgId2, $imgId3, $imgId4, $imgId5);
+                $images = array($img1, $img2, $img3, $img4, $img5);
 
                 $editProduct = new editProducts();
                 $editProduct->init();
 
-                $editProduct->editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount);
+                $editProduct->editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount, $images, $imgIDS);
 
                 header("Location: ". BASEPATH ."products/");
             }

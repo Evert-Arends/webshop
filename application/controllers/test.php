@@ -17,14 +17,22 @@ class test extends EmmaController
 
     public function init()
     {
-        $ar = array("1" => "HEy!", "2" => "LOL!");
-        var_dump($ar);
+        Loader::model("ProductModel");
+        Loader::model("FillModel", "/controller/products/");
+        require_once('./controllers/products/getProducts.php');
 
-        $ar = array_replace($ar, array("1" => "HOI!"));
+        $fill = new FillModel();
+        // $fill->init();
+//        $ar = array("1" => "HEy!", "2" => "LOL!");
+//        var_dump($ar);
+//
+//        $ar = array_replace($ar, array("1" => "HOI!"));
+//
+//        var_dump($ar);
+//
+//        Session::nullify("cart");
 
-        var_dump($ar);
-
-        Session::nullify("cart");
     }
+
 
 }
