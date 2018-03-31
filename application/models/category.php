@@ -12,6 +12,7 @@ class CategoryModel extends EmmaModel
     private $id;
     private $name;
     private $description;
+    private $parent;
     // Linked properties
     private $children = array(); // Must be null or a parent category object in an array
 
@@ -95,6 +96,19 @@ class CategoryModel extends EmmaModel
         $this->description = $description;
     }
 
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent($parent_id)
+    {
+        $newModel = clone($this);
+        $newModel->get($parent_id);
+        $this->parent = $newModel;
+    }
+
     /**
      * At least one of the parameters needs to be set.
      * Fills this model with data from the database.
@@ -128,11 +142,12 @@ class CategoryModel extends EmmaModel
 
     /**
      * @param $commit
-     * @return int
+     * @return void
      */
     public function create($commit)
     {
         $categoryTable = new CategoriesTable();
+
 
         $values = array(
             "name" => $this->getName(),
@@ -144,7 +159,16 @@ class CategoryModel extends EmmaModel
             );
 
             $this->setId($id);
-            return $id;
+        }
+        if ($this->getParent()) {
+            $categoryHasCategory = new categories_has_categories();
+            $nValues = array(
+                "parent" => $this->getParent()->getId(),
+                "child" => $this->getId()
+            );
+            if ($commit) {
+                $categoryHasCategory->insert($nValues);
+            }
         }
     }
 }

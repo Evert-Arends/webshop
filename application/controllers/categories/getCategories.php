@@ -11,6 +11,7 @@ class getCategories extends EmmaModel
 {
     public function init()
     {
+        Loader::model("CategoryModel");
         $this->CategoryModel = Loader::model("CategoryModel");
     }
 
@@ -32,7 +33,7 @@ class getCategories extends EmmaModel
         return $this->createModels($allIDS);
     }
 
-    private function getChildren($id)
+    public function getChildren($id)
     {
 
         $sql = "SELECT * FROM categories INNER JOIN categories_has_categories category ON categories.id = category.child WHERE parent = ?";
@@ -51,11 +52,29 @@ class getCategories extends EmmaModel
         return $result;
     }
 
-    public function checkIfCategoryExists($id) {
+    public function checkIfCategoryExists($name)
+    {
 
-        $sql = "SELECT COUNT(id) as total FROM categories WHERE id=?";
-        $result = $this->fetchAll($sql, array($id));
+        $sql = "SELECT COUNT(id) as total FROM categories WHERE name=?";
+        $result = $this->fetch($sql, array($name));
         return $result ? ($result->total > 0 ? true : false) : false;
+    }
+
+    public function removeLinkedCategories($categories)
+    {
+        foreach ($categories as $category) {
+            $sql = "DELETE FROM categories_has_categories WHERE child = ? OR parent = ?";
+            $this->query($sql, array($category, $category));
+        }
+
+        return true;
+    }
+
+    public function deleteCategories($categories)
+    {
+        $str = str_repeat('?,', count($categories) - 1) . '?';
+        $sql = "DELETE FROM categories WHERE id IN (". $str .")";
+        $this->fetchAll($sql, $categories);
     }
 
     public function allCategories()
@@ -72,7 +91,7 @@ class getCategories extends EmmaModel
     {
         $categories = array();
         foreach ($IDS as $value) {
-            $categoryModel = clone($this->CategoryModel);
+            $categoryModel = new CategoryModel();
 
             $children = $this->getChildren($value->id);
 

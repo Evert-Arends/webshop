@@ -11,6 +11,7 @@ class admin_crud_categories extends EmmaController
     protected $product;
     protected $allCategories;
     protected $msg;
+    private $all_kids;
 
     public function init()
     {
@@ -25,10 +26,9 @@ class admin_crud_categories extends EmmaController
         } elseif ($this->checkPost("delete_category")) {
             $this->deleteCategory();
         } elseif ($this->checkPost("create_category")) {
-            var_dump($this->request->post);
             $this->createCategory();
         }
-        var_dump($this->request->post);
+//        var_dump($this->request->post);
 
     }
 
@@ -43,6 +43,7 @@ class admin_crud_categories extends EmmaController
     public function createCategory()
     {
         $parent = $this->getPost("parent");
+
         $name = $this->getPost("name");
         $description = $this->getPost("desc");
 
@@ -53,17 +54,20 @@ class admin_crud_categories extends EmmaController
 
         $categories = new getCategories();
 
-        $cat = $categories->checkIfCategoryExists($parent);
+        $cat = $categories->checkIfCategoryExists($name);
         if ($cat) {
             return $this->ajax_msg("Category exists already!");
         }
 
         $category = new CategoryModel();
         $category->setName($name);
-        if($description) {
+        if ($description) {
             $category->setDescription($description);
         } else {
             $category->setDescription("No description available.");
+        }
+        if (!$parent == 0) {
+            $category->setParent($parent);
         }
 
         $category->create(true);
@@ -75,12 +79,67 @@ class admin_crud_categories extends EmmaController
 
     public function editCategory()
     {
+        $category = $this->getPost("CategoryId");
+        $name = $this->getPost("CategoryName");
+        $categories = new getCategories();
+        $catTable = new CategoriesTable();
+
+        $catTable->find("id", $category);
+        if (!$catTable) {
+            return $this->ajax_msg("Could not find category!");
+        }
+
+        if ($name) {
+            $cat = $categories->checkIfCategoryExists($name);
+            if ($cat) {
+                return $this->ajax_msg("Category with that name exists already!");
+            }
+            $catTable->Objects->name = $name;
+            $catTable->save();
+        }
+
+        return $this->ajax_msg("success");
 
     }
 
     public function deleteCategory()
     {
+        $category = $this->getPost("CategoryId");
+        $to_delete = array();
+        if ($category) {
+            $categories = $this->getChildCategories($category);
+            array_push($to_delete, (int)$category);
 
+            foreach ($categories as $cat) {
+                array_push($to_delete, $cat);
+            }
+        }
+
+        $categoryMdl = new getCategories();
+        $categoryMdl->removeLinkedCategories($to_delete);
+        $categoryMdl->deleteCategories($to_delete);
+
+        return $this->ajax_msg("success");
+
+    }
+
+    private function getChildCategories($category_id)
+    {
+        $this->all_kids = array();
+        $categoryMdl = new getCategories();
+        $categories = $categoryMdl->getChildren($category_id);
+
+        if ($categories) {
+            foreach ($categories as $cat) {
+                if ($cat->getChildren()) {
+                    $this->getChildCategories($cat->getId());
+                }
+                array_push($this->all_kids, $cat->getId());
+
+            }
+        }
+
+        return $this->all_kids;
     }
 
     private function ajax_msg($msg)
