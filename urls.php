@@ -131,6 +131,12 @@ $routes = array(
             "protected" => true,
             "level" => array(1)
         ),
+    "create_product" =>
+        array(
+            "controller" => "admin_create_products",
+            "protected" => true,
+            "level" => array(1)
+        ),
     "test@lol" =>
         array(
             "controller" => "test",

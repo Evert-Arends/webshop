@@ -48,33 +48,50 @@
                                         <!-- Image -->
                                         <div class="col-12 col-lg-6">
                                             <div class="preview">
+                                                <style>
+                                                    .imgholder-big {
+                                                        height: 300px;
+                                                        width: 550px;
+                                                        overflow: hidden;
+                                                    }
+                                                </style>
                                                 <div class="preview-pic tab-content">
-                                                    <div class="tab-pane active" id="pic-1"><img
-                                                                src="http://via.placeholder.com/400x252/34568"/></div>
-                                                    <div class="tab-pane" id="pic-2"><img
-                                                                src="http://via.placeholder.com/400x252/62201"/></div>
-                                                    <div class="tab-pane" id="pic-3"><img
-                                                                src="http://via.placeholder.com/400x252/10378"/></div>
-                                                    <div class="tab-pane" id="pic-4"><img
-                                                                src="http://via.placeholder.com/400x252/99574"/></div>
-                                                    <div class="tab-pane" id="pic-5"><img
-                                                                src="http://via.placeholder.com/400x252/12345"/></div>
+                                                    <div class="tab-pane active imgholder-big" id="pic-1"><img
+                                                                src="<?= $product->getImages()[0]->getLocation(); ?>"/>
+                                                    </div>
+                                                    <div class="tab-pane imgholder-big" id="pic-2"><img
+                                                                src="<?= $product->getImages()[1]->getLocation(); ?>"/>
+                                                    </div>
+                                                    <div class="tab-pane imgholder-big" id="pic-3"><img
+                                                                src="<?= $product->getImages()[2]->getLocation(); ?>"/>
+                                                    </div>
+                                                    <div class="tab-pane imgholder-big" id="pic-4"><img
+                                                                src="<?= $product->getImages()[3]->getLocation(); ?>"/>
+                                                    </div>
+                                                    <div class="tab-pane imgholder-big" id="pic-5"><img
+                                                                src="<?= $product->getImages()[4]->getLocation(); ?>"/>
+                                                    </div>
                                                 </div>
                                                 <ul class="preview-thumbnail nav nav-tabs">
                                                     <li class="active"><a data-target="#pic-1" data-toggle="tab"><img
-                                                                    src="http://via.placeholder.com/200x126/34568"/></a>
+                                                                    class="imgholder-small"
+                                                                    src="<?= $product->getImages()[0]->getLocation(); ?>"/></a>
                                                     </li>
                                                     <li><a data-target="#pic-2" data-toggle="tab"><img
-                                                                    src="http://via.placeholder.com/200x126/62201"/></a>
+                                                                    class="imgholder-small"
+                                                                    src="<?= $product->getImages()[1]->getLocation(); ?>"/></a>
                                                     </li>
                                                     <li><a data-target="#pic-3" data-toggle="tab"><img
-                                                                    src="http://via.placeholder.com/200x126/10378"/></a>
+                                                                    class="imgholder-small"
+                                                                    src="<?= $product->getImages()[2]->getLocation(); ?>"/></a>
                                                     </li>
                                                     <li><a data-target="#pic-4" data-toggle="tab"><img
-                                                                    src="http://via.placeholder.com/200x126/99574"/></a>
+                                                                    class="imgholder-small"
+                                                                    src="<?= $product->getImages()[3]->getLocation(); ?>"/></a>
                                                     </li>
                                                     <li><a data-target="#pic-5" data-toggle="tab"><img
-                                                                    src="http://via.placeholder.com/200x126/12345"/></a>
+                                                                    class="imgholder-small"
+                                                                    src="<?= $product->getImages()[4]->getLocation(); ?>"/></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -124,7 +141,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="button" onclick="addToCart('<?php echo BASEPATH . "cart"; ?>', '<?= $product->getID() ?>', '<?= $product->getName() ?>', $('#quantity').val())"
+                                                <button type="button"
+                                                        onclick="addToCart('<?php echo BASEPATH . "cart"; ?>', '<?= $product->getID() ?>', '<?= $product->getName() ?>', $('#quantity').val())"
                                                         class="btn btn-success btn-lg btn-block text-uppercase">
                                                     <i class="fa fa-shopping-cart"></i> Toevoegen
                                                 </button>

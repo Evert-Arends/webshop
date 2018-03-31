@@ -54,7 +54,6 @@ class admin_edit_product extends EmmaController
     private function editProduct()
     {
         $request = $this->request;
-        var_dump($request->post);
         if (isset($request->post["editProductBtn"])) {
             if (isset($request->post["id"])) {
 

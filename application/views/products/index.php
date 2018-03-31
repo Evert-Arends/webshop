@@ -11,6 +11,7 @@
                 </li>
                 <li class="breadcrumb-item active">Producten</li>
             </ol>
+                <a href="<?= BASEPATH ?>create_product" class="btn btn-success col-12 mb-3">Nieuw product</a>
             <!-- Example DataTables Card-->
             <div class="card mb-3">
                 <div class="card-header">
