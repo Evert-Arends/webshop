@@ -24,6 +24,7 @@ class admin_edit_product extends EmmaController
     public function index()
     {
         $this->adminData();
+        $this->editProduct();
         $this->page();
     }
 
@@ -53,14 +54,14 @@ class admin_edit_product extends EmmaController
     private function editProduct()
     {
         $request = $this->request;
-        if (isset($request->post["deleteProductBtn"])) {
+        if (isset($request->post["editProductBtn"])) {
             if (isset($request->post["productId"])) {
                 $productId = $request->post["productId"];
 
-                $deleteProduct = new deleteProducts();
-                $deleteProduct->init();
+                $editProduct = new editProducts();
+                $editProduct->init();
 
-                $deleteProduct->deleteProductOnId($productId);
+                $editProduct->editProduct($productId);
 
                 header("Location: ". BASEPATH ."products/");
             }

@@ -18,8 +18,11 @@ class editUsers extends EmmaModel
         Loader::model("UserModel");
     }
 
-    public function editProduct($product)
+    public function editUser($userId, $roleName)
     {
-        echo "UPDATING USER.";
+        $userTable = new UsersTable();
+        $userTable->find('id', $userId);
+        $userTable->Objects->roles_name = $roleName;
+        $userTable->save();
     }
 }

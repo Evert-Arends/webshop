@@ -13,11 +13,13 @@ class admin_users extends EmmaController
     public function init()
     {
         require_once('./controllers/users/getUsers.php');
+        require_once('./controllers/users/editUsers.php');
     }
 
     public function index()
     {
         $this->adminData();
+        $this->editUser();
         $this->page();
     }
 
@@ -27,6 +29,22 @@ class admin_users extends EmmaController
         $allUsers->init();
 
         return $allUsers->allUsers();
+    }
+
+    private function editUser()
+    {
+        $request = $this->request;
+        if (isset($request->post["editUserBtn"])) {
+            if (isset($request->post["userId"])) {
+                $userId = $request->post["userId"];
+                $roleId = $request->post["selectRole"];
+
+                $editUser = new editUsers();
+                $editUser->init();
+
+                $editUser->editUser($userId, $roleId);
+            }
+        }
     }
 
     private function adminData()

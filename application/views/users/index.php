@@ -58,7 +58,8 @@
                                         <td>
                                             <button type='button' class='editModalOpener btn btn-warning btn-sm'
                                                     data-toggle='modal' data-target='#editModal'
-                                                    data-id='<?= $user->getId(); ?>' data-role='<?= $role->getLevel(); ?>'>
+                                                    data-id='<?= $user->getId(); ?>'
+                                                    data-role='<?= $user->getRole()->getName(); ?>'>
                                                 Bewerken
                                             </button>
                                         </td>
@@ -81,7 +82,7 @@
         var userId = $(this).data('id');
         var roleId = $(this).data('role');
         $(".modal-body #userId").val(userId);
-        $('#roleId option[value="'+ roleId +'"]').prop("selected", "selected");
+        $('#selectRole option[value="' + roleId + '"]').prop("selected", "selected");
     });
 </script>
 
@@ -97,14 +98,13 @@
             </div>
             <div class="modal-body">
                 Bewerk gebruikersrechten.
-                <form class="form form-outline" id="editUser" name="editUser" method="POST" action="<?= BASEPATH ?>users/">
+                <form class="form form-outline" id="editUser" name="editUser" method="POST"
+                      action="<?= BASEPATH ?>users/">
                     <input type="hidden" name="userId" id="userId" value=""/>
-                    <div id="roleId">
-                        <select class="form-control">
-                            <option value="2">Gebruiker</option>
-                            <option value="1">Administrator</option>
-                        </select>
-                    </div>
+                    <select class="form-control" id="selectRole" name="selectRole">
+                        <option value="Customer">Gebruiker</option>
+                        <option value="Admin">Administrator</option>
+                    </select>
                     <button type="submit" id="editUserBtn" name="editUserBtn" class="btn btn-danger mt-1 form-control">
                         Aanpassen
                     </button>
