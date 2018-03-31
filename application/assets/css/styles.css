@@ -61,8 +61,8 @@ body {
 /*	2.	Menu
 -------------------------------------------------------------------*/
 #menu {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
     z-index: 1052;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
     background: #563d7c none;

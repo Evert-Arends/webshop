@@ -124,17 +124,16 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="cart.html"
-                                                   class="btn btn-success btn-lg btn-block text-uppercase">
+                                                <button type="button" onclick="addToCart('<?php echo BASEPATH . "cart"; ?>', '<?= $product->getID() ?>', '<?= $product->getName() ?>', $('#quantity').val())"
+                                                        class="btn btn-success btn-lg btn-block text-uppercase">
                                                     <i class="fa fa-shopping-cart"></i> Toevoegen
-                                                </a>
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="row custom-margin">
                             <!-- Description -->
                             <div class="col-12">
