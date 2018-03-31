@@ -145,15 +145,16 @@
                         <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Doorwinkelen</a>
                         </td>
                         <td colspan="3" class="hidden-xs"></td>
-                        <td><a href="<?= BASEPATH ?>" class="btn btn-success btn-block">Betalen <i
+                        <td><a href="#" onclick="payMe();"
+                               class="btn btn-success btn-block">Betalen <i
                                         class="fa fa-angle-right"></i></a>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
                 <?php
-                }else{
-                        echo "<div class='alert alert-danger'>Geen producten in winkelwagen.</div>";
+                } else {
+                    echo "<div class='alert alert-danger'>Geen producten in winkelwagen.</div>";
                 }
                 ?>
                 <script>
@@ -163,8 +164,25 @@
                         refreshPrice();
                     }
 
+                    function payMe() {
+                        let data = {
+                            payday: true,
+                            ajax: true
+                        };
+                        $.post('<?php echo BASEPATH . "cart"; ?>', data, function (returnData) {
+                            if (returnData === "success") {
+                                location.reload();
+                            } else {
+                                console.log(returnData + "dd");
+                                alert(returnData);
+                                location.reload();
+
+                            }
+                        });
+                    }
+
                     function refreshPrice() {
-                        if($('#cart tbody').children().length === 0){
+                        if ($('#cart tbody').children().length === 0) {
                             $("#cart").remove();
                             $(".appendMsg").append("<div class='alert alert-danger'>Geen producten in winkelwagen.</div>");
                         }
