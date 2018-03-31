@@ -19,8 +19,27 @@ class editProducts extends EmmaModel
         Loader::model("ProductModel");
     }
 
-    public function editProduct($product)
+    public function editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount)
     {
-        echo "UPDATING PRODUCT.";
+        $productTable = new ProductsTable();
+        $productTable->find('id', $productId);
+        $productTable->Objects->name = $name;
+        $productTable->Objects->description = $description;
+        $productTable->Objects->manufacturer = $manufacturer;
+        $productTable->Objects->categories_id = $category;
+        $productTable->Objects->price = $price;
+
+        if($discount){
+            $discountTable = new product_has_discount();
+            if($discountTable->find('products_id', $productId)){
+                $discountTable->Objects->discount = $discount;
+            } else{
+                $discountTable->insert(array(
+                    "products_id" => $productId,
+                    "discount" => $discount
+                ));
+            }
+        }
+        $productTable->save();
     }
 }

@@ -9,6 +9,9 @@
                 <li class="breadcrumb-item">
                     <a href="<?= BASEPATH ?>admin">Dashboard</a>
                 </li>
+                <li class="breadcrumb-item">
+                    <a href="<?= BASEPATH ?>products">Producten</a>
+                </li>
                 <li class="breadcrumb-item active">Product bewerken</li>
             </ol>
 
@@ -16,61 +19,73 @@
             if ($this->product) {
                 foreach ($this->product as $product) { ?>
                     <!-- product editing -->
-                    <div class="form-group row">
-                        <label for="name" class="col-2 col-form-label">Productnaam</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getName(); ?>" id="name" name="name">
+                    <form class="form form-outline" id="editProduct" name="editProduct" method="POST"
+                          action="<?= BASEPATH ?>edit_product/">
+                        <input class="hidden" type="hidden" value="<?= $product->getId(); ?>" id="id"
+                               name="id">
+                        <div class="form-group row">
+                            <label for="name" class="col-2 col-form-label">Productnaam</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?= $product->getName(); ?>" id="name"
+                                       name="name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="description" class="col-2 col-form-label">Omschrijving</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getDescription(); ?>" id="description" name="description">
+                        <div class="form-group row">
+                            <label for="description" class="col-2 col-form-label">Omschrijving</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?= $product->getDescription(); ?>"
+                                       id="description" name="description">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="manufacturer" class="col-2 col-form-label">Leverancier</label>
-                        <div class="col-10">
-                            <input class="form-control" type="text" value="<?= $product->getManufacturer(); ?>" id="manufacturer" name="manufacturer">
+                        <div class="form-group row">
+                            <label for="manufacturer" class="col-2 col-form-label">Leverancier</label>
+                            <div class="col-10">
+                                <input class="form-control" type="text" value="<?= $product->getManufacturer(); ?>"
+                                       id="manufacturer" name="manufacturer">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="category" class="col-2 col-form-label">Categorie</label>
-                        <div class="col-10">
-                            <select class="form-control" id="category" name="category">
-                                <?php
-                                $category = $product->getCategory();
-                                ?>
-                                <option selected><?= $category->getName(); ?></option>
-                                <?php
-                                if ($this->allCategories) {
-                                    foreach ($this->allCategories as $cat) { ?>
-                                        ?>
-                                        <option id="<?= $cat->getId(); ?>"><?= $cat->getName(); ?></option>
-                                        <?php
+                        <div class="form-group row">
+                            <label for="category" class="col-2 col-form-label">Categorie</label>
+                            <div class="col-10">
+                                <select class="form-control" id="category" name="category">
+                                    <?php
+                                    $category = $product->getCategory();
+                                    ?>
+                                    <option selected value="<?= $category->getId(); ?>"><?= $category->getName(); ?></option>
+                                    <?php
+                                    if ($this->allCategories) {
+                                        foreach ($this->allCategories as $cat) { ?>
+                                            ?>
+                                            <option value="<?= $cat->getId(); ?>"><?= $cat->getName(); ?></option>
+                                            <?php
+                                        }
                                     }
-                                }
-                                ?>
-                            </select>
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="price" class="col-2 col-form-label">Prijs (in euro's ex BTW)</label>
-                        <div class="col-10">
-                            <input class="form-control" type="number" value="<?= $product->getPrice(); ?>" step=".01" id="price">
+                        <div class="form-group row">
+                            <label for="price" class="col-2 col-form-label">Prijs (in euro's ex BTW)</label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" value="<?= $product->getPrice(); ?>"
+                                       step=".01" id="price" name="price">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="sale" class="col-2 col-form-label">Korting</label>
-                        <div class="col-10">
-                            <input class="form-control" type="number" value="<?= $product->getDiscount(); ?>" id="sale">
+                        <div class="form-group row">
+                            <label for="sale" class="col-2 col-form-label">Korting</label>
+                            <div class="col-10">
+                                <input class="form-control" type="number" value="<?= $product->getDiscount(); ?>"
+                                       id="sale" name="sale">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <button type="submit" id="editProductBtn" name="editProductBtn" class="btn btn-dark form-control">Veranderingen opslaan</button>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <button type="submit" id="editProductBtn" name="editProductBtn"
+                                        class="btn btn-dark form-control">Veranderingen opslaan
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <?php
                 }
             }
