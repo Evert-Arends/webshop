@@ -13,15 +13,14 @@ class FourOhFour extends EmmaController
 
     public function init()
     {
-        // Load models
         Loader::model("ProductModel");
         Loader::model("CategoryModel");
 
         Loader::setSnippet("sidebar", "templates/sidebar");
 
-        // Load specific external helpers
-        require_once('./controllers/products/getProducts.php');
-        require_once('./controllers/categories/getCategories.php');
+        Loader::model("getProducts", "/controllers/products/");
+        Loader::model("getCategories", "/controllers/categories/");
+
     }
 
     public function index()

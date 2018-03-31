@@ -11,7 +11,6 @@ class admin_categories extends EmmaController
     protected $ReturnData;
     protected $AllRootCategories;
 
-
     public function init()
     {
         Loader::model("CategoryModel");
@@ -24,6 +23,9 @@ class admin_categories extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return array|string
+     */
     private function getCategories(){
         $categories = new getCategories();
         $categories->init();

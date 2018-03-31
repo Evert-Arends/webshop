@@ -10,10 +10,9 @@ class admin_products extends EmmaController
 {
     protected $Products;
 
-
     public function init()
     {
-        require_once('./controllers/products/getProducts.php');
+        Loader::model("getProducts", "/controllers/products/");
     }
 
     public function index()

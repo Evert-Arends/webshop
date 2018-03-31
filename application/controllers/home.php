@@ -18,8 +18,6 @@ class home extends EmmaController
 
     public function init()
     {
-        // Set route request
-        // Load models
         Loader::model("ProductModel");
         Loader::model("CategoryModel");
         Loader::model("UserModel");
@@ -27,9 +25,9 @@ class home extends EmmaController
 
         Loader::setSnippet("sidebar", "templates/sidebar");
 
-        // Load specific external helpers
-        require_once('./controllers/products/getProducts.php');
-        require_once('./controllers/categories/getCategories.php');
+        Loader::model("getProducts", "/controllers/products/");
+        Loader::model("getCategories", "/controllers/categories/");
+
     }
 
     public function index()
@@ -54,9 +52,11 @@ class home extends EmmaController
         return $product->randomProducts(4);
     }
 
-    private function getRootCategories(){
+    private function getRootCategories()
+    {
         $categories = new getCategories();
         $categories->init();
+
         return $categories->allRootCategories();
     }
 

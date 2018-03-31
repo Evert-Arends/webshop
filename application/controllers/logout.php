@@ -13,7 +13,7 @@ class logout extends EmmaController
 
     public function init()
     {
-
+        //Class init
     }
 
     public function index()

@@ -32,6 +32,7 @@ define("DB_PASSWORD", "!webshop!");
 define("DB_TABLES_LOWERCASE", true);
 
 define("PRINT_INSERT_QUERY", false);
+define("PRINT_SELECT_QUERY", false);
 /****************************************************
  *                    Autoloader                    *
  ****************************************************/
@@ -43,7 +44,7 @@ AutoLoader::$autoloadModels = array();
  ****************************************************/
 
 define("TITLE", "EmmaPHP Framework");
-define("BASEPATH", "http://localhost:8080/school/webshop/");
+define("BASEPATH", "http://localhost/webshop/");
 define("APPPATH", BASEPATH . "application/");
 
 // If you want EmmaPHP to be in charge of authenticating a user.

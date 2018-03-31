@@ -28,11 +28,12 @@ class admin_crud_categories extends EmmaController
         } elseif ($this->checkPost("create_category")) {
             $this->createCategory();
         }
-//        var_dump($this->request->post);
-
     }
 
 
+    /**
+     * @return array|string
+     */
     private function getAllCategories()
     {
         $categories = new getCategories();
@@ -40,6 +41,9 @@ class admin_crud_categories extends EmmaController
         return $categories->allCategories();
     }
 
+    /**
+     * Creates categorie with data from post request
+     */
     public function createCategory()
     {
         $parent = $this->getPost("parent");
@@ -77,6 +81,9 @@ class admin_crud_categories extends EmmaController
     }
 
 
+    /**
+     * Edits category with data from post request
+     */
     public function editCategory()
     {
         $category = $this->getPost("CategoryId");
@@ -99,9 +106,11 @@ class admin_crud_categories extends EmmaController
         }
 
         return $this->ajax_msg("success");
-
     }
 
+    /**
+     * Deletes category on ID
+     */
     public function deleteCategory()
     {
         $category = $this->getPost("CategoryId");
@@ -120,9 +129,12 @@ class admin_crud_categories extends EmmaController
         $categoryMdl->deleteCategories($to_delete);
 
         return $this->ajax_msg("success");
-
     }
 
+    /**
+     * @param $category_id
+     * @return array
+     */
     private function getChildCategories($category_id)
     {
         $this->all_kids = array();
@@ -142,16 +154,27 @@ class admin_crud_categories extends EmmaController
         return $this->all_kids;
     }
 
+    /**
+     * @param $msg
+     */
     private function ajax_msg($msg)
     {
         echo $msg;
     }
 
+    /**
+     * @param $param
+     * @return mixed
+     */
     private function getPost($param)
     {
         return $this->request->post[$param];
     }
 
+    /**
+     * @param $param
+     * @return bool
+     */
     private function checkPost($param)
     {
         if (isset($this->request->post[$param]))

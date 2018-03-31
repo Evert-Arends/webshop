@@ -15,8 +15,8 @@ class contact extends EmmaController
     {
         Loader::model("ProductModel");
         Loader::setSnippet("sidebar_product", "templates/sidebar_product");
-        // current directory
-        require_once('./controllers/products/getProducts.php');
+
+        Loader::model("getProducts", "/controllers/products/");
     }
 
     public function index()

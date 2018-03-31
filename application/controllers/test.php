@@ -17,12 +17,13 @@ class test extends EmmaController
 
     public function init()
     {
-        Loader::model("ProductModel");
-        Loader::model("FillModel", "/controller/products/");
-        require_once('./controllers/products/getProducts.php');
 
-        $fill = new FillModel();
-        // $fill->init();
+//        Loader::model("ProductModel");
+//        require_once('./controllers/products/fill.php');
+//
+//        $fill = new FillModel();
+//         $fill->init();
+
 //        $ar = array("1" => "HEy!", "2" => "LOL!");
 //        var_dump($ar);
 //
@@ -33,6 +34,5 @@ class test extends EmmaController
 //        Session::nullify("cart");
 
     }
-
 
 }

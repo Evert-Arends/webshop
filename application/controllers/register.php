@@ -23,6 +23,9 @@ class register extends EmmaController
         $this->userRegister();
     }
 
+    /**
+     * Registers user
+     */
     private function userRegister()
     {
         $request = $this->request;
@@ -90,6 +93,9 @@ class register extends EmmaController
         }
     }
 
+    /**
+     * @return array
+     */
     private function getForm()
     {
         $keys = array
@@ -114,11 +120,18 @@ class register extends EmmaController
         return $form_array;
     }
 
+    /**
+     * @param $target
+     * @return string
+     */
     private function getPost($target)
     {
         return isset($this->request->post[$target]) ? $this->request->post[$target] : "";
     }
 
+    /**
+     * @param $error
+     */
     private function msg($error)
     {
         echo $error;
@@ -173,6 +186,5 @@ class register extends EmmaController
             }
         }
         return $error_array;
-
     }
 }

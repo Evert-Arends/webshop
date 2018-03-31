@@ -12,8 +12,8 @@ class admin_users extends EmmaController
 
     public function init()
     {
-        require_once('./controllers/users/getUsers.php');
-        require_once('./controllers/users/editUsers.php');
+        Loader::model("getUsers", "/controllers/users/");
+        Loader::model("editUsers", "/controllers/users/");
     }
 
     public function index()
@@ -23,6 +23,9 @@ class admin_users extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return array|string
+     */
     public function allUsers()
     {
         $allUsers = new getUsers();
@@ -31,6 +34,10 @@ class admin_users extends EmmaController
         return $allUsers->allUsers();
     }
 
+
+    /**
+     * Edits user with data from post request
+     */
     private function editUser()
     {
         $request = $this->request;

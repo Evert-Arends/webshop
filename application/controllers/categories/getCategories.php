@@ -15,6 +15,9 @@ class getCategories extends EmmaModel
         $this->CategoryModel = Loader::model("CategoryModel");
     }
 
+    /**
+     * @return array|bool
+     */
     private function getAllRootCategories()
     {
         $sql = "SELECT * FROM categories WHERE id NOT IN (SELECT child FROM categories_has_categories)";
@@ -23,6 +26,9 @@ class getCategories extends EmmaModel
         return $result;
     }
 
+    /**
+     * @return array|string
+     */
     public function allRootCategories()
     {
         $allIDS = $this->getAllRootCategories();
@@ -33,6 +39,10 @@ class getCategories extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    /**
+     * @param $id
+     * @return array|bool
+     */
     public function getChildren($id)
     {
 
@@ -44,6 +54,9 @@ class getCategories extends EmmaModel
         return false;
     }
 
+    /**
+     * @return array|bool
+     */
     private function getAllCategories()
     {
         $sql = "SELECT * FROM categories";
@@ -52,14 +65,22 @@ class getCategories extends EmmaModel
         return $result;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function checkIfCategoryExists($name)
     {
 
-        $sql = "SELECT COUNT(id) as total FROM categories WHERE name=?";
+        $sql = "SELECT COUNT(id) AS total FROM categories WHERE name=?";
         $result = $this->fetch($sql, array($name));
         return $result ? ($result->total > 0 ? true : false) : false;
     }
 
+    /**
+     * @param $categories
+     * @return bool
+     */
     public function removeLinkedCategories($categories)
     {
         foreach ($categories as $category) {
@@ -70,13 +91,19 @@ class getCategories extends EmmaModel
         return true;
     }
 
+    /**
+     * @param $categories
+     */
     public function deleteCategories($categories)
     {
         $str = str_repeat('?,', count($categories) - 1) . '?';
-        $sql = "DELETE FROM categories WHERE id IN (". $str .")";
+        $sql = "DELETE FROM categories WHERE id IN (" . $str . ")";
         $this->fetchAll($sql, $categories);
     }
 
+    /**
+     * @return array|string
+     */
     public function allCategories()
     {
         $allIDS = $this->getAllCategories();
@@ -87,6 +114,10 @@ class getCategories extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    /**
+     * @param $IDS
+     * @return array
+     */
     private function createModels($IDS)
     {
         $categories = array();

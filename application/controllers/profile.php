@@ -17,10 +17,12 @@ class profile extends EmmaController
     {
         Loader::model("ProductModel");
         Loader::model("OrderModel");
+
         Loader::setSnippet("sidebar_product", "templates/sidebar_product");
 
-        require_once('./controllers/products/getProducts.php');
-        require_once('./controllers/orders/getOrders.php');
+        Loader::model("getProducts", "/controllers/products/");
+        Loader::model("getOrders", "/controllers/orders/");
+
     }
 
     public function index()

@@ -38,7 +38,9 @@ class cart extends EmmaController
         }
     }
 
-    /** Ajax handler for shopping cart */
+    /**
+     * Cart ajax handler
+     */
     private function checkAjaxRequest()
     {
         if ($this->checkPost("add_product")) {
@@ -86,6 +88,9 @@ class cart extends EmmaController
         return false;
     }
 
+    /**
+     * Cart session to database order
+     */
     private function translateCartToOrder()
     {
         $cart = Session::get("cart");
@@ -122,11 +127,19 @@ class cart extends EmmaController
         return $this->ajax_msg("Uw bestelling is geplaatst, u ontvant spoedig meer details. Bedankt!");
     }
 
+    /**
+     * @param $var
+     * @return bool
+     */
     private function checkPost($var)
     {
         return isset($this->request->post[$var]) ? true : false;
     }
 
+    /**
+     * @param $id
+     * @param $amount
+     */
     private function addProduct($id, $amount)
     {
         $session = $this->getCartSession();
@@ -142,6 +155,11 @@ class cart extends EmmaController
         return $this->ajax_msg("success");
     }
 
+    /**
+     * @param $session_key
+     * @param $id
+     * @param $amount
+     */
     private function editProduct($session_key, $id, $amount)
     {
         $session = $this->getCartSession();
@@ -155,6 +173,9 @@ class cart extends EmmaController
 
     }
 
+    /**
+     * @param $session_key
+     */
     private function removeProduct($session_key)
     {
         $session_array = $this->getCartSession();
@@ -165,16 +186,25 @@ class cart extends EmmaController
 
     }
 
+    /**
+     * @param $msg
+     */
     private function ajax_msg($msg)
     {
         echo $msg;
     }
 
+    /**
+     * @param $session
+     */
     private function setCartSession($session)
     {
         Session::set("cart", $session);
     }
 
+    /**
+     * @return array|bool|string
+     */
     private function getCartSession()
     {
         $session = Session::get("cart");
@@ -185,6 +215,9 @@ class cart extends EmmaController
         return Session::get("cart");
     }
 
+    /**
+     * @return array|null
+     */
     private function randomProduct()
     {
         $product = new getProducts();

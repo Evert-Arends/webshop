@@ -21,7 +21,9 @@ class getOrders extends EmmaModel
         Loader::model("ProductModel");
     }
 
-
+    /**
+     * @return array|bool
+     */
     private function getAllOrders()
     {
         $sql = "SELECT * FROM `orders`";
@@ -29,6 +31,9 @@ class getOrders extends EmmaModel
         return $result;
     }
 
+    /**
+     * @return array|null
+     */
     public function allOrders()
     {
         $allIDS = $this->getAllOrders();
@@ -39,6 +44,10 @@ class getOrders extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    /**
+     * @param $user_id
+     * @return array|bool
+     */
     private function getUserOrders($user_id)
     {
         $sql = "SELECT * FROM `orders` WHERE users_id = ?";
@@ -46,6 +55,10 @@ class getOrders extends EmmaModel
         return $result;
     }
 
+    /**
+     * @param $user_id
+     * @return array|null
+     */
     public function userOrders($user_id)
     {
         $allIDS = $this->getUserOrders($user_id);
@@ -56,6 +69,10 @@ class getOrders extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    /**
+     * @param $IDS
+     * @return array
+     */
     private function createModels($IDS)
     {
         $orders = array();

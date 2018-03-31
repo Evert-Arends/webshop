@@ -6,7 +6,6 @@
  * Time: 17:33
  */
 
-
 class editProducts extends EmmaModel
 {
     public function __construct()
@@ -19,6 +18,17 @@ class editProducts extends EmmaModel
         Loader::model("ProductModel");
     }
 
+    /**
+     * @param $productId
+     * @param $name
+     * @param $description
+     * @param $manufacturer
+     * @param $category
+     * @param $price
+     * @param $discount
+     * @param $images
+     * @param $imgIDS
+     */
     public function editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount, $images, $imgIDS)
     {
         $productTable = new ProductsTable();
@@ -31,12 +41,12 @@ class editProducts extends EmmaModel
 
         $allImages = array_combine($imgIDS, $images);
 
-        if($discount){
+        if ($discount) {
             $discountTable = new product_has_discount();
-            if($discountTable->find('products_id', $productId)){
+            if ($discountTable->find('products_id', $productId)) {
                 $discountTable->Objects->discount = $discount;
                 $discountTable->save();
-            } else{
+            } else {
                 $discountTable->insert(array(
                     "products_id" => $productId,
                     "discount" => $discount
@@ -46,7 +56,7 @@ class editProducts extends EmmaModel
 
         $productTable->save();
 
-        if($allImages) {
+        if ($allImages) {
             $photoTable = new PhotosTable();
             $value = array(
                 "photo_id" => "",
@@ -54,17 +64,15 @@ class editProducts extends EmmaModel
                 "locatie" => ""
             );
             foreach ($allImages as $id => $location) {
-                if($photoTable->find('photo_id', $id)){
+                if ($photoTable->find('photo_id', $id)) {
                     $photoTable->Objects->locatie = $location;
                     $photoTable->save();
-                }else{
+                } else {
                     $value["photo_id"] = $id;
                     $value["locatie"] = $location;
                     $photoTable->insert($value);
                 }
             }
-        }else{
-            echo "IM DONEEEEEEEEEEEEEEEEEE";
         }
     }
 }

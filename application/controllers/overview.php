@@ -15,12 +15,12 @@ class overview extends EmmaController
 
     public function init()
     {
-        // Load models
         Loader::model("CategoryModel");
+
+        Loader::setSnippet("sidebar", "templates/sidebar");
+
         Loader::model("getProducts", "/controllers/products/");
         Loader::model("getCategories", "/controllers/categories/");
-        Loader::setSnippet("sidebar", "templates/sidebar");
-        // Load specific external helpers
     }
 
     public function index()
@@ -29,6 +29,9 @@ class overview extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return int
+     */
     public function getPageNumber()
     {
         if (isset($this->request->get["page"]) || !empty($this->request->get["page"])) {
@@ -42,6 +45,9 @@ class overview extends EmmaController
         return $page;
     }
 
+    /**
+     * @return array|string
+     */
     private function getRootCategories()
     {
         $categories = new getCategories();
@@ -49,6 +55,9 @@ class overview extends EmmaController
         return $categories->allRootCategories();
     }
 
+    /**
+     * @return array|null
+     */
     public function productData()
     {
         $product = new getProducts();
@@ -78,6 +87,9 @@ class overview extends EmmaController
         return $products;
     }
 
+    /**
+     * @return bool|int
+     */
     public function countProducts()
     {
         $product = new getProducts();
@@ -100,6 +112,10 @@ class overview extends EmmaController
         return $count;
     }
 
+    /**
+     * @param $parameter
+     * @return string
+     */
     public function checkUrlParameter($parameter)
     {
         if (isset($this->request->get[$parameter])) {

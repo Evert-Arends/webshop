@@ -18,10 +18,19 @@ class createProducts extends EmmaModel
         Loader::model("ProductModel");
     }
 
+    /**
+     * @param $name
+     * @param $description
+     * @param $manufacturer
+     * @param $category
+     * @param $price
+     * @param $discount
+     * @param $images
+     */
     public function createProduct($name, $description, $manufacturer, $category, $price, $discount, $images)
     {
         $productTable = new ProductsTable();
-        $id =  $productTable->insert(array(
+        $id = $productTable->insert(array(
             "name" => $name,
             "description" => $description,
             "manufacturer" => $manufacturer,
@@ -29,9 +38,9 @@ class createProducts extends EmmaModel
             "price" => $price,
         ));
 
-        if($discount){
+        if ($discount) {
             $discountTable = new product_has_discount();
-            if($id){
+            if ($id) {
                 $discountTable->insert(array(
                     "products_id" => $id,
                     "discount" => $discount
@@ -39,7 +48,7 @@ class createProducts extends EmmaModel
             }
         }
 
-        if($images) {
+        if ($images) {
             $photoTable = new PhotosTable();
             $value = array(
                 "locatie" => "",

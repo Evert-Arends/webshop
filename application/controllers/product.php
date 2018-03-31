@@ -14,9 +14,10 @@ class product extends EmmaController
     public function init()
     {
         Loader::model("ProductModel");
+
         Loader::setSnippet("sidebar_product", "templates/sidebar_product");
-        // current directory
-        require_once('./controllers/products/getProducts.php');
+
+        Loader::model("getProducts", "/controllers/products/");
     }
 
     public function index()
@@ -25,6 +26,9 @@ class product extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return null|$productId
+     */
     public function getProductId()
     {
         if (isset($this->request->get["id"])) {
@@ -32,16 +36,25 @@ class product extends EmmaController
         } else {
             $productId = null;
         }
+
         return $productId;
     }
 
+    /**
+     * @param $productId
+     * @return array
+     */
     public function getProduct($productId)
     {
         $product = new getProducts();
         $product->init();
+
         return $product->getProductOnId($productId);
     }
 
+    /**
+     * @return array|null
+     */
     private function randomProduct()
     {
         $product = new getProducts();

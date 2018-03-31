@@ -21,6 +21,9 @@ class admin extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return mixed
+     */
     private function getUser(){
         return $this->request->User;
     }

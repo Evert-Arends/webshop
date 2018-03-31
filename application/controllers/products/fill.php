@@ -13,20 +13,27 @@ class FillModel extends EmmaModel
         parent::__construct();
     }
 
+    /**
+     * This init fills photo table with images for products.
+     */
     public function init()
     {
         Loader::model("ProductModel");
         require_once('./controllers/products/getProducts.php');
         $prm = new getProducts();
-        $products = $prm->allProducts(1, 100000);
+        $products = $prm->allProducts(0, 100000);
         $prdri = array();
         foreach ($products as $product) {
             array_push($prdri, $product->getId());
         }
+        var_dump($prdri);
         foreach ($prdri as $prd) {
             $sql = "INSERT INTO `photos`(`photo_id`, `products_id`, `locatie`, `description`) VALUES (NULL, $prd, \"https://i.imgur.com/M1o4gih.png\", NULL);";
-            $this->query($sql);
+            $i = 0;
+            $times_to_run = 5;
+            while ($i++ < $times_to_run) {
+                $this->query($sql);
+            }
         }
-
     }
 }

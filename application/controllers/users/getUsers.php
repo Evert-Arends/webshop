@@ -20,6 +20,9 @@ class getUsers extends EmmaModel
         Loader::model("UserModel");
     }
 
+    /**
+     * @return bool|DataObject
+     */
     public function countUsers()
     {
         $sql = "SELECT COUNT(*) AS Total FROM `users`";
@@ -28,6 +31,9 @@ class getUsers extends EmmaModel
         return $result;
     }
 
+    /**
+     * @return array|bool
+     */
     private function getAllUsers()
     {
         $sql = "SELECT * FROM `users`";
@@ -36,6 +42,9 @@ class getUsers extends EmmaModel
         return $result;
     }
 
+    /**
+     * @return array|string
+     */
     public function allUsers()
     {
         $allIDS = $this->getAllUsers();
@@ -46,6 +55,10 @@ class getUsers extends EmmaModel
         return $this->createModels($allIDS);
     }
 
+    /**
+     * @param $userId
+     * @return array
+     */
     public function getUserOnId($userId)
     {
         $sql = "SELECT * FROM `users` WHERE id = ?";
@@ -54,6 +67,10 @@ class getUsers extends EmmaModel
         return $this->createModels($result);
     }
 
+    /**
+     * @param $IDS
+     * @return array
+     */
     private function createModels($IDS)
     {
         $users = array();

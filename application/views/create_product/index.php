@@ -63,7 +63,7 @@
                 <div class="form-group row">
                     <label for="sale" class="col-2 col-form-label">Korting</label>
                     <div class="col-10">
-                        <input required class="form-control" type="number" placeholder="Korting"
+                        <input class="form-control" type="number" placeholder="Korting"
                                id="sale" name="sale">
                     </div>
                 </div>

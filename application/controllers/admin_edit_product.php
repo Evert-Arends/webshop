@@ -16,9 +16,9 @@ class admin_edit_product extends EmmaController
     {
         Loader::model("CategoryModel");
 
-        require_once('./controllers/products/editProducts.php');
-        require_once('./controllers/categories/getCategories.php');
-        require_once('./controllers/products/getProducts.php');
+        Loader::model("editProducts", "/controllers/products/");
+        Loader::model("getCategories", "/controllers/categories/");
+        Loader::model("getProducts", "/controllers/products/");
     }
 
     public function index()
@@ -28,6 +28,9 @@ class admin_edit_product extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return null|$productId
+     */
     public function getProductId()
     {
         if (isset($this->request->get["id"])) {
@@ -38,6 +41,10 @@ class admin_edit_product extends EmmaController
         return $productId;
     }
 
+    /**
+     * @param $productId
+     * @return array
+     */
     public function getProduct($productId)
     {
         $product = new getProducts();
@@ -45,15 +52,21 @@ class admin_edit_product extends EmmaController
         return $product->getProductOnId($productId);
     }
 
-    private function getAllCategories(){
+    /**
+     * @return array|string
+     */
+    private function getAllCategories()
+    {
         $categories = new getCategories();
         $categories->init();
         return $categories->allCategories();
     }
 
+    /**
+     * Edits product with data from post request
+     */
     private function editProduct()
     {
-        var_dump($this->request->post);
         $request = $this->request;
         if (isset($request->post["editProductBtn"])) {
             if (isset($request->post["id"])) {
@@ -85,7 +98,7 @@ class admin_edit_product extends EmmaController
 
                 $editProduct->editProduct($productId, $name, $description, $manufacturer, $category, $price, $discount, $images, $imgIDS);
 
-                header("Location: ". BASEPATH ."products/");
+                header("Location: " . BASEPATH . "products/");
             }
         }
     }

@@ -16,8 +16,8 @@ class admin_create_products extends EmmaController
     {
         Loader::model("CategoryModel");
 
-        require_once('./controllers/products/createProducts.php');
-        require_once('./controllers/categories/getCategories.php');
+        Loader::model("createProducts", "/controllers/products/");
+        Loader::model("getCategories", "/controllers/categories/");
     }
 
     public function index()
@@ -27,6 +27,9 @@ class admin_create_products extends EmmaController
         $this->page();
     }
 
+    /**
+     * @return array|string
+     */
     private function getAllCategories()
     {
         $categories = new getCategories();
@@ -34,6 +37,9 @@ class admin_create_products extends EmmaController
         return $categories->allCategories();
     }
 
+    /**
+     * Creates product with data in post request.
+     */
     private function createProduct()
     {
         $request = $this->request;

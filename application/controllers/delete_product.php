@@ -10,7 +10,7 @@ class delete_product extends EmmaController
 {
     public function init()
     {
-        require_once('./controllers/products/deleteProducts.php');
+        Loader::model("deleteProducts", "/controllers/products/");
     }
 
     public function index()
@@ -18,6 +18,9 @@ class delete_product extends EmmaController
         $this->deleteProduct();
     }
 
+    /**
+     * Deletes product on ID
+     */
     private function deleteProduct()
     {
         $request = $this->request;

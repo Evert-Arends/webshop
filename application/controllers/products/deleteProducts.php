@@ -19,6 +19,10 @@ class deleteProducts extends EmmaModel
         Loader::model("ProductModel");
     }
 
+    /**
+     * @param $productId
+     * @return bool
+     */
     public function deleteProductOnId($productId)
     {
         $sql = "DELETE FROM `products` WHERE id = $productId";

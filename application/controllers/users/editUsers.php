@@ -18,6 +18,10 @@ class editUsers extends EmmaModel
         Loader::model("UserModel");
     }
 
+    /**
+     * @param $userId
+     * @param $roleName
+     */
     public function editUser($userId, $roleName)
     {
         $userTable = new UsersTable();

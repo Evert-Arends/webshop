@@ -20,6 +20,9 @@ class login extends EmmaController
         $this->userLogin();
     }
 
+    /**
+     * Logs user in
+     */
     private function userLogin()
     {
         $request = $this->request;
@@ -52,6 +55,9 @@ class login extends EmmaController
         }
     }
 
+    /**
+     * @param $error
+     */
     private function msg($error)
     {
         echo $error;
