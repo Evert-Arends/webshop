@@ -21,6 +21,10 @@ class UserRole extends EmmaModel
         parent::__construct();
     }
 
+    /**
+     * @param $name
+     * @return $this|bool
+     */
     public function getRole($name)
     {
         $rolesTable = new RolesTable();

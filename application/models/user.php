@@ -43,6 +43,10 @@ class UserModel extends EmmaModel
         $this->AuthModel = new AuthModel();
     }
 
+    /**
+     * @param string $email
+     * @return $this|bool
+     */
     public function getUser($email = "")
     {
         if (!$email) {
@@ -77,6 +81,10 @@ class UserModel extends EmmaModel
 
     }
 
+    /**
+     * @param $email
+     * @return bool|EmmaTable
+     */
     private function getUserFromDB($email)
     {
         $user_getter = new UsersTable();
@@ -280,6 +288,10 @@ class UserModel extends EmmaModel
     }
 
 
+    /**
+     * @param $email
+     * @return bool
+     */
     public function checkIfUserExists($email)
     {
         $tempUser = new UsersTable();
