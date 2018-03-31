@@ -9,8 +9,7 @@
 
 <div class="row">
 
-    <?php $this->loadSnippet("sidebar_product");
-    ?>
+    <?php $this->loadSnippet("sidebar_product"); ?>
 
     <!-- PRODUCTS -->
     <div class="col-xl-9 col-lg-12 col-md-12">
@@ -22,8 +21,11 @@
         </div>
 
         <div class="row" style="margin-top: 1rem">
-            <div class="col-12">
+            <div class="col-12 appendMsg">
                 <table id="cart" class="table table-hover table-condensed" style="background: whitesmoke;">
+                    <?php
+                    if (!empty($this->cart)) {
+                    ?>
                     <thead>
                     <tr>
                         <th style="width:30%">Product</th>
@@ -35,7 +37,6 @@
                     </thead>
                     <tbody>
                     <?php
-
                     foreach ($this->cart as $key => $product) {
                         $productID = $product["product"];
                         ?>
@@ -61,7 +62,7 @@
                                         var quantity = parseInt($('#<?php echo $key . "-quantity"; ?>').val());
                                         $('#<?php echo $key . "-quantity"; ?>').val(quantity + 1);
                                         editSubtotal(quantity + 1);
-                                            updateAmount('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>', quantity + 1, '<?= $productID ?>');
+                                        updateAmount('<?php echo BASEPATH . "cart"; ?>', '<?= $key ?>', quantity + 1, '<?= $productID ?>');
                                         refreshPrice();
                                     });
 
@@ -77,6 +78,7 @@
                                     });
 
                                     function editSubtotal(quantity) {
+                                        refreshPrice();
                                         var price = $('#<?php echo $key . "-price"; ?>').text();
                                         var stripped = price.replace(/\€/g, '');
                                         var intPrice = parseFloat(stripped) * quantity;
@@ -114,7 +116,6 @@
                             </td>
                             <td data-th="Subtotaal"
                                 class="text-center subtotal" <?php echo "id=" . $key . "-subtotal"; ?>>
-                                1.99
                             </td>
 
                             <td class="actions" data-th="">
@@ -126,13 +127,14 @@
                             </td>
                         </tr>
                         <?php
-                    } ?>
+                    }
+                    ?>
                     </tbody>
                     <tfoot>
                     <tr>
                         <td colspan="2" class="hidden-xs"></td>
                         <td id="" class="hidden-xs text-center font-weight-bold">Exclusief BTW</td>
-                        <td id="total-price-ex-btw" class="hidden-xs text-center font-weight-bold">1.99</td>
+                        <td id="total-price-ex-btw" class="hidden-xs text-center font-weight-bold"></td>
                         <td colspan="1" class="hidden-xs"></td>
                     </tr>
                     <tr>
@@ -151,13 +153,24 @@
                     </tr>
                     </tfoot>
                 </table>
+                <?php
+                }else{
+                        echo "<div class='alert alert-danger'>Geen producten in winkelwagen.</div>";
+                }
+                ?>
                 <script>
                     function clickHandler(o, key) {
                         $(o).parent().parent().remove();
                         deleteFromCart('<?php echo BASEPATH . "cart"; ?>', key);
+                        refreshPrice();
                     }
 
                     function refreshPrice() {
+                        if($('#cart tbody').children().length === 0){
+                            $("#cart").remove();
+                            $(".appendMsg").append("<div class='alert alert-danger'>Geen producten in winkelwagen.</div>");
+                        }
+
                         //Var init
                         var sum = 0;
                         var exBTW = 0;
