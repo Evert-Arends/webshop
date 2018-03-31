@@ -22,7 +22,7 @@ class test extends EmmaController
 
         $ar = array_replace($ar, array("1" => "HOI!"));
 
-        var_dump($ar);
+        var_dump($this->request->User->id);
 
         Session::nullify("cart");
     }

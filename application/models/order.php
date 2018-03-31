@@ -58,6 +58,11 @@ class OrderModel extends EmmaModel
         return $this;
     }
 
+    public function getLastInsertedId() {
+        $sql = "SELECT MAX(id) as max_id FROM orders";
+        return $this->fetch($sql)->max_id;
+    }
+
     /**
      * @return mixed
      */
@@ -234,5 +239,20 @@ class OrderModel extends EmmaModel
         return $this;
     }
 
+
+    public function create() {
+        $ordersTable = new OrdersTable();
+        $value = array(
+            "users_id" => $this->getUserId(),
+            "order_date" => $this->getOrderDate()
+        );
+
+        $id = $ordersTable->insert($value);
+
+        foreach ($this->getOrderRules() as $orderRule) {
+            $orderRule->setId($id);
+            $orderRule->create(true);
+        }
+    }
 
 }
