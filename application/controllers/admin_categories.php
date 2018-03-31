@@ -15,13 +15,12 @@ class admin_categories extends EmmaController
     public function init()
     {
         Loader::model("CategoryModel");
-        require_once('./controllers/categories/getCategories.php');
-
+        Loader::model("getCategories", "/controllers/categories/");
     }
 
     public function index()
     {
-        $this->adminData();
+        $this->template_data();
         $this->page();
     }
 
@@ -31,7 +30,7 @@ class admin_categories extends EmmaController
         return $categories->allRootCategories();
     }
 
-    public function adminData()
+    public function template_data()
     {
         $this->AllRootCategories = $this->getCategories();
     }
