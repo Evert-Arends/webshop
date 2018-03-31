@@ -85,10 +85,13 @@
                 Bewerk categorie naam.
                 <form class="form form-outline" id="editCategory" name="editCategory" method="POST"
                       action="<?= BASEPATH ?>edit_category/">
+                    <input type="hidden" name="edit_category" id="CategoryId" value=""/>
+
                     <input type="hidden" name="CategoryId" id="CategoryId" value=""/>
                     <input class="form-control" type="text" name="CategoryName" id="CategoryName" value=""/>
-                    <button type="submit" id="editCategoryBtn" name="editCategoryBtn"
-                            class="btn btn-danger mt-1 form-control">
+                    <button type="button" id="editCategoryBtn" name="editCategoryBtn"
+                            class="btn btn-danger mt-1 form-control"
+                            onclick="postForm('<?= BASEPATH ?>edit_category/', 'editCategory')">
                         Aanpassen
                     </button>
                 </form>
@@ -118,10 +121,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Annuleren</button>
-                <form id="deleteCategory" name="deleteCategory" method="POST" action="<?= BASEPATH ?>delete_category/">
+                <form id="deleteCategory" name="deleteCategory" method="POST" action="<?= BASEPATH ?>edit_category/">
                     <input type="hidden" name="CategoryId" id="CategoryId" value=""/>
+                    <input type="hidden" name="delete_category" id="CategoryId" value=""/>
                     <button type="button" id="deleteCategoryBtn" name="deleteCategoryBtn"
-                            onclick="postForm($(this), '<?= BASEPATH ?>edit_category/')" class="btn btn-danger">
+                            onclick="postForm('<?= BASEPATH ?>edit_category/', 'deleteCategory')"
+                            class="btn btn-danger">
                         Verwijderen
                     </button>
                 </form>
@@ -141,6 +146,9 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-info">
+                    <strong>Info!</strong> Indicates a neutral informative change or action.
+                </div>
                 Vul een categorienaam in.
                 <form class="form form-outline" id="createCategory" name="createCategory" method="POST"
                       action="<?= BASEPATH ?>edit_category/">
@@ -166,11 +174,34 @@
 <script>
     function postForm(url, target) {
         if (target === "deleteCategory") {
-            $("#deleteCategory").serialize();
+            let data = $("#deleteCategory").serialize();
+            $.post(url, data, function (returnData) {
+                if (returnData === "success") {
+                    location.reload();
+                } else {
+                    console.log(returnData + "dd");
+                    alert(returnData);
+                }
+            });
         } else if (target === "createCategory") {
             let data = $("#createCategory").serialize();
             $.post(url, data, function (returnData) {
-                console.log(returnData);
+                if (returnData === "success") {
+                    location.reload();
+                } else {
+                    console.log(returnData + "dd");
+                    alert(returnData);
+                }
+            });
+        } else if (target === "editCategory") {
+            let data = $("#editCategory").serialize();
+            $.post(url, data, function (returnData) {
+                if (returnData === "success") {
+                    location.reload();
+                } else {
+                    console.log(returnData + "dd");
+                    alert(returnData);
+                }
             });
         }
     }
