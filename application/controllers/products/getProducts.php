@@ -45,8 +45,8 @@ class getProducts extends EmmaModel
         $sql = "SELECT id FROM `products` WHERE categories_id = ?";
         $result = $this->fetchAll($sql, array((int)$category));
 
-        $total = count($result);
         if ($result) {
+            $total = count($result);
             return $total;
         } else {
             return false;

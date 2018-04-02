@@ -44,7 +44,7 @@ AutoLoader::$autoloadModels = array();
  ****************************************************/
 
 define("TITLE", "EmmaPHP Framework");
-define("BASEPATH", "http://localhost/webshop/");
+define("BASEPATH", "http://localhost/school/webshop/");
 define("APPPATH", BASEPATH . "application/");
 
 // If you want EmmaPHP to be in charge of authenticating a user.

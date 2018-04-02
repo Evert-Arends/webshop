@@ -149,7 +149,6 @@ $routes = array(
             "level" => array(0)
         ));
 
-// What is this doing here?
 $allowed_requests = array(
     null
 );
